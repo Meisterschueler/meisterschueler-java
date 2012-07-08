@@ -19,7 +19,7 @@ public class HanonSongFactory extends SongFactory {
 		for (int i = 0; i <= 34; i++) {
 			songs.add(getNo(i));
 		}
-		
+
 		songBook.setName("The Virtuoso Pianist");
 		songBook.setComposer("C. L. Hanon");
 		songBook.setSongs(songs);
@@ -915,7 +915,7 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingers[] = { 1, 2, 3, 1, 2, 3, 4, 1, 2, 3, 1, 2, 3, 4, 5, 4, 3, 2, 1, 3, 2, 1, 4, 3, 2, 1, 3, 2, 1 };
 
 			leftHand = guidoService.gmnToScores(pattern, leftFingers);
-			
+
 			rightHand = guidoService.gmnToScores(oneOctaveUp(pattern), rightFingers);
 
 			break;
