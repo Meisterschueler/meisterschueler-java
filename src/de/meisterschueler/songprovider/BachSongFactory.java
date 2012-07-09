@@ -18,7 +18,7 @@ public class BachSongFactory extends SongFactory {
 	private List<Song> songs = new ArrayList<Song>();
 
 	public BachSongFactory() {
-		for (int i = 0; i <= 34; i++) {
+		for (int i = 0; i <= 8; i++) {
 			songs.add(getNo(i));
 		}
 		

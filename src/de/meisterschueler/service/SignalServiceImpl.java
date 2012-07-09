@@ -14,6 +14,9 @@ public class SignalServiceImpl extends SignalService {
 		case STARTUP:
 			gmn = "g1/16 {c/4,e,g,c2}";
 			break;
+		case SHUTDOWN:
+			gmn = "c2/16 b1/16 c2/4";
+			break;
 		case PING:
 			gmn = "c1";
 			break;

@@ -3,7 +3,6 @@ package de.meisterschueler.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -18,10 +17,8 @@ import com.leff.midi.event.meta.TimeSignature;
 import de.meisterschueler.basic.MidiEventPair;
 
 public class MidiService {
-	public void saveMidiEvents(List<MidiEventPair> midiEvents, String filename) {
-		List<MidiEvent> events = unpair(midiEvents);
-		
-		MidiFile midi = createMidiFile(events);
+	public void saveMidiEvents(List<MidiEventPair> midiEventPairs, String filename) {
+		MidiFile midi = createMidiFile(midiEventPairs);
 
 		File output = new File(filename);
 		try {
@@ -30,18 +27,8 @@ public class MidiService {
 			System.err.println(e);
 		}
 	}
-	
-	public List<MidiEvent> unpair(List<MidiEventPair> midiEvents) {
-		List<MidiEvent> result = new ArrayList<MidiEvent>();
-		for (MidiEventPair midiEventPair : midiEvents) {
-			result.add(midiEventPair.getNoteOn());
-			result.add(midiEventPair.getNoteOff());
-		}
-		Collections.sort(result);
-		return result;
-	}
 
-	public MidiFile createMidiFile(List<MidiEvent> midiEvents) {
+	public MidiFile createMidiFile(List<MidiEventPair> midiEvents) {
 		MidiTrack tempoTrack = new MidiTrack();
 		MidiTrack noteTrack = new MidiTrack();
 
@@ -54,15 +41,10 @@ public class MidiService {
 		tempoTrack.insertEvent(ts);
 		tempoTrack.insertEvent(t);
 
-		long offset = midiEvents.get(0).getTick();
-		for(MidiEvent midiEvent : midiEvents) {
-			if (midiEvent instanceof NoteOn) {
-				NoteOn noteOn = (NoteOn) midiEvent;
-				noteTrack.insertEvent(new NoteOn(noteOn.getTick()-offset, noteOn.getChannel(), noteOn.getNoteValue(), noteOn.getVelocity()));
-			} else if (midiEvent instanceof NoteOff) {
-				NoteOff noteOff = (NoteOff) midiEvent;
-				noteTrack.insertEvent(new NoteOff(noteOff.getTick()-offset, noteOff.getChannel(), noteOff.getNoteValue(), noteOff.getVelocity()));
-			}
+		for(MidiEventPair midiEvent : midiEvents) {
+			NoteOn noteOn = midiEvent.getNoteOn();
+			NoteOff noteOff = midiEvent.getNoteOff();
+			noteTrack.insertNote(noteOn.getChannel(), noteOn.getNoteValue(), noteOn.getVelocity(), noteOn.getTick(), noteOff.getTick()-noteOn.getTick());
 		}
 
 		ArrayList<MidiTrack> tracks = new ArrayList<MidiTrack>();
@@ -79,7 +61,7 @@ public class MidiService {
 		}
 		return result;
 	}
-	
+
 	public void addMidi(List<MidiEventPair> midiEvents, MidiEvent midiEvent) {	
 		if (midiEvent instanceof NoteOn) {
 			midiEvents.add(new MidiEventPair((NoteOn) midiEvent, null));

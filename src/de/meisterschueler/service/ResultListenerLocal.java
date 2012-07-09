@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.leff.midi.MidiFile;
-import com.leff.midi.event.MidiEvent;
 
 import de.meisterschueler.basic.Finger;
 import de.meisterschueler.basic.MatchingItem;
+import de.meisterschueler.basic.MidiEventPair;
 import de.meisterschueler.basic.SongAnalysis;
 
 public class ResultListenerLocal implements ResultListener {
@@ -52,7 +52,7 @@ public class ResultListenerLocal implements ResultListener {
 	private void sendResult(MatchingItem item) {
 		try {
 			// Create tmp midi file
-			List<MidiEvent> midi = midiService.unpair(item.getNotes());
+			List<MidiEventPair> midi = item.getNotes(); 
 			MidiFile midiFile = midiService.createMidiFile(midi);
 			File file = File.createTempFile("temp", ".mid");
 			midiFile.writeToFile(file);
