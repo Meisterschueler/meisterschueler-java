@@ -11,18 +11,20 @@ public class MidiConnectorDummy extends MidiConnector implements Runnable {
 
 	@Override
 	public void run() {
-		long currentTick = getMidiEvents().get(0).getTick();
-		for (int i=0; i<getMidiEvents().size(); i++) {
+		for (int i=0; i<midiEvents.size(); i++) {
+			long delta;
+			if (i < midiEvents.size()-1) {
+				delta = midiEvents.get(i+1).getTick()-midiEvents.get(i).getTick();
+			} else {
+				delta = 0;
+			}
 			setChanged();
-			notifyObservers(getMidiEvents().get(i));
-			if (i<getMidiEvents().size()-1) {
-				try {
-					Thread.sleep(getMidiEvents().get(i+1).getTick() - currentTick);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				currentTick = getMidiEvents().get(i+1).getTick();
+			notifyObservers(midiEvents.get(i));
+			try {
+				Thread.sleep(delta);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}

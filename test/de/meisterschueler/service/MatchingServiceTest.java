@@ -392,7 +392,12 @@ public class MatchingServiceTest {
 	
 	@Test
 	public void cutMatchingMidiEventsTest() {
-		List<MidiEventPair> events = guidoService.gmnToMidi("c0 e g");
+		
+		List<MidiEventPair> events = new ArrayList<MidiEventPair>();
+		events.add(new MidiEventPair(new NoteOn(30000, 0, 48, 50), new NoteOff(31000, 0, 48, 0)));
+		events.add(new MidiEventPair(new NoteOn(32000, 0, 52, 50), new NoteOff(33000, 0, 52, 0)));
+		events.add(new MidiEventPair(new NoteOn(34000, 0, 55, 50), new NoteOff(35000, 0, 55, 0)));		
+		
 		List<Score> scores = guidoService.gmnToScores("c0 e");
 		
 		MatchingItem item = new MatchingItem();
@@ -402,7 +407,12 @@ public class MatchingServiceTest {
 		
 		List<MidiEventPair> rest = matchingService.cutMatchingMidiEvents(item);
 		assertEquals( 1, rest.size() );
-		assertEquals( 2, item.getNotes().size() );
 		
+		List<MidiEventPair> cuttedNotes = item.getNotes();
+		assertEquals( 2, cuttedNotes.size() );
+		assertEquals( 0, cuttedNotes.get(0).getNoteOn().getTick() );
+		assertEquals( 1000, cuttedNotes.get(0).getNoteOff().getTick() );
+		assertEquals( 2000, cuttedNotes.get(1).getNoteOn().getTick() );
+		assertEquals( 3000, cuttedNotes.get(1).getNoteOff().getTick() );
 	}
 }

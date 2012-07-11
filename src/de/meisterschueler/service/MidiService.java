@@ -28,7 +28,7 @@ public class MidiService {
 		}
 	}
 
-	public MidiFile createMidiFile(List<MidiEventPair> midiEvents) {
+	public MidiFile createMidiFile(List<MidiEventPair> midiEventPairs) {
 		MidiTrack tempoTrack = new MidiTrack();
 		MidiTrack noteTrack = new MidiTrack();
 
@@ -41,7 +41,7 @@ public class MidiService {
 		tempoTrack.insertEvent(ts);
 		tempoTrack.insertEvent(t);
 
-		for(MidiEventPair midiEvent : midiEvents) {
+		for(MidiEventPair midiEvent : midiEventPairs) {
 			NoteOn noteOn = midiEvent.getNoteOn();
 			NoteOff noteOff = midiEvent.getNoteOff();
 			noteTrack.insertNote(noteOn.getChannel(), noteOn.getNoteValue(), noteOn.getVelocity(), noteOn.getTick(), noteOff.getTick()-noteOn.getTick());

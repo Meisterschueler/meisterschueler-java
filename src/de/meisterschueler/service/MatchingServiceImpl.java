@@ -9,6 +9,7 @@ import java.util.TreeMap;
 import org.apache.commons.lang3.StringUtils;
 
 import com.leff.midi.event.MidiEvent;
+import com.leff.midi.event.NoteOff;
 import com.leff.midi.event.NoteOn;
 
 import de.meisterschueler.alignment.MatchingState;
@@ -312,6 +313,18 @@ public class MatchingServiceImpl implements MatchingService {
 		goodEvents = new ArrayList<MidiEventPair>(notes.subList(0, noteAlignment.length()));
 		evilEvents = new ArrayList<MidiEventPair>(notes.subList(noteAlignment.length(), notes.size()));
 
+		// remove tick offset from goodEvents
+		long offset = goodEvents.get(0).getNoteOn().getTick();
+		for (MidiEventPair midiEventPair : goodEvents) {
+			offset = Math.min(offset, midiEventPair.getNoteOn().getTick() );
+		}
+		for (MidiEventPair midiEventPair : goodEvents) {
+			NoteOn noteOn = midiEventPair.getNoteOn();
+			NoteOff noteOff = midiEventPair.getNoteOff();
+			midiEventPair.setNoteOn(new NoteOn(noteOn.getTick()-offset, noteOn.getChannel(), noteOn.getNoteValue(), noteOn.getVelocity()));
+			midiEventPair.setNoteOff(new NoteOff(noteOff.getTick()-offset, noteOff.getChannel(), noteOff.getNoteValue(), noteOff.getVelocity()));
+		}
+		
 		item.setNotes(goodEvents);
 		item.setPitchAlignment(pitchAlignment);
 		return evilEvents;
