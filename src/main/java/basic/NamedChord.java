@@ -8,7 +8,6 @@ public class NamedChord {
 	private List<Score> scores;
 	
 	private String intervalString;
-	private String noteString;
 	
 	private Key key;
 	private Mode mode;
