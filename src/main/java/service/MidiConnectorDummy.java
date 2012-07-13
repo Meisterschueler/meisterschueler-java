@@ -3,7 +3,7 @@ package service;
 import java.util.List;
 import java.util.Observable;
 
-import javax.sound.midi.MidiEvent;
+import com.leff.midi.event.MidiEvent;
 
 public class MidiConnectorDummy extends MidiConnector implements Runnable {
 	

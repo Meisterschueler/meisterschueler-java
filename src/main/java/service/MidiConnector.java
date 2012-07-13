@@ -3,7 +3,7 @@ package service;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.sound.midi.MidiEvent;
+import com.leff.midi.event.MidiEvent;
 
 public abstract class MidiConnector extends Observable implements Observer {
 	public abstract void sendMidiEvent(MidiEvent midiEvent);
