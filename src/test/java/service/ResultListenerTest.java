@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import basic.MidiEventPair;
@@ -21,7 +20,6 @@ public class ResultListenerTest {
 	private ResultListener resultListener = new ResultListenerLocal();
 	private GuidoService guidoService = new GuidoServiceImpl();
 	
-	@Ignore
 	@Test
 	public void saveMidiEventsTest() {
 		String c0 = "c0 d e f g f e d";

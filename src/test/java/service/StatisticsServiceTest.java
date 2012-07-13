@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import basic.Score;
@@ -121,7 +120,6 @@ public class StatisticsServiceTest {
 		assertEquals( 12.0, result.get(0).getSibling().getSibling().retrieveAdditional().getOffset(), 0.1);
 	}
 	
-	@Ignore
 	@Test
 	public void analysisTest() {
 		List<Double> werte = Arrays.asList(0.1, 0.5, 0.4, 0.2, 0.6, 0.9, 0.1, 0.5, -0.5);
