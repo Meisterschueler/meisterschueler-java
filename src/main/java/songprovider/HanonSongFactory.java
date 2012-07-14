@@ -534,8 +534,8 @@ public class HanonSongFactory extends SongFactory {
 			int stepsUp1[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 			int stepsUp2[] = {14};
 
-			String patternDown1 = "e1 c g0 e g f g e";
-			String patternDown2 = "e1 c g0 e g f g f";
+			String patternDown1 = "e3 c3 g2 e2 g2 f2 g2 e2";
+			String patternDown2 = "e3 c3 g2 e2 g2 f2 g2 f2";
 			int leftFingersDown1[] = { 1, 2, 4, 5, 3, 4, 3, 5 };
 			int leftFingersDown2[] = { 1, 2, 4, 5, 3, 4, 3, 4 };
 			int rightFingersDown1[] = { 5, 4, 2, 1, 3, 2, 3, 1 };
