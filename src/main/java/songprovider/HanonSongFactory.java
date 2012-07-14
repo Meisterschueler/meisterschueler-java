@@ -17,7 +17,7 @@ public class HanonSongFactory extends SongFactory {
 	private List<Song> songs = new ArrayList<Song>();
 
 	public HanonSongFactory() {
-		for (int i = 0; i <= 34; i++) {
+		for (int i = 0; i <= 35; i++) {
 			songs.add(getNo(i));
 		}
 
@@ -810,25 +810,27 @@ public class HanonSongFactory extends SongFactory {
 
 			break;
 		}
-		case 30: {  // Das ist erst einmal nur für die rechte Hand korrekt
+		case 30: {
 			name = "31";
 			meter = "3/4";
 
-			String patternUp = "e-1 e0 d0 e0 c0 e0 b-1 e0 a-1 e0 g-1 e0";
+			String leftPatternUp = "c0 c1 b0 c1 a0 c1 g0 c1 f0 c1 e0 c1";
+			String rightPatternUp = "e1 e2 d2 e2 c2 e2 b1 e2 a1 e2 g1 e2";
 			int leftFingersUp[] = { 5, 1, 2, 1, 3, 1, 4, 1, 5, 1, 5, 1 };
 			int rightFingersUp[] = { 1, 5, 4, 5, 3, 5, 2, 5, 1, 5, 1, 5 };
 			int stepsUp[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 
-			String patternDown = "e2 e1 f1 e1 g1 e1 a1 e1 b1 e1 c2 e1";
+			String leftPatternDown = "c3 c2 d2 c2 e2 c2 f2 c2 g2 c2 a2 c2";
+			String rightPatternDown = "e4 e3 f3 e3 g3 e3 a3 e3 b3 e3 c4 e3";
 			int leftFingersDown[] = { 1, 5, 4, 5, 3, 5, 2, 5, 1, 5, 1, 5 };
 			int rightFingersDown[] = { 5, 1, 2, 1, 3, 1, 4, 1, 5, 1, 5, 1 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12};
 
-			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
+			leftHand = guidoService.gmnToScores(leftPatternUp, leftFingersUp, stepsUp);
+			leftHand.addAll(guidoService.gmnToScores(leftPatternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(oneOctaveUp(rightPatternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(rightPatternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -879,6 +881,7 @@ public class HanonSongFactory extends SongFactory {
 
 			break;
 		}
+		
 		case 33: {
 			name = "50a";
 			meter = "C";
@@ -907,7 +910,32 @@ public class HanonSongFactory extends SongFactory {
 
 			break;
 		}
+		
 		case 34: {
+			name = "54";
+			meter = "C";
+
+			String patternUp = "{c1,e} {d,f} {c,e} {d,f} {c,e} {d,f} {c,e} {d,f} {e,g} {d,f} {e,g} {d,f} {e,g} {d,f} {e,g} {d,f}";
+			int leftFingersUp[] = { 5, 3, 4, 2, 5, 3, 4, 2, 5, 3, 4, 2, 5, 3, 4, 2, 3, 1, 4, 2, 3, 1, 4, 2, 3, 1, 4, 2, 3, 1, 4, 2};
+			int rightFingersUp[] = { 1, 3, 2, 4, 1, 3, 2, 4, 1, 3, 2, 4, 1, 3, 2, 4, 3, 5, 2, 4, 3, 5, 2, 4, 3, 5, 2, 4, 3, 5, 2, 4};
+			int stepsUp[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+
+			String patternDown = "{d2,f} {c,e} {d,f} {c,e} {d,f} {c,e} {d,f} {c,e} {b1,d2} {c,e} {b1,d2} {c,e} {b1,d2} {c,e} {b1,d2} {c,e}";
+			int leftFingersDown[] = { 3, 1, 4, 2, 3, 1, 4, 2, 3, 1, 4, 2, 3, 1, 4, 2, 5, 3, 4, 2, 5, 3, 4, 2, 5, 3, 4, 2, 5, 3, 4, 2};
+			int rightFingersDown[] = { 3, 5, 2, 4, 3, 5, 2, 4, 3, 5, 2, 4, 3, 5, 2, 4, 1, 3, 2, 4, 1, 3, 2, 4, 1, 3, 2, 4, 1, 3, 2, 4};   
+			int stepsDown[] = { 0, -1, -2, -3, -4, -5, -6};
+
+			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
+			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
+
+			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+
+			break;
+			
+		}
+		
+		case 35: {
 			name = "0";
 			description = "Scale";
 
