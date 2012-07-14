@@ -22,7 +22,7 @@ public class ResultListenerTest {
 	
 	@Test
 	public void saveMidiEventsTest() {
-		String c0 = "c0 d e f g f e d";
+		String c0 = "c0 d e f g f e d ";
 		List<MidiEventPair> midiEvents = guidoService.gmnToMidi(StringUtils.repeat(c0, 100));
 		
 		midiEvents.clear();
