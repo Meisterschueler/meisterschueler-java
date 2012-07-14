@@ -161,7 +161,7 @@ public class HanonSongFactory extends SongFactory {
 			int stepsUp2[] = {13};
 
 			String patternDown1 = "g2 b1 c2 b1 d2 b1 e2 b1";
-			String patternDown2 = "g0 b-1 c0 b-1 d0 b-1 e0 d";
+			String patternDown2 = "g2 b1 c2 b1 d2 b1 e2 d2";
 			int leftFingersDown1[] = { 1, 5, 4, 5, 3, 5, 2, 5 };
 			int leftFingersDown2[] = { 1, 5, 4, 5, 3, 5, 2, 3 };
 			int rightFingersDown1[] = { 5, 1, 2, 1, 3, 1, 4, 1 };
@@ -456,8 +456,8 @@ public class HanonSongFactory extends SongFactory {
 			int stepsUp1[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 			int stepsUp2[] = {13};
 
-			String patternDown1    = "g0 d0 b-1 c0 a3 b-1 c0 a3";
-			String patternDown2    = "g0 d0 b-1 c0 a3 b-1 c0 b-1";
+			String patternDown1    = "g2 d2 b1 c2 a1 b1 c2 a1";
+			String patternDown2    = "g2 d2 b1 c2 a1 b1 c2 b1";
 			int leftFingersDown1[]  = { 1, 2, 4, 3, 5, 4, 3, 5 };
 			int leftFingersDown2[]  = { 1, 2, 4, 3, 5, 4, 3, 5 };
 			int rightFingersDown1[] = { 5, 3, 2, 3, 1, 2, 3, 1 };
@@ -489,7 +489,7 @@ public class HanonSongFactory extends SongFactory {
 			String patternDown = "g2 f d e c d f e";
 			int leftFingersDown[] = { 1, 2, 4, 3, 5, 4, 2, 3 };
 			int rightFingersDown[] = { 5, 4, 2, 3, 1, 2, 4, 3 };
-			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -10, -11, -12, -13, -14};
+			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
