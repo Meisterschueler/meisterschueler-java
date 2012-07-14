@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -19,7 +20,6 @@ import basic.Song;
 
 import com.leff.midi.event.NoteOff;
 import com.leff.midi.event.NoteOn;
-
 
 public class MatchingHandlerTest  {
 
@@ -161,6 +161,43 @@ public class MatchingHandlerTest  {
 		matchingHandler.match(midiGEvents.get(eventSize-1).getNoteOn());
 		matchingHandler.match(midiGEvents.get(eventSize-1).getNoteOff());
 		assertEquals( Key.G, resultServiceDummy.getLastResult().getKey() );
+	}
+	
+	@Test
+	public void polyphoneTest() {
+		// Play No. 50
+		List<MidiEventPair> midiEvents = new ArrayList<MidiEventPair>();
+		// Thirds, all lower notes played first
+		midiEvents.add(new MidiEventPair(new NoteOn(0, 0, 48, 30), new NoteOff(2, 0, 48, 30)));
+		midiEvents.add(new MidiEventPair(new NoteOn(1, 0, 52, 30), new NoteOff(3, 0, 52, 30)));
+		
+		midiEvents.add(new MidiEventPair(new NoteOn(100, 0, 50, 30), new NoteOff(102, 0, 50, 30)));
+		midiEvents.add(new MidiEventPair(new NoteOn(101, 0, 53, 30), new NoteOff(103, 0, 53, 30)));
+		
+		midiEvents.add(new MidiEventPair(new NoteOn(200, 0, 52, 30), new NoteOff(202, 0, 52, 30)));
+		midiEvents.add(new MidiEventPair(new NoteOn(201, 0, 55, 30), new NoteOff(203, 0, 55, 30)));
+		
+		midiEvents.add(new MidiEventPair(new NoteOn(300, 0, 50, 30), new NoteOff(302, 0, 50, 30)));
+		midiEvents.add(new MidiEventPair(new NoteOn(301, 0, 53, 30), new NoteOff(303, 0, 53, 30)));
+		
+		// but here: lower note second
+		midiEvents.add(new MidiEventPair(new NoteOn(400, 0, 52, 30), new NoteOff(402, 0, 52, 30)));
+		midiEvents.add(new MidiEventPair(new NoteOn(401, 0, 48, 30), new NoteOff(403, 0, 48, 30)));
+		
+		midiEvents.add(new MidiEventPair(new NoteOn(500, 0, 50, 30), new NoteOff(502, 0, 50, 30)));
+		midiEvents.add(new MidiEventPair(new NoteOn(501, 0, 53, 30), new NoteOff(503, 0, 53, 30)));
+
+		// and here: lower note second		
+		midiEvents.add(new MidiEventPair(new NoteOn(600, 0, 55, 30), new NoteOff(602, 0, 55, 30)));
+		midiEvents.add(new MidiEventPair(new NoteOn(601, 0, 52, 30), new NoteOff(603, 0, 52, 30)));
+		
+		midiEvents.add(new MidiEventPair(new NoteOn(700, 0, 50, 30), new NoteOff(702, 0, 50, 30)));
+		midiEvents.add(new MidiEventPair(new NoteOn(701, 0, 53, 30), new NoteOff(703, 0, 53, 30)));
+			
+		proceedMidiEvents(midiEvents);
+		
+		assertEquals( "No. 50", matchingHandler.getBestMatchingItem().getSong().getName() );
+		assertEquals( "mmmmmmmmmmmmmmmm", matchingHandler.getBestMatchingItem().getPitchAlignment().substring(0, 15) );
 	}
 
 	private void proceedMidiEvents(List<MidiEventPair> midiEvents) {
