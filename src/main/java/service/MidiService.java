@@ -3,6 +3,7 @@ package service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -44,10 +45,14 @@ public class MidiService {
 		tempoTrack.insertEvent(ts);
 		tempoTrack.insertEvent(t);
 
-		for(MidiEventPair midiEvent : midiEventPairs) {
-			NoteOn noteOn = midiEvent.getNoteOn();
-			NoteOff noteOff = midiEvent.getNoteOff();
-			noteTrack.insertNote(noteOn.getChannel(), noteOn.getNoteValue(), noteOn.getVelocity(), noteOn.getTick(), noteOff.getTick()-noteOn.getTick());
+		ArrayList<MidiEvent> events = new ArrayList<MidiEvent>();
+		for (MidiEventPair midiEventPair : midiEventPairs) {
+			events.add(midiEventPair.getNoteOn());
+			events.add(midiEventPair.getNoteOff());
+		}
+		Collections.sort(events);
+		for (MidiEvent event : events) {
+			noteTrack.insertEvent(event);
 		}
 
 		ArrayList<MidiTrack> tracks = new ArrayList<MidiTrack>();
