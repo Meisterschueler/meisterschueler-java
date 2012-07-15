@@ -129,8 +129,12 @@ public class MatchingHandlerTest  {
 
 	@Test
 	public void songFinishedLegatoTest() {
-		List<MidiEventPair> midiCEvents = guidoService.gmnToMidi("c1 d e f g a b c2 d e f g a b c3 b2 a g f e d c b1 a g f e d");
-		List<MidiEventPair> midiGEvents = guidoService.gmnToMidi("g1 a b c2 d e f# g a b c3 d e f# g f# e d c b2 a g f# e d c b1 a");
+		String CScale = "c1 d e f g a b c2 d e f g a b c3 b2 a g f e d c b1 a g f e d";
+		String GScale = "g1 a b c2 d e f# g a b c3 d e f# g f# e d c b2 a g f# e d c b1 a";
+		
+		List<MidiEventPair> midiEventPairs = guidoService.gmnToMidi(CScale + " " + GScale); 
+		List<MidiEventPair> midiCEvents = new ArrayList<MidiEventPair>(midiEventPairs.subList(0, 28));
+		List<MidiEventPair> midiGEvents = new ArrayList<MidiEventPair>(midiEventPairs.subList(28, 56));
 		
 		// Play C scale
 		int eventSize = midiCEvents.size();
