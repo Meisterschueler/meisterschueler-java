@@ -197,7 +197,7 @@ public class MatchingHandlerTest  {
 		proceedMidiEvents(midiEvents);
 		
 		assertEquals( "No. 50", matchingHandler.getBestMatchingItem().getSong().getName() );
-		assertEquals( "mmmmmmmmmmmmmmmm", matchingHandler.getBestMatchingItem().getPitchAlignment().substring(0, 15) );
+		assertEquals( "mmmmmmmmmmmmmmmm", matchingHandler.getBestMatchingItem().getPitchAlignment().substring(0, 16) );
 	}
 
 	private void proceedMidiEvents(List<MidiEventPair> midiEvents) {

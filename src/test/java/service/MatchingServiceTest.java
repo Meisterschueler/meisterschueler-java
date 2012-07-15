@@ -96,7 +96,7 @@ public class MatchingServiceTest {
 		notes.add(new NoteOn(4000, 4, 55, 9));
 		notes.add(new NoteOn(5000, 5, 55, 11));
 
-		List<Score> result = matchingService.simpleMatch(scores, midiService.pairMidi(notes));
+		List<Score> result = matchingService.simpleMatch(scores, midiService.pairMidiEvents(notes));
 
 		for (int i=0; i<result.size(); i++) {
 			NoteOn noteOn = scores.get(i).getNote().getNoteOn();
