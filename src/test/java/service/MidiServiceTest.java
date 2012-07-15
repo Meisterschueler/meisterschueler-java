@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import basic.MidiEventPair;
 
+import com.leff.midi.MidiFile;
 import com.leff.midi.event.MidiEvent;
 import com.leff.midi.event.NoteOff;
 import com.leff.midi.event.NoteOn;
@@ -16,6 +17,25 @@ import com.leff.midi.event.NoteOn;
 
 public class MidiServiceTest {
 	private MidiService midiService = new MidiService();
+	private GuidoService guidoService = new GuidoServiceImpl();
+	
+	@Test
+	public void createMidiFileTest() {
+		List<MidiEventPair> midiEventPairs = guidoService.gmnToMidi("c0/4 d e f g/2 g");
+		MidiFile midiFile = midiService.createMidiFile(midiEventPairs);
+		Object[] objects = midiFile.getTracks().get(1).getEvents().toArray();
+		int noteOnCount = 0;
+		int noteOffCount = 0;
+		for (Object o : objects) {
+			if (o instanceof NoteOn) {
+				noteOnCount++;
+			} else if (o instanceof NoteOff) {
+				noteOffCount++;
+			}
+		}
+		assertEquals( 6, noteOnCount );
+		assertEquals( 6, noteOffCount );
+	}
 	
 	@Test
 	public void addMidiTest() {
