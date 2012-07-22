@@ -6,9 +6,10 @@ import java.util.Map;
 
 public class Song {
 	private String name;
+	private String description;
+	private Long id;
 	private Map<Hand, List<Score> > voices = new HashMap<Hand, List<Score> >();
 	private Key key;
-	private String description;
 	
 	public Song() {
 		this.key = Key.C;
@@ -22,6 +23,22 @@ public class Song {
 		this.name = name;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public List<Score> getVoice(Hand hand) {
 		return voices.get(hand);
 	}
@@ -36,13 +53,5 @@ public class Song {
 
 	public void setKey(Key key) {
 		this.key = key;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-	
-	public void setDescription(String description) {
-		this.description = description;
 	}
 }

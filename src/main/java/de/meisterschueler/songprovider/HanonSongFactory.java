@@ -29,13 +29,15 @@ public class HanonSongFactory extends SongFactory {
 	private Song getNo(int no) {
 		List<Score> leftHand = null;
 		List<Score> rightHand = null;
-		String description = "";
-		String meter = "2/4";
 		String name = "";
+		String description = "";
+		Long id = null;
+		String meter = "2/4";
 		switch (no) {
 		case 0: {
 			name = "1";
 			description = "";
+			id = 100L;
 
 			String patternUp = "c0 e f g a g f e";
 			int leftFingersUp[] = { 5, 4, 3, 2, 1, 2, 3, 4 };
@@ -59,6 +61,7 @@ public class HanonSongFactory extends SongFactory {
 		case 1: {
 			name = "2";
 			description = "";
+			id = 200L;
 
 			String patternUp = "c0 e a g f g f e";
 			int leftFingersUp[] = { 5, 3, 1, 2, 3, 2, 3, 4 };
@@ -82,6 +85,7 @@ public class HanonSongFactory extends SongFactory {
 		case 2: {
 			name = "3";
 			description = "";
+			id = 300L;
 
 			String patternUp = "c0 e a g f e f g";
 			int leftFingersUp[] = { 5, 3, 1, 2, 3, 4, 3, 2 };
@@ -105,6 +109,7 @@ public class HanonSongFactory extends SongFactory {
 		case 3: {
 			name = "4";
 			description = "Special exercise for the 3rd, 4th and 5th fingers of the hand.";
+			id = 400L;
 
 			String patternUp = "c0 d c e a g f e";
 			int leftFingersUp[] = { 5, 4, 5, 3, 1, 2, 3, 4 };
@@ -128,6 +133,7 @@ public class HanonSongFactory extends SongFactory {
 		case 4: {
 			name = "5";
 			description = "We repeat, that the fingers should be lifted high, and with precision, until this entire volm is mastered.";
+			id = 500L;
 
 			String patternUp = "c0 a g a f g e f";
 			int leftFingersUp[] = { 5, 1, 2, 1, 3, 2, 4, 3 };
@@ -150,6 +156,7 @@ public class HanonSongFactory extends SongFactory {
 		case 5: {
 			name = "6";
 			description = "To obtain the good results which we promise those who study this work, it is indispensable to play daily, at least once, the exercise already learned.";
+			id = 600L;
 
 			String patternUp1 = "c0 a g a f a e a";
 			String patternUp2 = "c0 a g a f a e d";
@@ -185,6 +192,7 @@ public class HanonSongFactory extends SongFactory {
 		case 6: {
 			name = "7";
 			description = "Exercise of the greatest importance for the 3rd, 4th and 5th fingers.";
+			id = 700L;
 
 			String patternUp = "c0 e d f e g f e";
 			int leftFingersUp[] = { 5, 3, 4, 2, 3, 1, 2, 3 };
@@ -208,6 +216,7 @@ public class HanonSongFactory extends SongFactory {
 		case 7: {
 			name = "8";
 			description = "Very important exercise for all five fingers.";
+			id = 800L;
 
 			String patternUp = "c0 e g a f g e f";
 			int leftFingersUp[] = { 5, 4, 2, 1, 3, 2, 4, 3 };
@@ -231,6 +240,7 @@ public class HanonSongFactory extends SongFactory {
 		case 8: {
 			name = "9";
 			description = "Extension of the 4th and 5th, and general finger-exercise.";
+			id = 900L;
 
 			String patternUp = "c0 e f e g f a g";
 			int leftFingersUp[] = { 5, 4, 3, 4, 2, 3, 1, 2 };
@@ -260,6 +270,7 @@ public class HanonSongFactory extends SongFactory {
 		case 9: {
 			name = "10";
 			description = "Preparation for the trill, for the 3rd and 4th fingers of the left hand in ascending (1); and for the 3rd and 4th of the right, descending (2).";
+			id = 1000L;
 
 			String patternUp = "c0 a g f e f e f";
 			int leftFingersUp[] = { 5, 1, 2, 3, 4, 3, 4, 3 };
@@ -283,6 +294,7 @@ public class HanonSongFactory extends SongFactory {
 		case 10: {
 			name = "11";
 			description = "Another preparation for the trill, for the 4th and 5th fingers.";
+			id = 1100L;
 
 			String patternUp = "c0 e a g a g f g";
 			int leftFingersUp[] = { 5, 3, 1, 2, 1, 2, 3, 2 };
@@ -305,6 +317,7 @@ public class HanonSongFactory extends SongFactory {
 		case 11: {
 			name = "12";
 			description = "Extension of 1-5, and exercise for 3-4-5.";
+			id = 1200L;
 
 			String patternUp1  = "g0 c e d c d e c";
 			String patternUp2  = "a0 c e d c d e c";
@@ -342,6 +355,7 @@ public class HanonSongFactory extends SongFactory {
 		case 12: {
 			name = "13";
 			description = "(3-4-5)";
+			id = 1300L;
 
 			String patternUp = "e0 c f d g e f g";
 			int leftFingersUp[] = { 3, 5, 2, 4, 1, 3, 2, 1 };
@@ -365,6 +379,7 @@ public class HanonSongFactory extends SongFactory {
 		case 13: {
 			name = "14";
 			description = "(3-4) Another preparation for the trill, for the 3rd and 4th fingers.";
+			id = 1400L;
 
 			String patternUp = "c0 d f e f e g f";
 			int leftFingersUp[] = { 5, 4, 2, 3, 2, 3, 1, 2 };
@@ -388,6 +403,7 @@ public class HanonSongFactory extends SongFactory {
 		case 14: {
 			name = "15";
 			description = "Extension of 1-2, and exercise for all 5 fingers.";
+			id = 1500L;
 
 			String patternUp1 = "c0 e d f e g f a";
 			String patternUp2 = "c0 e d f e g f g";
@@ -423,6 +439,7 @@ public class HanonSongFactory extends SongFactory {
 		case 15: {
 			name = "16";
 			description = "Extension of 3-5, and exercise for 3-4-5.";
+			id = 1600L;
 
 			String patternUp = "c0 e0 d0 e0 a0 g0 f0 g0";
 			int leftFingersUp[] = { 5, 3, 4, 3, 1, 2, 3, 2 };
@@ -446,6 +463,7 @@ public class HanonSongFactory extends SongFactory {
 		case 16: {
 			name = "17";
 			description = "Extension of 1-2, 2-4, 4-5, and exercise for 3-4-5.";
+			id = 1700L;
 
 			String patternUp1  = "c0 e0 a0 g0 b0 a0 g0 a0";
 			String patternUp2  = "c0 e0 a0 g0 b0 a0 g0 f0";
@@ -480,6 +498,7 @@ public class HanonSongFactory extends SongFactory {
 		case 17: {
 			name = "18";
 			description = "(1-2-3-4-5)";
+			id = 1800L;
 
 			String patternUp = "c0 d f e g f d e";
 			int leftFingersUp[] = { 5, 4, 2, 3, 1, 2, 4, 3 };
@@ -503,6 +522,7 @@ public class HanonSongFactory extends SongFactory {
 		case 18: {
 			name = "19";
 			description = "(1-2-3-4-5)";
+			id = 1900L;
 
 			String patternUp = "c0 a f g a f e g";
 			int leftFingersUp[] = { 5, 1, 3, 2, 1, 3, 4, 2 };
@@ -526,6 +546,7 @@ public class HanonSongFactory extends SongFactory {
 		case 19: {
 			name = "20";
 			description = "Extension of 2-4, 4-5, and exercise for 2-3-4.";
+			id = 2000L;
 
 			String patternUp1 = "e0 g c1 e c b0 c1 a0";
 			String patternUp2 = "e0 g c1 e c b0 c1 g0";
@@ -557,6 +578,7 @@ public class HanonSongFactory extends SongFactory {
 		}
 		case 20: {
 			name = "21";
+			id = 2100L;
 			meter = "4/4";
 
 			String patternUp = "c0 d e d c e f g a g f g a g f e";
@@ -584,6 +606,7 @@ public class HanonSongFactory extends SongFactory {
 		}
 		case 21: {
 			name = "22";
+			id = 2200L;
 			meter = "C";
 
 			String patternUp = "c0 e0 d0 e0 c0 e0 f0 g0 a0 f0 g0 f0 a0 g0 f0 e0";
@@ -611,6 +634,7 @@ public class HanonSongFactory extends SongFactory {
 		}
 		case 22: {
 			name = "23";
+			id = 2300L;
 			meter = "C";
 
 			String patternUp = "c0 d0 e0 d0 c0 d0 e0 d0 c0 a0 g0 f0 e0 f0 g0 f0";
@@ -633,6 +657,7 @@ public class HanonSongFactory extends SongFactory {
 		}
 		case 23: {
 			name = "24";
+			id = 2400L;
 			meter = "C";
 
 			String patternUp = "e0 d0 e0 c0 e0 d0 e0 c0 e0 d0 e0 c0 a0 f0 g0 e0";
@@ -655,6 +680,7 @@ public class HanonSongFactory extends SongFactory {
 		}
 		case 24: {
 			name = "25";
+			id = 2500L;
 			meter = "C";
 
 			String patternUp = "c0 d0 e0 c0 d0 e0 f0 d0 e0 f0 g0 f0 e0 g0 f0 e0";
@@ -686,6 +712,7 @@ public class HanonSongFactory extends SongFactory {
 		}
 		case 25: {
 			name = "26";
+			id = 2600L;
 			meter = "C";
 
 			String patternUp = "e0 f0 g0 e0 d0 e0 f0 d0 c0 d0 e0 c0 a0 g0 a0 g0";
@@ -708,6 +735,7 @@ public class HanonSongFactory extends SongFactory {
 		}
 		case 26: {
 			name = "27";
+			id = 2700L;
 			meter = "C";
 
 			String patternUp = "e0 f0 d0 e0 c0 e0 f0 g0 a0 g0 a0 g0 a0 g0 f0 e0";
@@ -730,6 +758,7 @@ public class HanonSongFactory extends SongFactory {
 		}
 		case 27: {
 			name = "28";
+			id = 2800L;
 			meter = "C";
 
 			String patternUp = "c0 e0 d0 e0 c0 e0 d0 e0 c0 a0 g0 a0 f0 g0 e0 f0";
@@ -752,6 +781,7 @@ public class HanonSongFactory extends SongFactory {
 		}
 		case 28: {
 			name = "29";
+			id = 2900L;
 			meter = "C";
 
 			String patternUp = "c0 d c e d e d f e f e g f g f g";
@@ -784,6 +814,7 @@ public class HanonSongFactory extends SongFactory {
 		}
 		case 29: {
 			name = "30";
+			id = 3000L;
 			meter = "C";
 
 			String patternUp = "c0 d0 c0 d0 c0 d0 c0 e0 a0 g0 a0 g0 a0 g0 a0 f0";
@@ -812,6 +843,7 @@ public class HanonSongFactory extends SongFactory {
 		}
 		case 30: {
 			name = "31";
+			id = 3100L;
 			meter = "3/4";
 
 			String leftPatternUp = "c0 c1 b0 c1 a0 c1 g0 c1 f0 c1 e0 c1";
@@ -836,6 +868,7 @@ public class HanonSongFactory extends SongFactory {
 		}
 		case 31: {
 			name = "38";
+			id = 3800L;
 			meter = "2/4";
 
 			String patternUp = "c0 d0 e0 f0 g0 a0 b0 c1";
@@ -858,6 +891,7 @@ public class HanonSongFactory extends SongFactory {
 		}
 		case 32: {
 			name = "50";
+			id = 5000L;
 			meter = "C";
 
 			String patternUp = "{c0,e0} {d0,f0} {e0,g0} {d0,f0}";
@@ -884,6 +918,7 @@ public class HanonSongFactory extends SongFactory {
 		
 		case 33: {
 			name = "50a";
+			id = 5001L;
 			meter = "C";
 
 			String patternUp = "{c0,e} {d,f} {e,g}";
@@ -913,6 +948,7 @@ public class HanonSongFactory extends SongFactory {
 		
 		case 34: {
 			name = "54";
+			id = 5400L;
 			meter = "C";
 
 			String patternUp = "{c1,e} {d,f} {c,e} {d,f} {c,e} {d,f} {c,e} {d,f} {e,g} {d,f} {e,g} {d,f} {e,g} {d,f} {e,g} {d,f}";
@@ -938,6 +974,7 @@ public class HanonSongFactory extends SongFactory {
 		case 35: {
 			name = "0";
 			description = "Scale";
+			id = 0L;
 
 			String pattern = "c0 d e f g a b c1 d e f g a b c2 b1 a g f e d c b0 a g f e d";
 			int leftFingers[] = { 5, 4, 3, 2, 1, 3, 2, 1, 4, 3, 2, 1, 3, 2, 1, 2, 3, 1, 2, 3, 4, 1, 2, 3, 1, 2, 3, 4, 5 };
@@ -959,6 +996,7 @@ public class HanonSongFactory extends SongFactory {
 		if (!description.isEmpty()) {
 			song.setDescription(description);
 		}
+		song.setId(id);
 		//		song.meter = meter;
 
 		return song;

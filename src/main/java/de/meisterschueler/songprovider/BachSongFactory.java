@@ -31,13 +31,15 @@ public class BachSongFactory extends SongFactory {
 	private Song getNo(int no) {
 		String leftHand = null;
 		String rightHand = null;
-		String description = "";
 		Fraction meter = new Fraction(2,4);
 		String name = "";
+		String description = "";
+		Long id = null;
 		Key key = null;
 		switch (no) {
 	        case 0: {
 	            name = "Inventio 1";
+	            id = 010100L;
 	            meter = new Fraction(4,4);
 	            key = Key.C;
 	            rightHand = "_/16 c1/16 d e f d e c g/8 c2 b1 c2 d/16 g1 a b c2 a1 b g d2/8 g f g e/16 a g f e g f a g f e d c e d f e d c b1 a c2 b1 d2 c b1 a g f# a g b a/8 d c2/8. d/16 b1 a g f# e g f# a g b a c2 b1 d2 c e d b1/32 c2 d/16 g b1/8 a/16 g g/8 _/8 _/4 _/16 g/16 a b c2 a1 b g f#/8 _/8 _/4 _/16 a/16 b c2 d b1 c2 a1 b/8 _/8 _/4 _/16 d2/16 c b1 a c2 b1 d2 c/8 _/8 _/4 _/16 e/16 d c b1 d2 c# e d/8 c# d e f a1 b c#2 d f#1 g# a b c2 d*5/16 e1/16 f# g# a f# g# e e2 d c e d c b1 d2 c a g# b a e f d a&1 f2 e d c/8 b1/16 a a a2 g f e g f a g*9/16 e/16 f g a f g e f*9/16 g/16 f e d f e g f*9/16 d/16 e f g e f d e*9/16 c/16 d e f d e c d e f g a f g e f g a b c3 a2 b g c3/8 g2 e d/16 c c b&1 a g f a g b& a b c2 e1 d c2 f1 b {e/1,g,c2}";
@@ -47,6 +49,7 @@ public class BachSongFactory extends SongFactory {
 
 	        case 1: {
 	            name = "Inventio 2";
+	            id = 010200L;
 	            meter = new Fraction(4,4);
 	            key = Key.Es;
 	            rightHand = "_/8 c2/16 b1 c2 d e& g1 a& b& a& f f2 e& d c b1 a&2 g f e& d c b1 c2 d c d d/8. c/32 d e&/16 d c d e& f g/8 g f _/8 f f e& _/8 d e& a&1/8. f/16 b& f g/8 e&2/8. d/16 e& b&1 c2 e& a& g f e& d c b&1 d2 g f e& d c b&1 a& c2 f c d/8. d/16 e& b&1 c2 b&1 g2*5/16 b&1/16 c2 b&1 a&2*5/16 b&1/16 e&2 d g f a& g c3 b&2 a& g f b& a& b& g b& a& b& e& g f g c d e& f d e& f g e& f g a& b& a& c3 b&2 a& g f a& d*5/16 d/16 g d e& c d b&1 c2*5/16 g/16 f# a c b&1 c2/8. f#/16 e d b&/8. e/16 f#/8. g/16 g/8 g1/16 f# g a b& d e& f e& c c2 b&1 a g f# e&2 d c b&1 a g f# g a g a a/8. g/32 a b&/16 a g a b& c2 d/8 d c _/8 c c b&1 _/8 a b& e&/8. c/16 f c d/8 b&/8. a/16 b& f g b& e&2 d c b&1 a g f a d2 c b&1 a g f e& g c2 g1 a/8. a/16 b& f g f d2*5/16 f1/16 g f e&2*5/16 f1/16 b& a d2 c e& d g f e& d c f e& f d c b&1 a d2 c e& d c b&1 a c2 f*5/16 g1/16 c2 b1 e&2 d f e& a& g f e& d g f g e& d c b1 c2 d e& g1 a& b& a& f f2 e& d c b1 a&2 g f e& d c b1 c2 d c d d/8. c/32 d e&/16 d c d e& f g/8 g f _/8 f f e&/16 d g f a& g g/8. a&/16 d/8. c/16 c/1";
@@ -55,6 +58,7 @@ public class BachSongFactory extends SongFactory {
 	        }
 	        case 2: {
 	            name = "Inventio 4";
+	            id = 010400L;
 	            meter = new Fraction(3,8);
 	            key = Key.F;
 	            rightHand = "d1/16 e f g a b& c# b& a g f e f/8 a d2 g1 c#2 e d/16 e f g a b& c# b& a g f e f d e f g a b&1 a2 g f e d e c d e f g a1 g2 f e d c d e f d e f g1/8 _/8 _/8 c2/16 d e c d e f1/8 _/8 b&/4 a/8 g c2/16 b&1 a g f e f g g/8. f/16 f/8 c2 c c*19/16 b&1/16 a g f e c2 d1 e f# g a b& a g f e d b& c d e f g a b c2 d e f g#1 f2 e d c b1 c2 b1 d2 c b1 a g# a g# f# e d c d e f# g# a d c2 b1 a g# f# e f# g# a b c2 f#1 e2 d c b1 a g# a b c2 d e a1 f2 e d c b1 a2 g# f# e a/8. d/16 b1/8. a/16 a/8. a/16 b& c2 d1/8 f# a b&/16 g a b& c2 d e1 d2 c b&1 a g a/8 f2/16 e f/8 g1 e2 _/8 d/16 e f g a b& c# b& a g f e f/8 d g1/8. d2/16 c# e a1 c#2 d b1 c#2/8. d/16 d c b&1 a g f b& c# d e f g a d2 f1/8 e/16 d d/4.";
@@ -64,6 +68,7 @@ public class BachSongFactory extends SongFactory {
 	        }
 	        case 3: {
 	            name = "Inventio 5";
+	            id = 010500L;
 	            meter = new Fraction(4,4);
 	            key = Key.Es;
 	            rightHand = "_/8 e&1/16 d e&/8 f g/4 a& _/8 f/16 e& f/8 g a&/4 b& g/8 c2 b&1 a& g/16 a& b& a& g/8 f e& g b& e&2/8. c/16 d e& f/8 e& d/16 e& d c d e& c d b&1 b&2 a b& g a f g e& g f g e& f d e& c b& a g a b& g a b&1 b&2 a g a b& g a f b& a& g f g e& f d g f e& d e& c d f1 e&2 d c d e& c d e&/8 b&1/16 a& b&/8 c2 d&/4 e& _/8 c/16 b&1 c2/8 d e&/4 f _/8 d/16 c d/8 e& f/4 g e&/16 f e& d e& f d e& c c3 b&2 c3 a&2 b& g a& f a& g a& f g e& f d c3 b2 a b c3 a2 b c c3 b&2 a& b& c3 a&2 b& g c3 b&2 a& g a& f g e a& g f e f d e g1 f2 e d e f d e f/8 f1/16 e f/8 g a&/4 b& _/8 g/16 f g/8 a& b&/4 c2 a&1/8 d&2 c b&1 a/16 b& c2 b&1 a/8 g f a c2 e&/8. c/16 d& e& f/8 e& d&/16 e& d& c d& e& c d& b&1 a&2 g f g a& f g a& d& c b&1 c2 d& b&1 c2 a&1 g2 f e f g e f g c b&1 a& b& c2 a&1 b& g f2 e d e f d e f/8 a&1/16 g a&/8 b& c2/4 d& _/8 b&1/16 a& b&/8 c2 d&/4 e& c/16 a& g a& f g e& f d& b& a& b& c d& b&1 c2 a&1 c2 b&1 c2 a&1 b& g a& f e&2 d c d e& c d e&/8 e&1/16 d e&/8 f g/4 a& _/8 f/16 e& f/8 g a&/4 b& g/8 c2 b&1 a& g/16 a& b& a& g/8 f e& f2 e& d& c/16 d& e& d& c/8 b&1 a& c2 e& a&/8. f/16 g a& b&/8 a& g*5/32 f/32 e& f f/4 e&/2";
@@ -72,6 +77,7 @@ public class BachSongFactory extends SongFactory {
 	        }
 	        case 4: {
 	            name = "Inventio 6";
+	            id = 010600L;
 	            meter = new Fraction(3,8);
 	            key = Key.E;
 	            rightHand = "_/16 e2/8 d# d c# b1 a g# f# g#/32 a g#/16 b/32 a b/16 g#/32 f# g#/16 e/32 d# e/8 f# g# a b c#2 d# e/16 d# c# b1 e2/8 e1 _/8 _/16 g#2 e c# e/32 d# e/16 c# a#1 f#/8 f#2 d# b1 d#2/32 c# d#/16 b1 g# e/8 e2 c# a#1 g#2 f# e d# c# b1/16 a# e/32 d# e/16 a#/32 g# a#/16 b/32 a# b/16 d# c# b c# a# b/8 _/16 b/16 d#2 f# b/8 _/16 b/16 f# d# b1 f# d# b0 _/8 b/8 c#1 d# e f# g# a# b/16 a# g# f# b/8 b0 _/8 _/16 b2 a# a g# f# e d# c# d#/32 e d#/16 f#/32 e f#/16 d#/32 c# d#/16 b1/32 a# b/16 d#2/32 c# d#/16 g#/32 f## g#/16 c#/32 b1 c#2/16 e/32 d# e/16 a#/32 g# a#/16 d#/32 c# d#/16 g#/32 f## g#/16 b/32 a# b/16 d#/32 c## d#/16 a#/32 g# a#/16 f##/32 e# f##/16 d#/32 c## d#/16 a/8 g# f# e/32 d# e/16 c#/32 b# c#/16 e/32 d# e/16 g#/8 f# e d#/32 c# d#/16 b1/32 a# b/16 c#2/32 b1 c#2/16 e/8 d# c# b1/32 a# b/16 g#/32 f## g#/16 a/32 g# a/16 c#2/32 b1 c#2/16 a1/32 g# a/16 e2/32 d# e/16 f##1/32 e# f##/16 a#/32 g# a#/16 b0/32 a# b/16 g#1 e c# a#0 f##1 g# d# b0 g# _/8 e1/8 f# g# a b c#2 d# e/16 d# c# b1 e2/8. b1/32 a b/16 g#/32 f# g#/16 e2/8 d# d c# b1 a g# f# g#/32 a g#/16 b/32 a b/16 g#/32 f# g#/16 e/32 d# e/8 f# a b d#2 f# d#1 e g# a c#2 e c#1 f# a b c#2 d# e c# a1 f#2/4.. e/16 d# c# b1 a g# e/32 d# e/16 g#/32 f# g#/16 b/32 a b/16 g#/32 f# g#/16 b/32 a b/16 e2/32 d# e/16 b1 g# e _/8";
@@ -80,6 +86,7 @@ public class BachSongFactory extends SongFactory {
 	        }
 	        case 5: {
 	            name = "Inventio 7";
+	            id = 010700L;
 	            meter = new Fraction(4,4);
 	            key = Key.G;
 	            rightHand = "_/8 b1/16 a g f# g e b/8 b e2/8. f#/16 d#/8 f#/16 e d# c# d# b1 b2/8 a/16 g f#/8. e/32 f# g/8 b/16 a g f# g e c3/8. b2/16 a g f# e f#/8 a/16 g f# e f# d b/8. a/16 g f# e d e f# e d c b1 a g c2 b1 a b c2 d e f# g f# e d g/8. g/16 g f# e f# f#/8. g/16 g/8 d/16 c b1 a b g d2*27/16 e/16 c#/8. d/16 d/8 a1/16 g f# e f# d c2/8. b1/16 c2/8. d/16 b1/8 b e2/8. e/16 e g f# e d c# d b1 a#/8 f#2/16 e d c# d b1 e2/8 b/16 a g f# g e a#/8 c# f# a#1 b/8. c#2/16 c#/8. b1/16 b/8 d2 e1 d2 c a1 d c2 b1 d2 g b1 a f#2 g1 e2 d# f#/16 e d# c# b1 a g f# g b e2 b1 a g f# e f# a d2 a1 g f# e d# e g c2 g1 f# e d# c# d# f# b/8 b b*5/16 d#2/16 e g a1*5/16 c#2/16 d# f# g1*5/16 b/16 d#2 e f#1 a b c2 d#1 f# g a b0/8 a1/8. f#/16 b f# g/8 e c2/8. c/16 c/8 b1 g2/8. g/16 g a g f# f#/8. e/16 e d c b1 a g a f# d#2/8 f#1 b/8. c2/16 a1/8. g/16 f#/8. e/16 e/2";
@@ -88,6 +95,7 @@ public class BachSongFactory extends SongFactory {
 	        }
 	        case 6: {
 	            name = "Inventio 13";
+	            id = 011300L;
 	            //meter = "C";
 	            key = Key.C;
 	            rightHand = "_/16 e1/16 a c2 b1 e b d2 c/8 e g#1 e2 a1/16 e a c2 b1 e b d2 c/8 a1 _/4 _/16 e2/16 c e a1 c2 e1 g f/8 a d2 f/8. d/16 b1 d2 g1 b d f e/8 g c2 e/8. c/16 a1 c2 f1/8 d2/8. b1/16 g b e/8 c2/8. a1/16 f a d/8 b c2 _/8 _/4 _/16 g1/16 c2 e d g1 d2 f e/8 g b1 g2 c/16 g1 c2 e d g1 d2 f e/8 c g e c3/16 a2 e a c e a1 c2 d/8 f# a c3 b2/16 g d g b1 d2 g1 b c2/8 e g b a/16 f# d# f# b1 d#2 f#1 a g/8 g2/8. e/16 c e a1/8 f#2/8. d/16 b1 d2 g1/8 e2/8. c/16 a1 c2 f#1 g2 f# e d# f# b1 d#2 e/8 _/8 _/4 _/16 g/16 b& g e g c# e g e c# e a1 _/16 _/8 _/16 f2 a f d f b1 d2 f d b1 d2 g1 _/16 _/8 _/16 e2 g e c e a1 c2 d# c a1 c2 f#1 _/16 _/8 _/16 d2 f d b1 d2 g#1 b d2 b1 g# b e _/16 _/8 _/16 e a c2 b1 e b d2 c/8 a1 g# e a/16 c2 e c a1 c2 f#1 a c2 a1 f# a d# c2 b1 a g# b d2 b1 g# b d f g# f d f b0 f1 e d c e a e c e a0 c1 d# c a0 c1 f#0 c1 b0 a g#/8 b1 g# e _/16 e/16 a c2 b1 e b d2 c a1 c2 e d b1 d2 f e c e g f e d c b1 c2 d e f d g# d b d c a f d b1 d2 g#1 b c2 a1 e a b g# a e c e a0/4";
@@ -96,6 +104,7 @@ public class BachSongFactory extends SongFactory {
 	        }
 	        case 7: {
 	            name = "Inventio 14";
+	            id = 011400L;
 	            //meter = "C";
 	            key = Key.Es;
 	            rightHand = "_/16 b&1/32 c2 d c b&1/16 f2 d b& f d f/32 e& d e& f/16 b&1 d2 f1 a& g e&/32 f g f e&/16 b& g e&2 b&1 g b&/32 a& g a& b&/16 e& g c e& a0 c1/32 d e& d c/16 a f c2 a1 e&2 f1/32 g a g f/16 c2 a1 f2 c d/8 _/8 _/16 g/32 f e& f g/16 c/8 _/8 _/16 f/32 e& d e& f/16 b&1/8 _/8 _/16 e&2/32 d c d e&/16 a1 c2/32 b&1 a b& c2/16 f1/8 _/8 f2 f1 a c2 f/4 _/4 _/8 f1/8 b& d2 f/4 _/4 _/8 g1/8 b& c2 e/4 _/4 _/16 f1/32 g a g f/16 c2 a1 f2 c a e&/32 d c d e&/16 a1 c2 f#1 a b&/8 d2 b&1 g a& f2 a&1 f g/16 c/32 d e& d c/16 g e& c2 g1 d2 a&1/32 g f g a&/16 d f b0 g1 e&/8 _/8 _/16 c/32 d e& d c/16 c2/8. b&1/16 a f/32 g a g f/16 f2/8. e&/16 d b&1/32 c2 d c b&1/16 b&2/8. a&/16 g b&/32 a& g a& b&/16 e& g/32 f e& f g/16 c e&/32 d c d e&/16 a1 c2/32 d e& d c/16 f a&1/32 g f g a&/16 g b&/32 c2 d c b&1/16 e&2 g1/32 f e& f g/16 f a/32 b& c2 b&1 a/16 d2 f1/32 e& d e& f/16 e& g/32 a b& a g/16 c2 e&1/32 d c d e&/16 d/4 _/16 b&/32 c2 d c b&1/16 f2 d b& f d f/32 e& d e& f/16 b&1 e&2 b&1 e&2 g1 e&/32 f g f e&/16 b& g e&2 b&1 g b&/32 a& g a& b&/16 e&/8 e&2/8. e&/32 d c d e&/16 f1/8 e&2/8. c/32 d e& d c/16 f d/32 c b&1 c2 d/16 f1 b& c2 a1 b&/1";
