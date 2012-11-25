@@ -7,7 +7,6 @@ import java.util.List;
 import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.collections.MultiMap;
 
-
 import com.leff.midi.event.MidiEvent;
 
 import de.meisterschueler.basic.Hand;
@@ -16,7 +15,6 @@ import de.meisterschueler.basic.MidiEventPair;
 import de.meisterschueler.basic.Score;
 import de.meisterschueler.basic.Song;
 import de.meisterschueler.service.SignalService.Signal;
-
 
 public class MatchingHandler {
 
@@ -78,7 +76,7 @@ public class MatchingHandler {
 		}
 	}
 
-	public void match(MidiEvent midiEvent) {
+	synchronized public void match(MidiEvent midiEvent) {
 		keyboardHandler.update(null, midiEvent);
 
 		String oldPitchSequence = matchingService.midiEventsToPitchSequence(midiEvents);
