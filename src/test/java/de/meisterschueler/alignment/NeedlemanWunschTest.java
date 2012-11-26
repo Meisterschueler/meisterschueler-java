@@ -43,8 +43,7 @@ public class NeedlemanWunschTest {
 	@Test
 	public void ABC_AZC_mexm_Test() {
 		String alignment = NeedlemanWunsch.getAlignments("ABC", "AZC");
-		//assertEquals( "mexm", alignment);	// 1. Wahl
-		assertEquals( "memx", alignment);	// 2. Wahl (auch nicht falsch, aber unschön)
+		assertEquals( "mwm", alignment);
 	}
 	
 	@Test
