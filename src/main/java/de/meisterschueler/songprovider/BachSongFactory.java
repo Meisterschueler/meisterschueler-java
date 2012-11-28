@@ -125,7 +125,7 @@ public class BachSongFactory extends SongFactory {
 		song.setVoice(Hand.LEFT, guidoService.gmnToScores(leftHand));
 		song.setVoice(Hand.RIGHT, guidoService.gmnToScores(rightHand));
 		song.setKey(key);
-		song.setName("No. " + name);
+		song.setName(name);
 		if (!description.isEmpty()) {
 			song.setDescription(description);
 		}

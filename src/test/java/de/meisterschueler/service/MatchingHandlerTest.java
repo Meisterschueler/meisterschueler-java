@@ -24,12 +24,14 @@ import de.meisterschueler.service.GuidoService;
 import de.meisterschueler.service.MatchingHandler;
 import de.meisterschueler.service.ResultListenerDummy;
 import de.meisterschueler.service.SignalServiceDummy;
+import de.meisterschueler.songprovider.BachSongFactory;
 import de.meisterschueler.songprovider.HanonSongFactory;
 
 public class MatchingHandlerTest  {
 
 	private MatchingHandler matchingHandler = new MatchingHandler();
 	private HanonSongFactory hanonSongFactory = new HanonSongFactory();
+	private BachSongFactory bachSongFactory = new BachSongFactory();
 	private GuidoService guidoService = new GuidoService();
 	private MatchingItem bestMatchingItem = null;
 
@@ -38,6 +40,7 @@ public class MatchingHandlerTest  {
 	@Before
 	public void init() {
 		List<Song> songs = hanonSongFactory.getSongBook().getSongs();
+		songs.addAll( bachSongFactory.getSongBook().getSongs() );
 		matchingHandler.setSongs(songs);
 		matchingHandler.initMatchingItems();
 		matchingHandler.setSignalService(new SignalServiceDummy());
@@ -207,6 +210,30 @@ public class MatchingHandlerTest  {
 		
 		assertEquals( "No. 50", matchingHandler.getBestMatchingItem().getSong().getName() );
 		assertEquals( "mmmmmmmmmmmmmmmm", matchingHandler.getBestMatchingItem().getPitchAlignment().substring(0, 16) );
+	}
+	
+	@Test
+	public void multiThreadingTest() {
+		for (int i=0; i<100; i++) {
+			final int tick = i*100;
+			new Thread() {
+				@Override
+				public void run() {
+					int note = 30 * (int)(Math.random()*30);
+					matchingHandler.match(new NoteOn(tick, 0, note, 30));
+					matchingHandler.match(new NoteOff(tick, 0, note, 30));
+				}
+			}.start();
+		}
+	}
+	
+	@Test
+	public void bachInventio13Test() {
+		List<MidiEventPair> midiEvents = guidoService.gmnToMidi("e1 a c2 b1 e b d2 c e g#1 e2");
+		proceedMidiEvents(midiEvents);
+		assertNotNull(bestMatchingItem);
+		assertEquals( "Inventio 13", bestMatchingItem.getSong().getName() );
+		assertTrue( bestMatchingItem.getPitchAlignment().startsWith("mmmmmmmmmmm") );
 	}
 
 	private void proceedMidiEvents(List<MidiEventPair> midiEvents) {
