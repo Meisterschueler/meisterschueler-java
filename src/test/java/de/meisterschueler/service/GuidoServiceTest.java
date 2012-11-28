@@ -115,6 +115,12 @@ public class GuidoServiceTest {
 		}
 	}
 	
+	@Test
+	public void gmnComplexToMidiTest() {
+		List<MidiEventPair> notes = guidoService.gmnToMidi("c {e,g} _ d _ {f,g}");
+		assertEquals( 6, notes.size() );
+	}
+	
 	
 	
 	@Test
