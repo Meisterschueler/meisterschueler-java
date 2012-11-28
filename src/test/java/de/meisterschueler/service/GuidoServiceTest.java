@@ -2,14 +2,14 @@ package de.meisterschueler.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
 import org.apache.commons.math3.fraction.Fraction;
+import org.junit.Ignore;
 import org.junit.Test;
-
-
 
 import com.leff.midi.event.NoteOff;
 import com.leff.midi.event.NoteOn;
@@ -17,7 +17,6 @@ import com.leff.midi.event.NoteOn;
 import de.meisterschueler.basic.Finger;
 import de.meisterschueler.basic.MidiEventPair;
 import de.meisterschueler.basic.Score;
-import de.meisterschueler.service.GuidoService;
 
 
 public class GuidoServiceTest {
@@ -116,14 +115,6 @@ public class GuidoServiceTest {
 	}
 	
 	@Test
-	public void gmnComplexToMidiTest() {
-		List<MidiEventPair> notes = guidoService.gmnToMidi("c {e,g} _ d _ {f,g}");
-		assertEquals( 6, notes.size() );
-	}
-	
-	
-	
-	@Test
 	public void gmnToScoresFingerTest() {
 		String gmnString = "c d e {f,g} a";
 		int fingers[] = {5, 4, 3, 2, 1, 3};
@@ -162,6 +153,18 @@ public class GuidoServiceTest {
 		assertEquals( 67, scores.get(2).getPitch() );
 		assertNotNull( scores.get(2).getSibling() );
 		assertEquals( 69, scores.get(2).getSibling().getPitch() );
+	}
+	
+	// noch zu prüfen, ob gmnToScores oder gmnToMidi die Pausen ignorieren soll
+	@Ignore
+	@Test
+	public void gmnToScoresPauseTest() {
+		List<Score> notes = guidoService.gmnToScores("c {e,g} _ d _ {f,g}");
+		assertNull( notes.get(0).getSibling() );
+		assertNotNull( notes.get(1).getSibling() );
+		assertNull( notes.get(2).getSibling() );
+		assertNotNull( notes.get(3).getSibling() );
+		assertEquals( 4, notes.size() );
 	}
 	
 	@Test
