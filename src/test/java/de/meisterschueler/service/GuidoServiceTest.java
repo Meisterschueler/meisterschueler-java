@@ -155,16 +155,22 @@ public class GuidoServiceTest {
 		assertEquals( 69, scores.get(2).getSibling().getPitch() );
 	}
 	
-	// noch zu prüfen, ob gmnToScores oder gmnToMidi die Pausen ignorieren soll
-	@Ignore
 	@Test
 	public void gmnToScoresPauseTest() {
 		List<Score> notes = guidoService.gmnToScores("c {e,g} _ d _ {f,g}");
+		assertEquals( 6, notes.size() );
 		assertNull( notes.get(0).getSibling() );
 		assertNotNull( notes.get(1).getSibling() );
 		assertNull( notes.get(2).getSibling() );
-		assertNotNull( notes.get(3).getSibling() );
-		assertEquals( 4, notes.size() );
+		assertNull( notes.get(3).getSibling() );
+		assertNull( notes.get(4).getSibling() );
+		assertNotNull( notes.get(5).getSibling() );
+	}
+	
+	@Test
+	public void gmnToMidiPauseTest() {
+		List<MidiEventPair> events = guidoService.gmnToMidi("c {e,g} _ d _ {f,g}");
+		assertEquals( 6, events.size() );
 	}
 	
 	@Test
