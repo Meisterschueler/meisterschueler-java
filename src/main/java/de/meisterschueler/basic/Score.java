@@ -28,6 +28,7 @@ public class Score {
 	// Other
 	private MidiEventPair note = null;
 	private AdditionalValues additional = null;
+	private boolean pause;
 
 	public Score() {
 		this.natural = 0;
@@ -40,6 +41,7 @@ public class Score {
 		this.finger = Finger.NONE;
 
 		this.status = Status.NONE;
+		this.pause = false;
 	}
 
 	public static char naturalToChar(int natural) {
@@ -167,5 +169,13 @@ public class Score {
 
 	public void setPosition(Fraction position) {
 		this.position = position;
+	}
+
+	public boolean isPause() {
+		return pause;
+	}
+	
+	public void setPause(boolean pause) {
+		this.pause = pause;
 	}
 }

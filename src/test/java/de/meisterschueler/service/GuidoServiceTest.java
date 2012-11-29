@@ -46,6 +46,11 @@ public class GuidoServiceTest {
 	}
 	
 	@Test
+	public void gmnToScorePauseTest() throws Exception {
+		assertTrue( guidoService.gmnToScore("_").isPause() );
+	}
+	
+	@Test
 	public void gmnToScoresTest() {
 		List<Score> scores = guidoService.gmnToScores( "c-1 c0 {d,f#,a}" );
 	    assertEquals( 3, scores.size()); 

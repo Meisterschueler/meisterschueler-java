@@ -219,16 +219,18 @@ public class GuidoService {
 		for (Score score : scores) {
 			long deltaTick = (long) (score.getMeasure().doubleValue()*4.0*1000.0);
 
-			NoteOn noteOn = new NoteOn(tick, 0, score.getPitch(), velocity);
-			NoteOff noteOff = new NoteOff(tick+deltaTick, 0, score.getPitch(), velocity);
-			notes.add(new MidiEventPair(noteOn, noteOff));
-			
-			while (score.getSibling() != null) {
-				score = score.getSibling();
-
-				noteOn = new NoteOn(tick, 0, score.getPitch(), velocity);
-				noteOff = new NoteOff(deltaTick, 0, score.getPitch(), velocity);
+			if (!score.isPause()) {
+				NoteOn noteOn = new NoteOn(tick, 0, score.getPitch(), velocity);
+				NoteOff noteOff = new NoteOff(tick+deltaTick, 0, score.getPitch(), velocity);
 				notes.add(new MidiEventPair(noteOn, noteOff));
+
+				while (score.getSibling() != null) {
+					score = score.getSibling();
+
+					noteOn = new NoteOn(tick, 0, score.getPitch(), velocity);
+					noteOff = new NoteOff(deltaTick, 0, score.getPitch(), velocity);
+					notes.add(new MidiEventPair(noteOn, noteOff));
+				}
 			}
 
 			tick += deltaTick;
@@ -341,13 +343,13 @@ public class GuidoService {
 
 				transScore.setFinger(finger);
 				transScore.setStatus(status);
-				
+
 				score = score.getSibling();
 				node.setSibling(transScore);
 				node = transScore;
 
 			} while (score != null);
-			
+
 			result.add(root.getSibling());
 		}
 		return result;
@@ -480,17 +482,22 @@ public class GuidoService {
 		Pattern pattern = Pattern.compile(NOTE_PATTERN);
 		Matcher matcher = pattern.matcher(gmnString);
 		if (matcher.find()) {
-			if (matcher.group(2) != null) {
-				score.setAccidental(matcher.group(2));
-			}
-
-			if (matcher.group(3) != null) {
-				score.setOctave(Integer.parseInt(matcher.group(3))-Score.GUIDO_OCTAVE_OFFSET);
+			if (matcher.group(1).charAt(0) == '_') {
+				score.setPause(true);
 			} else {
-				score.setOctave(prevScore.getOctave());
-			}
 
-			score.setNatural(Score.charToNatural(matcher.group(1).charAt(0))+score.getOctave()*NATURALS_PER_OCTAVE);
+				if (matcher.group(2) != null) {
+					score.setAccidental(matcher.group(2));
+				}
+
+				if (matcher.group(3) != null) {
+					score.setOctave(Integer.parseInt(matcher.group(3))-Score.GUIDO_OCTAVE_OFFSET);
+				} else {
+					score.setOctave(prevScore.getOctave());
+				}
+
+				score.setNatural(Score.charToNatural(matcher.group(1).charAt(0))+score.getOctave()*NATURALS_PER_OCTAVE);
+			}
 
 			Fraction measure = getMeasure(matcher.group(4), matcher.group(5), matcher.group(6), prevScore);
 			score.setMeasure(measure);
