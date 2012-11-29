@@ -219,7 +219,7 @@ public class MatchingHandlerTest  {
 			new Thread() {
 				@Override
 				public void run() {
-					int note = 30 * (int)(Math.random()*30);
+					int note = (int)(Math.random()*30);
 					matchingHandler.match(new NoteOn(tick, 0, note, 30));
 					matchingHandler.match(new NoteOff(tick, 0, note, 30));
 				}

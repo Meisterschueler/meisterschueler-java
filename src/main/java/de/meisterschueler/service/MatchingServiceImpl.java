@@ -77,7 +77,9 @@ public class MatchingServiceImpl implements MatchingService {
 	public String scoresToPitchSequence(List<Score> scores) {
 		String sequence = new String();
 		for (Score score : scores) {
-			sequence += (char)(score.getPitch());
+			if (!score.isPause()) {
+				sequence += (char)(score.getPitch());
+			}
 		}
 		return sequence;
 	}

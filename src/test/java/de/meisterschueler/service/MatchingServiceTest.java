@@ -11,8 +11,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-
-
 import com.leff.midi.event.MidiEvent;
 import com.leff.midi.event.NoteOff;
 import com.leff.midi.event.NoteOn;
@@ -21,12 +19,8 @@ import de.meisterschueler.basic.Key;
 import de.meisterschueler.basic.MatchingItem;
 import de.meisterschueler.basic.MidiEventPair;
 import de.meisterschueler.basic.Score;
-import de.meisterschueler.basic.Song;
 import de.meisterschueler.basic.Score.Status;
-import de.meisterschueler.service.GuidoService;
-import de.meisterschueler.service.MatchingService;
-import de.meisterschueler.service.MatchingServiceImpl;
-import de.meisterschueler.service.MidiService;
+import de.meisterschueler.basic.Song;
 
 
 public class MatchingServiceTest {
@@ -36,16 +30,31 @@ public class MatchingServiceTest {
 	private MidiService midiService = new MidiService();
 
 	@Test
-	public void midiEventsToSequenceTest() {
-		List<MidiEventPair> notes = guidoService.gmnToMidi("c0 d e f g");
+	public void sequenceTest() {
+		String gmnString = "c0 d e _ f g";
+		List<MidiEventPair> notes = guidoService.gmnToMidi(gmnString);
 		String pitchSequence = matchingService.midiEventsToPitchSequence(notes);
 		String intervalSequence = matchingService.midiEventsToIntervalSequence(notes);
 		assertEquals( 5, pitchSequence.length() );
 		assertEquals( 4, intervalSequence.length() );
+		
+		List<Score> scores = guidoService.gmnToScores(gmnString);
+		pitchSequence = matchingService.scoresToPitchSequence(scores);
+		intervalSequence = matchingService.scoresToIntervalSequence(scores);
+		assertEquals( 5, pitchSequence.length() );
+		assertEquals( 4, intervalSequence.length() );
 
-		notes = guidoService.gmnToMidi("{c0,e,g}");
+		gmnString = "{c0,e,g}";
+		notes = guidoService.gmnToMidi(gmnString);
 		pitchSequence = matchingService.midiEventsToPitchSequence(notes);
 		intervalSequence = matchingService.midiEventsToIntervalSequence(notes);
+		assertEquals( 3, pitchSequence.length() );
+		assertEquals( 2, intervalSequence.length() );
+		
+		scores = guidoService.gmnToScores(gmnString);
+		scores = matchingService.getFlatScores(scores);	// TODO: sollte das nicht eher in scoresToPitchSequence rein ???
+		pitchSequence = matchingService.scoresToPitchSequence(scores);
+		intervalSequence = matchingService.scoresToIntervalSequence(scores);
 		assertEquals( 3, pitchSequence.length() );
 		assertEquals( 2, intervalSequence.length() );
 	}
@@ -292,7 +301,7 @@ public class MatchingServiceTest {
 		matchingService.updateTransposition(item);
 		assertEquals(2, item.getTransposition());
 	}
-
+	
 	@Test
 	public void updateKeyTest() {
 		MatchingItem item = new MatchingItem();
