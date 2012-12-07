@@ -76,13 +76,26 @@ public class MatchingHandler {
 		}
 	}
 
-	synchronized public void match(MidiEvent midiEvent) {
-		keyboardHandler.update(null, midiEvent);
-
-		String oldPitchSequence = matchingService.midiEventsToPitchSequence(midiEvents);
+	public void match(MidiEvent midiEvent) {
+		//keyboardHandler.update(null, midiEvent); TODO: des gehört woanerscht hi !
 
 		MidiEvent correctedMidiEvent = midiService.correctMidi(midiEvent);
 		midiService.addMidi(midiEvents, correctedMidiEvent);
+
+		match();
+	}
+	
+	public void match(List<MidiEventPair> midiEventPairs) {
+		midiEvents.clear();
+		
+		for (MidiEventPair pair : midiEventPairs) {
+			midiEvents.add(pair);
+			match();
+		}
+	}
+
+	synchronized private void match() {
+		String oldPitchSequence = matchingService.midiEventsToPitchSequence(midiEvents);
 
 		String pitchSequence = matchingService.midiEventsToPitchSequence(midiEvents);
 		String intervalSequence = matchingService.midiEventsToIntervalSequence(midiEvents);
@@ -90,7 +103,7 @@ public class MatchingHandler {
 
 		boolean pitchSequenceChanged = (!oldPitchSequence.equals(pitchSequence) || status == Status.INIT);
 		boolean onePrunning = false;
-		
+
 		// Mit allen items matchen
 		for (MatchingItem item : matchingItems) {
 
@@ -103,7 +116,7 @@ public class MatchingHandler {
 			if (pitchSequenceChanged) {
 				if (!item.isPrunning()) {
 					onePrunning = true;
-					
+
 					// Tonart ermitteln
 					matchingService.matchInterval(item);
 					matchingService.updateTransposition(item);
@@ -140,7 +153,7 @@ public class MatchingHandler {
 			signalService.sendSignal(Signal.DONG);
 
 			initMatchingItems();
-			
+
 			// Status updaten
 			status = Status.INIT;
 		} else {
@@ -152,7 +165,7 @@ public class MatchingHandler {
 				} else {
 					qualityLimit = bestQuality/5.0;
 				}
-				
+
 				for (Double quality : qualities) {
 					if (quality < qualityLimit) {
 						List<MatchingItem> worstItems = (List<MatchingItem>)qualityMap.get(quality);
@@ -162,7 +175,7 @@ public class MatchingHandler {
 					}
 				}
 			}
-			
+
 			// Status updaten
 			if (keyboardHandler.isKeyPressed()) {
 				status = Status.PLAYING;

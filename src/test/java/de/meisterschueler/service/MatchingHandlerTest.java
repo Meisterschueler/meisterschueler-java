@@ -5,13 +5,17 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-
+import com.leff.midi.MidiFile;
 import com.leff.midi.event.NoteOff;
 import com.leff.midi.event.NoteOn;
 
@@ -20,10 +24,6 @@ import de.meisterschueler.basic.Key;
 import de.meisterschueler.basic.MatchingItem;
 import de.meisterschueler.basic.MidiEventPair;
 import de.meisterschueler.basic.Song;
-import de.meisterschueler.service.GuidoService;
-import de.meisterschueler.service.MatchingHandler;
-import de.meisterschueler.service.ResultListenerDummy;
-import de.meisterschueler.service.SignalServiceDummy;
 import de.meisterschueler.songprovider.BachSongFactory;
 import de.meisterschueler.songprovider.HanonSongFactory;
 
@@ -33,6 +33,7 @@ public class MatchingHandlerTest  {
 	private HanonSongFactory hanonSongFactory = new HanonSongFactory();
 	private BachSongFactory bachSongFactory = new BachSongFactory();
 	private GuidoService guidoService = new GuidoService();
+	private MidiService midiService = new MidiService();
 	private MatchingItem bestMatchingItem = null;
 
 	private ResultListenerDummy resultServiceDummy = new ResultListenerDummy();
@@ -139,11 +140,11 @@ public class MatchingHandlerTest  {
 	public void songFinishedLegatoTest() {
 		String CScale = "c1 d e f g a b c2 d e f g a b c3 b2 a g f e d c b1 a g f e d";
 		String GScale = "g1 a b c2 d e f# g a b c3 d e f# g f# e d c b2 a g f# e d c b1 a";
-		
+
 		List<MidiEventPair> midiEventPairs = guidoService.gmnToMidi(CScale + " " + GScale); 
 		List<MidiEventPair> midiCEvents = new ArrayList<MidiEventPair>(midiEventPairs.subList(0, 28));
 		List<MidiEventPair> midiGEvents = new ArrayList<MidiEventPair>(midiEventPairs.subList(28, 56));
-		
+
 		// Play C scale
 		int eventSize = midiCEvents.size();
 		proceedMidiEvents(midiCEvents.subList(0, eventSize-2));
@@ -174,7 +175,7 @@ public class MatchingHandlerTest  {
 		matchingHandler.match(midiGEvents.get(eventSize-1).getNoteOff());
 		assertEquals( Key.G, resultServiceDummy.getLastResult().getKey() );
 	}
-	
+
 	@Test
 	public void polyphoneTest() {
 		// Play No. 50
@@ -182,36 +183,36 @@ public class MatchingHandlerTest  {
 		// Thirds, all lower notes played first
 		midiEvents.add(new MidiEventPair(new NoteOn(0, 0, 48, 30), new NoteOff(2, 0, 48, 30)));
 		midiEvents.add(new MidiEventPair(new NoteOn(1, 0, 52, 30), new NoteOff(3, 0, 52, 30)));
-		
+
 		midiEvents.add(new MidiEventPair(new NoteOn(100, 0, 50, 30), new NoteOff(102, 0, 50, 30)));
 		midiEvents.add(new MidiEventPair(new NoteOn(101, 0, 53, 30), new NoteOff(103, 0, 53, 30)));
-		
+
 		midiEvents.add(new MidiEventPair(new NoteOn(200, 0, 52, 30), new NoteOff(202, 0, 52, 30)));
 		midiEvents.add(new MidiEventPair(new NoteOn(201, 0, 55, 30), new NoteOff(203, 0, 55, 30)));
-		
+
 		midiEvents.add(new MidiEventPair(new NoteOn(300, 0, 50, 30), new NoteOff(302, 0, 50, 30)));
 		midiEvents.add(new MidiEventPair(new NoteOn(301, 0, 53, 30), new NoteOff(303, 0, 53, 30)));
-		
+
 		// but here: lower note second
 		midiEvents.add(new MidiEventPair(new NoteOn(400, 0, 52, 30), new NoteOff(402, 0, 52, 30)));
 		midiEvents.add(new MidiEventPair(new NoteOn(401, 0, 48, 30), new NoteOff(403, 0, 48, 30)));
-		
+
 		midiEvents.add(new MidiEventPair(new NoteOn(500, 0, 50, 30), new NoteOff(502, 0, 50, 30)));
 		midiEvents.add(new MidiEventPair(new NoteOn(501, 0, 53, 30), new NoteOff(503, 0, 53, 30)));
 
 		// and here: lower note second		
 		midiEvents.add(new MidiEventPair(new NoteOn(600, 0, 55, 30), new NoteOff(602, 0, 55, 30)));
 		midiEvents.add(new MidiEventPair(new NoteOn(601, 0, 52, 30), new NoteOff(603, 0, 52, 30)));
-		
+
 		midiEvents.add(new MidiEventPair(new NoteOn(700, 0, 50, 30), new NoteOff(702, 0, 50, 30)));
 		midiEvents.add(new MidiEventPair(new NoteOn(701, 0, 53, 30), new NoteOff(703, 0, 53, 30)));
-			
+
 		proceedMidiEvents(midiEvents);
-		
+
 		assertEquals( "No. 50", matchingHandler.getBestMatchingItem().getSong().getName() );
 		assertEquals( "mmmmmmmmmmmmmmmm", matchingHandler.getBestMatchingItem().getPitchAlignment().substring(0, 16) );
 	}
-	
+
 	@Test
 	public void multiThreadingTest() {
 		for (int i=0; i<100; i++) {
@@ -226,7 +227,7 @@ public class MatchingHandlerTest  {
 			}.start();
 		}
 	}
-	
+
 	@Test
 	public void bachInventio13Test() {
 		List<MidiEventPair> midiEvents = guidoService.gmnToMidi("e1 a c2 b1 e b d2 c e g#1 e2");
@@ -234,6 +235,39 @@ public class MatchingHandlerTest  {
 		assertNotNull(bestMatchingItem);
 		assertEquals( "Inventio 13", bestMatchingItem.getSong().getName() );
 		assertTrue( bestMatchingItem.getPitchAlignment().startsWith("mmmmmmmmmmm") );
+	}
+
+	@Test
+	public void fileMatchingTest() {
+		//File currentDir = new File(System.getProperty("user.dir"));
+		File currentDir = new File("C:\\Users\\Konstantin\\workspace\\meisterschueler_desktop");
+		File[] files = currentDir.listFiles(new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String name) {
+				if (name.endsWith(".mid"))
+					return true;
+				else
+					return false;
+			}
+		});
+		
+		for (File file : files) {
+			MidiFile midiFile;
+			try {
+				midiFile = new MidiFile(file);
+				List<MidiEventPair> midiEventPairs = midiService.loadMidiFile(midiFile);
+				matchingHandler.match(midiEventPairs);
+				MatchingItem bestMatch = matchingHandler.getBestMatchingItem();
+				System.out.println(bestMatch.getSong().getName());
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			matchingHandler.initMatchingItems();
+		}
 	}
 
 	private void proceedMidiEvents(List<MidiEventPair> midiEvents) {
