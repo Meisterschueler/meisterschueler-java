@@ -2,12 +2,13 @@ package de.meisterschueler.service;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-
-
 
 import com.leff.midi.MidiFile;
 import com.leff.midi.event.MidiEvent;
@@ -15,8 +16,6 @@ import com.leff.midi.event.NoteOff;
 import com.leff.midi.event.NoteOn;
 
 import de.meisterschueler.basic.MidiEventPair;
-import de.meisterschueler.service.GuidoService;
-import de.meisterschueler.service.MidiService;
 
 public class MidiServiceTest {
 	private MidiService midiService = new MidiService();
@@ -33,18 +32,34 @@ public class MidiServiceTest {
 	public void createMidiFileTest() {
 		List<MidiEventPair> midiEventPairs = guidoService.gmnToMidi("c0/4 d e f g/2 g");
 		MidiFile midiFile = midiService.createMidiFile(midiEventPairs);
-		Object[] objects = midiFile.getTracks().get(1).getEvents().toArray();
-		int noteOnCount = 0;
-		int noteOffCount = 0;
-		for (Object o : objects) {
-			if (o instanceof NoteOn) {
-				noteOnCount++;
-			} else if (o instanceof NoteOff) {
-				noteOffCount++;
-			}
+		
+		File outFile = new File("test.mid");
+		try {
+			midiFile.writeToFile(outFile);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		assertEquals( 6, noteOnCount );
-		assertEquals( 6, noteOffCount );
+	}
+	
+	@Test
+	public void loadMidiFileTest() {
+		MidiFile midiFile = null;
+		try {
+			midiFile = new MidiFile(new File("test.mid"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		List<MidiEventPair> midiEventPairs = midiService.loadMidiFile(midiFile);
+		assertEquals( 6, midiEventPairs.size() );
 	}
 	
 	@Test

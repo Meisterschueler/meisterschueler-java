@@ -1,5 +1,7 @@
 package de.meisterschueler.service;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -81,13 +83,13 @@ public class MidiService {
 		}
 		return midiEvent;
 	}
-	
+
 	public void addMidi(List<MidiEventPair> midiEventPairs, MidiEvent midiEvent) {
 		if (midiEvent instanceof NoteOn) {
 			NoteOn noteOn = (NoteOn)midiEvent;
 			NoteOn currentNote = noteOn;
 			ListIterator<MidiEventPair> it = midiEventPairs.listIterator(midiEventPairs.size());
-			
+
 			// go back until next note is later
 			boolean foundGoodTime = false;
 			while (it.hasPrevious() && !foundGoodTime) {
@@ -99,7 +101,7 @@ public class MidiService {
 					foundGoodTime = true;
 				}
 			}
-			
+
 			// go back to last gap
 			boolean foundGap = false;
 			while (it.hasPrevious() && !foundGap) {
@@ -113,7 +115,7 @@ public class MidiService {
 					currentNote = previousNote;
 				}
 			}
-			
+
 			// go forth until next note is higher
 			boolean finished = false;
 			NoteOn nextNote; 
@@ -126,9 +128,9 @@ public class MidiService {
 					finished = true;
 				}
 			}
-			
+
 			it.add(new MidiEventPair(noteOn, null));
-			
+
 		} else if (midiEvent instanceof NoteOff){
 			NoteOff noteOff = (NoteOff) midiEvent;
 			ListIterator<MidiEventPair> it = midiEventPairs.listIterator(midiEventPairs.size());
@@ -144,5 +146,18 @@ public class MidiService {
 				System.err.println("Oops... I did not found the passende Note, Alta!");
 			}
 		}
+	}
+
+	public List<MidiEventPair> loadMidiFile(MidiFile midiFile) {
+		List<MidiEventPair> midiEventPairs = new ArrayList<MidiEventPair>();
+
+		Object[] objects = midiFile.getTracks().get(1).getEvents().toArray();
+		for (Object o : objects) {
+			if (o instanceof MidiEvent) {
+				this.addMidi(midiEventPairs, (MidiEvent)o);
+			}
+		}
+
+		return midiEventPairs;
 	}
 }
