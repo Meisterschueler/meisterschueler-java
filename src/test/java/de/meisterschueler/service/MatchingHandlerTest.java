@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.leff.midi.MidiFile;
@@ -253,11 +254,12 @@ public class MatchingHandlerTest  {
 		
 		for (File file : files) {
 			MidiFile midiFile;
+			MatchingItem bestMatch = null;
 			try {
 				midiFile = new MidiFile(file);
 				List<MidiEventPair> midiEventPairs = midiService.loadMidiFile(midiFile);
 				matchingHandler.match(midiEventPairs);
-				MatchingItem bestMatch = matchingHandler.getBestMatchingItem();
+				bestMatch = matchingHandler.getBestMatchingItem();
 				System.out.println(bestMatch.getSong().getName());
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -266,6 +268,7 @@ public class MatchingHandlerTest  {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			assertTrue( file.getName().startsWith(bestMatch.getSong().getName()) );
 			matchingHandler.initMatchingItems();
 		}
 	}

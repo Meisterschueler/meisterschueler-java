@@ -79,23 +79,24 @@ public class MatchingHandler {
 	public void match(MidiEvent midiEvent) {
 		//keyboardHandler.update(null, midiEvent); TODO: des gehört woanerscht hi !
 
+		String oldPitchSequence = matchingService.midiEventsToPitchSequence(midiEvents);
 		MidiEvent correctedMidiEvent = midiService.correctMidi(midiEvent);
 		midiService.addMidi(midiEvents, correctedMidiEvent);
 
-		match();
+		match(oldPitchSequence);
 	}
 	
 	public void match(List<MidiEventPair> midiEventPairs) {
 		midiEvents.clear();
 		
 		for (MidiEventPair pair : midiEventPairs) {
+			String oldPitchSequence = matchingService.midiEventsToPitchSequence(midiEvents);
 			midiEvents.add(pair);
-			match();
+			match(oldPitchSequence);
 		}
 	}
 
-	synchronized private void match() {
-		String oldPitchSequence = matchingService.midiEventsToPitchSequence(midiEvents);
+	synchronized private void match(String oldPitchSequence) {
 
 		String pitchSequence = matchingService.midiEventsToPitchSequence(midiEvents);
 		String intervalSequence = matchingService.midiEventsToIntervalSequence(midiEvents);
