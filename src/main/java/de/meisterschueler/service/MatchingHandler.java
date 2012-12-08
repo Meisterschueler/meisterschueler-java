@@ -45,7 +45,10 @@ public class MatchingHandler {
 
 	private List<Song> songs;
 
+	private String oldPitchSequence;
+
 	public void initMatchingItems() {
+		oldPitchSequence = "";
 		matchingItems.clear();
 		for (Song song : songs) {
 			MatchingItem item = new MatchingItem();
@@ -79,24 +82,22 @@ public class MatchingHandler {
 	public void match(MidiEvent midiEvent) {
 		//keyboardHandler.update(null, midiEvent); TODO: des gehört woanerscht hi !
 
-		String oldPitchSequence = matchingService.midiEventsToPitchSequence(midiEvents);
 		MidiEvent correctedMidiEvent = midiService.correctMidi(midiEvent);
 		midiService.addMidi(midiEvents, correctedMidiEvent);
 
-		match(oldPitchSequence);
+		match();
 	}
 	
 	public void match(List<MidiEventPair> midiEventPairs) {
 		midiEvents.clear();
 		
 		for (MidiEventPair pair : midiEventPairs) {
-			String oldPitchSequence = matchingService.midiEventsToPitchSequence(midiEvents);
 			midiEvents.add(pair);
-			match(oldPitchSequence);
+			match();
 		}
 	}
 
-	synchronized private void match(String oldPitchSequence) {
+	synchronized private void match() {
 
 		String pitchSequence = matchingService.midiEventsToPitchSequence(midiEvents);
 		String intervalSequence = matchingService.midiEventsToIntervalSequence(midiEvents);
@@ -104,6 +105,8 @@ public class MatchingHandler {
 
 		boolean pitchSequenceChanged = (!oldPitchSequence.equals(pitchSequence) || status == Status.INIT);
 		boolean onePrunning = false;
+		
+		oldPitchSequence = pitchSequence;
 
 		// Mit allen items matchen
 		for (MatchingItem item : matchingItems) {
