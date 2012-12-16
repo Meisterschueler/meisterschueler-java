@@ -5,18 +5,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import com.leff.midi.MidiFile;
 import com.leff.midi.event.NoteOff;
 import com.leff.midi.event.NoteOn;
 
@@ -34,7 +28,6 @@ public class MatchingHandlerTest  {
 	private HanonSongFactory hanonSongFactory = new HanonSongFactory();
 	private BachSongFactory bachSongFactory = new BachSongFactory();
 	private GuidoService guidoService = new GuidoService();
-	private MidiService midiService = new MidiService();
 	private MatchingItem bestMatchingItem = null;
 
 	private ResultListenerDummy resultServiceDummy = new ResultListenerDummy();
@@ -215,62 +208,12 @@ public class MatchingHandlerTest  {
 	}
 
 	@Test
-	public void multiThreadingTest() {
-		for (int i=0; i<100; i++) {
-			final int tick = i*100;
-			new Thread() {
-				@Override
-				public void run() {
-					int note = (int)(Math.random()*30);
-					matchingHandler.match(new NoteOn(tick, 0, note, 30));
-					matchingHandler.match(new NoteOff(tick, 0, note, 30));
-				}
-			}.start();
-		}
-	}
-
-	@Test
 	public void bachInventio13Test() {
 		List<MidiEventPair> midiEvents = guidoService.gmnToMidi("e1 a c2 b1 e b d2 c e g#1 e2");
 		proceedMidiEvents(midiEvents);
 		assertNotNull(bestMatchingItem);
 		assertEquals( "Inventio 13", bestMatchingItem.getSong().getName() );
 		assertTrue( bestMatchingItem.getPitchAlignment().startsWith("mmmmmmmmmmm") );
-	}
-
-	@Test
-	public void fileMatchingTest() {
-		//File currentDir = new File(System.getProperty("user.dir"));
-		File currentDir = new File("C:\\Users\\Konstantin\\workspace\\meisterschueler_desktop");
-		File[] files = currentDir.listFiles(new FilenameFilter() {
-			@Override
-			public boolean accept(File dir, String name) {
-				if (name.endsWith(".mid"))
-					return true;
-				else
-					return false;
-			}
-		});
-		
-		for (File file : files) {
-			MidiFile midiFile;
-			MatchingItem bestMatch = null;
-			try {
-				midiFile = new MidiFile(file);
-				List<MidiEventPair> midiEventPairs = midiService.loadMidiFile(midiFile);
-				matchingHandler.match(midiEventPairs);
-				bestMatch = matchingHandler.getBestMatchingItem();
-				System.out.println(bestMatch.getSong().getName());
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			assertTrue( file.getName().startsWith(bestMatch.getSong().getName()) );
-			matchingHandler.initMatchingItems();
-		}
 	}
 
 	private void proceedMidiEvents(List<MidiEventPair> midiEvents) {

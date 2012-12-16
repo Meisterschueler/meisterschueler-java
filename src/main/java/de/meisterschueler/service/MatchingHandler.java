@@ -87,12 +87,40 @@ public class MatchingHandler {
 
 		match();
 	}
-	
-	public void match(List<MidiEventPair> midiEventPairs) {
+
+	public void matchAllPairs(List<MidiEventPair> midiEventPairs) {
 		midiEvents.clear();
-		
+
 		for (MidiEventPair pair : midiEventPairs) {
 			midiEvents.add(pair);
+		}
+
+		match();
+	}
+
+	public void matchAllEvents(List<MidiEvent> allMidiEvents) {
+		midiEvents.clear();
+
+		for (MidiEvent midiEvent : allMidiEvents) {
+			midiService.addMidi(midiEvents, midiEvent);
+		}
+
+		// Performance reasons: match at least one small part to disable 
+		// non matching items as early as possible before we match the whole part
+		if (midiEvents.size() > 32) {
+			List<MidiEventPair> all = midiEvents;
+			List<MidiEventPair> part1 = midiEvents.subList(0, 16);
+			List<MidiEventPair> part2 = midiEvents.subList(0, 32);
+
+			midiEvents = part1;
+			match();
+			
+			midiEvents = part2;
+			match();
+			
+			midiEvents = all;
+			match();
+		} else {
 			match();
 		}
 	}
@@ -105,7 +133,7 @@ public class MatchingHandler {
 
 		boolean pitchSequenceChanged = (!oldPitchSequence.equals(pitchSequence) || status == Status.INIT);
 		boolean onePrunning = false;
-		
+
 		oldPitchSequence = pitchSequence;
 
 		// Mit allen items matchen
