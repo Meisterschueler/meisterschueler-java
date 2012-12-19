@@ -8,6 +8,9 @@ import de.meisterschueler.basic.Rhythm;
 public class RhythmService {
 
 	public Rhythm getRhythm(List<MidiEventPair> notes) {
+		for (int i=1; i<notes.size()-1; i++) {
+			
+		}
 		return Rhythm.NONE;
 	}
 }

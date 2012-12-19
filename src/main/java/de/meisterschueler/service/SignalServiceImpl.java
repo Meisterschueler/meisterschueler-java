@@ -28,6 +28,9 @@ public class SignalServiceImpl extends SignalService {
 		case STRONG_DONG:
 			gmn = "{g#1,c#2,e#}";
 			break;
+		case RECORDING_FINISHED:
+			gmn = "e4/16 f g c5/2";
+			break;
 		default:
 			break;
 

@@ -31,7 +31,7 @@ public class UploadService {
 			dis.close();	
 
 			// Send data
-			URL url = new URL(GAE_LOCAL);
+			URL url = new URL(GAE_REMOTE);
 			URLConnection conn = url.openConnection();
 			conn.setDoOutput(true);
 

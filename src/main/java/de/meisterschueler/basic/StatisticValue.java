@@ -21,7 +21,6 @@ public class StatisticValue {
 		this.standardDeviation = standardDeviation;
 	}
 
-
 	public double[] getSpectrum() {
 		return spectrum;
 	}

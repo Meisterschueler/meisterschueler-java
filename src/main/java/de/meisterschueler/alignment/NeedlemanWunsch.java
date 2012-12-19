@@ -18,6 +18,7 @@ public class NeedlemanWunsch {
 	    
 	    if (seq1 == null || seq2 == null) {
 	    	System.out.println("WTF!!!");
+	    	return "";
 	    }
 
 	    int n1 = seq1.length();

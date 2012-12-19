@@ -1,14 +1,11 @@
 package de.meisterschueler.service;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
-
 
 import com.leff.midi.MidiFile;
 import com.leff.midi.MidiTrack;
@@ -19,7 +16,6 @@ import com.leff.midi.event.meta.Tempo;
 import com.leff.midi.event.meta.TimeSignature;
 
 import de.meisterschueler.basic.MidiEventPair;
-
 
 public class MidiService {
 	private static final long tickDelta = 20;	// maximum gap in a chord
@@ -36,33 +32,14 @@ public class MidiService {
 	}
 
 	public MidiFile createMidiFile(List<MidiEventPair> midiEventPairs) {
-		MidiTrack tempoTrack = new MidiTrack();
-		MidiTrack noteTrack = new MidiTrack();
-
-		TimeSignature ts = new TimeSignature();
-		ts.setTimeSignature(4, 4, TimeSignature.DEFAULT_METER, TimeSignature.DEFAULT_DIVISION);
-
-		Tempo t = new Tempo();
-		t.setBpm(120);
-
-		tempoTrack.insertEvent(ts);
-		tempoTrack.insertEvent(t);
-
 		ArrayList<MidiEvent> events = new ArrayList<MidiEvent>();
 		for (MidiEventPair midiEventPair : midiEventPairs) {
 			events.add(midiEventPair.getNoteOn());
 			events.add(midiEventPair.getNoteOff());
 		}
 		Collections.sort(events);
-		for (MidiEvent event : events) {
-			noteTrack.insertEvent(event);
-		}
 
-		ArrayList<MidiTrack> tracks = new ArrayList<MidiTrack>();
-		tracks.add(tempoTrack);
-		tracks.add(noteTrack);
-
-		return new MidiFile(MidiFile.DEFAULT_RESOLUTION, tracks);
+		return createMidiFile2(events);
 	}
 
 	public List<MidiEventPair> pairMidiEvents(List<MidiEvent> notes) {
@@ -131,7 +108,7 @@ public class MidiService {
 
 			it.add(new MidiEventPair(noteOn, null));
 
-		} else if (midiEvent instanceof NoteOff){
+		} else if (midiEvent instanceof NoteOff) {
 			NoteOff noteOff = (NoteOff) midiEvent;
 			ListIterator<MidiEventPair> it = midiEventPairs.listIterator(midiEventPairs.size());
 			boolean found = false;
@@ -159,5 +136,32 @@ public class MidiService {
 		}
 
 		return midiEventPairs;
+	}
+
+	public MidiFile createMidiFile2(List<MidiEvent> midiEvents) {
+		// Create Tempo Track
+		MidiTrack tempoTrack = new MidiTrack();
+
+		TimeSignature ts = new TimeSignature();
+		ts.setTimeSignature(4, 4, TimeSignature.DEFAULT_METER, TimeSignature.DEFAULT_DIVISION);
+
+		Tempo t = new Tempo();
+		t.setBpm(120);
+
+		tempoTrack.insertEvent(ts);
+		tempoTrack.insertEvent(t);
+
+		// Create Note Track
+		MidiTrack noteTrack = new MidiTrack();
+
+		for (MidiEvent event : midiEvents) {
+			noteTrack.insertEvent(event);
+		}
+
+		ArrayList<MidiTrack> tracks = new ArrayList<MidiTrack>();
+		tracks.add(tempoTrack);
+		tracks.add(noteTrack);
+
+		return new MidiFile(MidiFile.DEFAULT_RESOLUTION, tracks);
 	}
 }
