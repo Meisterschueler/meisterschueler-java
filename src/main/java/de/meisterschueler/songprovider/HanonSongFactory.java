@@ -52,8 +52,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -76,8 +76,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -100,8 +100,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -124,8 +124,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -148,8 +148,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 			break;
 		}
 
@@ -181,10 +181,10 @@ public class HanonSongFactory extends SongFactory {
 			leftHand.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
 			leftHand.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp1), rightFingersUp1, stepsUp1);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternUp2), rightFingersUp2, stepsUp2));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp1), rightFingersUp1, stepsUp1);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp2), rightFingersUp2, stepsUp2));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
 
 			break;
 		}
@@ -207,8 +207,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -231,8 +231,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -260,9 +260,9 @@ public class HanonSongFactory extends SongFactory {
 			leftHand.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
 			leftHand.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
 
 			break;
 		}
@@ -285,8 +285,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -309,8 +309,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 			break;
 		}
 
@@ -343,11 +343,11 @@ public class HanonSongFactory extends SongFactory {
 			leftHand.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown, stepsDown1));
 			leftHand.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown, stepsDown2));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp1), rightFingersUp12, stepsUp1);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternUp2), rightFingersUp12, stepsUp2));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternUp3), rightFingersUp3, stepsUp3));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown1), rightFingersDown, stepsDown1));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown2), rightFingersDown, stepsDown2));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp1), rightFingersUp12, stepsUp1);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp2), rightFingersUp12, stepsUp2));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp3), rightFingersUp3, stepsUp3));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown, stepsDown1));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown, stepsDown2));
 
 			break;
 		}
@@ -370,8 +370,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -394,8 +394,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -428,10 +428,10 @@ public class HanonSongFactory extends SongFactory {
 			leftHand.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
 			leftHand.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp1), rightFingersUp1, stepsUp1);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternUp2), rightFingersUp2, stepsUp2));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp1), rightFingersUp1, stepsUp1);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp2), rightFingersUp2, stepsUp2));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
 
 			break;
 		}
@@ -454,8 +454,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -488,10 +488,10 @@ public class HanonSongFactory extends SongFactory {
 			leftHand.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
 			leftHand.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp1), rightFingersUp1, stepsUp1);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternUp2), rightFingersUp2, stepsUp2));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp1), rightFingersUp1, stepsUp1);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp2), rightFingersUp2, stepsUp2));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
 			break;
 		}
 
@@ -513,8 +513,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -537,8 +537,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -569,10 +569,10 @@ public class HanonSongFactory extends SongFactory {
 			leftHand.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
 			leftHand.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp1), rightFingersUp, stepsUp1);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternUp2), rightFingersUp, stepsUp2));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp1), rightFingersUp, stepsUp1);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp2), rightFingersUp, stepsUp2));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
 
 			break;
 		}
@@ -599,9 +599,9 @@ public class HanonSongFactory extends SongFactory {
 			leftHand.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
 			leftHand.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
 			break;
 		}
 		case 21: {
@@ -627,9 +627,9 @@ public class HanonSongFactory extends SongFactory {
 			leftHand.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
 			leftHand.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
 			break;
 		}
 		case 22: {
@@ -650,8 +650,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -673,8 +673,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -703,10 +703,10 @@ public class HanonSongFactory extends SongFactory {
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown1, stepsDown1));
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown2, stepsDown2));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp1, stepsUp1);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp2, stepsUp2));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown1));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown2));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp1, stepsUp1);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp2, stepsUp2));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown1));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown2));
 
 			break;
 		}
@@ -728,8 +728,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -751,8 +751,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -774,8 +774,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -806,10 +806,10 @@ public class HanonSongFactory extends SongFactory {
 			leftHand.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
 			leftHand.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp1, stepsUp1);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp2, stepsUp2));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp1, stepsUp1);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp2, stepsUp2));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
 			break;
 		}
 		case 29: {
@@ -835,9 +835,9 @@ public class HanonSongFactory extends SongFactory {
 			leftHand.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
 			leftHand.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
 
 			break;
 		}
@@ -861,8 +861,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(leftPatternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(leftPatternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(rightPatternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(rightPatternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(rightPatternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(rightPatternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -884,8 +884,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -909,9 +909,9 @@ public class HanonSongFactory extends SongFactory {
 			leftHand.addAll(guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp2));
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp1);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp2));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp1);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp2));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 		}
@@ -939,9 +939,9 @@ public class HanonSongFactory extends SongFactory {
 			leftHand.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
 			leftHand.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
 
 			break;
 		}
@@ -964,8 +964,8 @@ public class HanonSongFactory extends SongFactory {
 			leftHand = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
 			leftHand.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightHand.addAll(guidoService.gmnToScores(oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
+			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 
 			break;
 			
@@ -982,7 +982,7 @@ public class HanonSongFactory extends SongFactory {
 
 			leftHand = guidoService.gmnToScores(pattern, leftFingers);
 
-			rightHand = guidoService.gmnToScores(oneOctaveUp(pattern), rightFingers);
+			rightHand = guidoService.gmnToScores(guidoService.oneOctaveUp(pattern), rightFingers);
 
 			break;
 		}
@@ -1000,9 +1000,5 @@ public class HanonSongFactory extends SongFactory {
 		//		song.meter = meter;
 
 		return song;
-	}
-
-	private String oneOctaveUp(String gmnString) {
-		return guidoService.transposeGmn("c0", "c1", gmnString);
 	}
 }
