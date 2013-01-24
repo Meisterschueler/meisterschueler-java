@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.math3.fraction.Fraction;
 
-
 import com.leff.midi.event.NoteOff;
 import com.leff.midi.event.NoteOn;
 

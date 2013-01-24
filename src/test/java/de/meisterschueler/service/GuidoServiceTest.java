@@ -173,6 +173,12 @@ public class GuidoServiceTest {
 	}
 	
 	@Test
+	public void gmnToScoresTagsTest() {
+		List<Score> notes = guidoService.gmnToScores("\\clef<\"bass\"> \\meter<\"4/4\"> c2 \\repeatBegin d e f g \\repeatEnd a b");
+		assertEquals( 11, notes.size() );
+	}
+	
+	@Test
 	public void gmnToMidiPauseTest() {
 		List<MidiEventPair> events = guidoService.gmnToMidi("c {e,g} _ d _ {f,g}");
 		assertEquals( 6, events.size() );
