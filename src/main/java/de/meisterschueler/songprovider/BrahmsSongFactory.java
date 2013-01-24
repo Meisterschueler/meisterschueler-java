@@ -20,7 +20,7 @@ public class BrahmsSongFactory extends SongFactory {
 			songs.add(getNo(i));
 		}
 		
-		songBook.setName("51 Übungen für Klavier");
+		songBook.setName("51 ï¿½bungen fï¿½r Klavier");
 		songBook.setComposer("Johannes Brahms");
 		songBook.setSongs(songs);
 	}
@@ -28,19 +28,35 @@ public class BrahmsSongFactory extends SongFactory {
 	private Song getNo(int no) {
 		String leftHand = null;
 		String rightHand = null;
-		Fraction meter = new Fraction(2,4);
 		String name = "";
 		String description = "";
 		Long id = null;
 		Key key = null;
 		switch (no) {
-	        case 0: {
+		case 0: {
+			name = "15";
+			id = 20500L;
+            key = Key.C;
+            rightHand = "";
+            leftHand = "";
+            break;
+		}
+	
+	        case 1: {
 	            name = "8a";
 	            id = 20801L;
-	            meter = new Fraction(2,4);
 	            key = Key.C;
-	            rightHand = "|: d1/16 c e g b c2 a1 f :||: d& c e g b c2 a&1 f :||: e& d f# a c#2 d b&1 g :||: f e g# b d#2 e c a1 :||: g f a c2 e f d b&1 :||: g& f a c2 e f d& b&1 :||: a& g b d2 f# g e& c :||: b&1 a c#2 e g# a f d :||: c b1 d#2 f# a# b g e :| d c e g b c3 a2 f d c a1 f d c a0 f";
-	            leftHand = "";
+	            rightHand = "\\meter<\"4/4\">c2/1 \\repeatBegin d/24 f d a1 f a d2 f d a1 f a d2 f d b&1 g b& d2 e d b&1 g b& d2 e d b1 g# b d2 e " +
+	            		"d b1 g# b c#2 e c# b&1 a b& c#2 e c# b&1 a b& \\repeatEnd " +
+	            		"\\repeatBegin d2 f d a1 f a d2 f d a1 f a d2 f d a#1 f a# d2 f d a#1 f a#" +
+	            		"d2 f d b1 g b d2 f d b1 g b d2 e d b1 g b d2 e d b1 g b " +
+	            		"d2 e d a1 g a d2 e d a1 g a {c2,e} {e,a} {c,e} a1 g a {c2,e} {e,a} {c,e} a1 g a \\repeatEnd {f/2,a,d2} _ ";
+	            leftHand  = "\\clef<\"bass\"> \\meter<\"4/4\">c1/1 \\repeatBegin  a0/24 f a d1 f d a0 f a d1 f d b&0 g b& d1 f d b&0 g b& d1 e d b0 g# b d1 e d b0 g#" +
+	            		"b d1 e d b&0 a b& c#1 e c# b&0 g# b& c#1 e c# \repeatEnd" +
+	            		"\\repeatBegin a0 f a d1 f d a0 f a d1 f d a#0 f a# d1 f d a#0 f a# d1 f d" +
+	            		"b0 g b d1 f d b0 g b d1 f d b0 g b d1 e d b0 g b d1 e d" +
+	            		"a0 g a d1 e d a0 g a d1 e d a0 g a c1 e c a0 g a c1 e c" +
+	            		"\\repeatEnd {f0/2,a,d1} _";
 	            break;
 	        }
 		}
