@@ -138,7 +138,7 @@ public class GuidoService {
 			return gmnString;
 		}
 	}
-
+	
 	public List<Score> gmnToScores(String gmnString) {
 		List<Score> result = new ArrayList<Score>();
 
@@ -505,5 +505,23 @@ public class GuidoService {
 		}
 
 		return score;
+	}
+
+	public String gmnConvertRepeats(String gmn) {
+//		gmn.replace(":||:", "\\repeatEnd \\repeatBegin");
+//		gmn.replace("|:", "\\repeatBegin");
+//		gmn.replace(":|", "\\repeatEnd");
+		
+		String regex = "\\\\repeatBegin([a-g0-9\\*\\/,\\{\\}#&\\s]*)\\\\repeatEnd";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(gmn);
+		
+		String result = gmn;
+		while (matcher.find()) {
+			String snippet = matcher.group(0);
+			snippet = snippet.substring(12, snippet.length()-10).trim();
+			result = result.replaceFirst(regex, snippet + " " + snippet);
+		}
+		return result;
 	}
 }

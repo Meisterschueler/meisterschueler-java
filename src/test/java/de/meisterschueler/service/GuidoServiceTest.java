@@ -5,10 +5,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.math3.fraction.Fraction;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.leff.midi.event.NoteOff;
@@ -174,7 +177,9 @@ public class GuidoServiceTest {
 	
 	@Test
 	public void gmnToScoresTagsTest() {
-		List<Score> notes = guidoService.gmnToScores("\\clef<\"bass\"> \\meter<\"4/4\"> c2 \\repeatBegin d e f g \\repeatEnd a b");
+		String gmn = "\\clef<\"bass\"> \\meter<\"4/4\"> c2 \\repeatBegin d e f g \\repeatEnd a b";
+		gmn = guidoService.gmnConvertRepeats(gmn);
+		List<Score> notes = guidoService.gmnToScores(gmn);
 		assertEquals( 11, notes.size() );
 	}
 	
