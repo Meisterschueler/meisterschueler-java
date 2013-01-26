@@ -58,9 +58,8 @@ public class BrahmsSongFactory extends SongFactory {
 			id = 20801L;
 			meter = new Fraction(2,4);
 			key = Key.C;
-			String pattern1 = "d1/16 c e g b c2 a1 f d1/16 c e g b c2 a1 f d& c e g b c2 a&1 f d& c e g b c2 a&1 f e& d f# a c#2 d b&1 g e& d f# a c#2 d b&1 g f e g# b d#2 e c a1 f e g# b d#2 e c a1 g f a c2 e f d b&1 g f a c2 e f d b&1 g& f a c2 e f d& b&1 g& f a c2 e f d& b&1 a& g b d2 f# g e& c a& g b d2 f# g e& c b&1 a c#2 e g# a f d b&1 a c#2 e g# a f d c b1 d#2 f# a# b g e c b1 d#2 f# a# b g e";
+			String pattern1 = "|: d1/16 c e g b c2 a1 f :||: d& c e g b c2 a&1 f :||: e& d f# a c#2 d b&1 g :||: f e g# b d#2 e c a1 :||: g f a c2 e f d b&1 :||: g& f a c2 e f d& b&1 :||: a& g b d2 f# g e& c :||: b&1 a c#2 e g# a f d :||: c b1 d#2 f# a# b g e :|";
 			String pattern2 = "d c e g b c3 a2 f d c a1 f";
-			//pattern = "|: d1/16 c e g b c2 a1 f :||: d& c e g b c2 a&1 f :||: e& d f# a c#2 d b&1 g :||: f e g# b d#2 e c a1 :||: g f a c2 e f d b&1 :||: g& f a c2 e f d& b&1 :||: a& g b d2 f# g e& c :||: b&1 a c#2 e g# a f d :||: c b1 d#2 f# a# b g e :| d c e g b c3 a2 f d c a1 f";
 
 			int leftFingers1[] = { 4, 5, 4, 3, 2, 1, 2, 3 };
 			int leftFingers2[] = { 4, 5, 4, 3, 2, 1, 2, 3, 4, 1, 2, 3 };
@@ -81,13 +80,13 @@ public class BrahmsSongFactory extends SongFactory {
 			id = 20802L;
 			meter = new Fraction(2,4);
 			key = Key.C;
-			String pattern1 = "";
-			String pattern2 = "d c e g b c3 a2 f d c a1 f";
-			String pattern =  "|: d0/16 c e g b c1 e g b c2 e g b c3 a2 f d c a1 f d c a0 f :|";
-			pattern += "|: d& c e g b c1 e g b c2 e g b c3 a&2 f d& c a&1 f d& c a&0 f :|";
-			pattern += "|: e& d f# a c#1 d f# a c#2 d f# a c#3 d b2 g e d b1 g e d b0 g :|";
-			pattern += "|:  :|";
-
+			String pattern1 =  "|: d0/16 c e g b c1 e g b c2 e g b c3 a2 f d c a1 f d c a0 f :|";
+			pattern1 += "|: d&0 c e g b c1 e g b c2 e g b c3 a&2 f d& c a&1 f d& c a&0 f :|";
+			pattern1 += "|: e&0 d f# a c#1 d f# a c#2 d f# a c#3 d b2 g e d b1 g e d b0 g :|";
+			pattern1 += "|: f0 e g# b d :|";
+			
+			String pattern2 = "d1 c e g b c2 e g b c3 e g c4/4 {e1,c2} _";
+			
 			int leftFingers1[] = { 4, 5, 4, 3, 2, 1, 2, 3 };
 			int leftFingers2[] = { 4, 5, 4, 3, 2, 1, 2, 3, 4, 1, 2, 3 };
 			int rightFingers1[]  = { 2, 1, 2, 3, 4, 5, 4, 3 };
@@ -101,6 +100,10 @@ public class BrahmsSongFactory extends SongFactory {
 
 			break;
 		}
+		case 19: {
+			
+		}
+
 		}
 
 		Song song = new Song();

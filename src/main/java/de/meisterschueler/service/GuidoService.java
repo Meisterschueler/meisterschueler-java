@@ -23,6 +23,8 @@ public class GuidoService {
 
 	private static final int NATURALS_PER_OCTAVE = 7;
 	private static final int NOTES_PER_OCTAVE = 12;
+	
+	private static String REPEAT_PATTERN = new String("\\repeatBegin \\repeatEnd");
 
 	//^([a-g_])(#|##|&|&&)?(-?[0-9]+)?(\*[0-9]+)?(\/[0-9]+)?(\.{1,3})?$
 	private static String NOTE_PATTERN = new String("^([a-g_])(#|##|&|&&)?(-?[0-9]+)?(\\*[0-9]+)?(\\/[0-9]+)?(\\.{1,3})?$");
@@ -32,7 +34,7 @@ public class GuidoService {
 
 	// ^\\([a-zA-Z]+)(\<(.*)\>)?(\(.*\))?$
 	private static String TAG_PATTERN = new String("^\\\\([a-zA-Z]+)(\\<(.*)\\>)?(\\(.*\\))?$");
-
+	
 	private interface AbstractCommand {
 		public String foundChord(String[] gmnStrings);
 		public String foundTag(String gmnString);
@@ -366,7 +368,7 @@ public class GuidoService {
 		Score currentScore = scores.get(i);
 		boolean finished = false;
 		do {
-			currentScore.setFinger(Finger.getFinger(fingers[f]));
+			currentScore.setFinger(Finger.getFinger(fingers[f % fingers.length]));
 			f++;
 			if (currentScore.getSibling() != null) {
 				currentScore = currentScore.getSibling();
@@ -506,5 +508,9 @@ public class GuidoService {
 		}
 
 		return score;
+	}
+
+	public String oneOctaveUp(String gmnString) {
+		return transposeGmn("c0", "c1", gmnString);
 	}
 }

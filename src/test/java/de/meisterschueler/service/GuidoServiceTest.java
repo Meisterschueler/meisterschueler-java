@@ -8,7 +8,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.apache.commons.math3.fraction.Fraction;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.leff.midi.event.NoteOff;
@@ -17,7 +16,6 @@ import com.leff.midi.event.NoteOn;
 import de.meisterschueler.basic.Finger;
 import de.meisterschueler.basic.MidiEventPair;
 import de.meisterschueler.basic.Score;
-
 
 public class GuidoServiceTest {
 
