@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.math3.fraction.Fraction;
 
-
 import com.leff.midi.event.NoteOff;
 import com.leff.midi.event.NoteOn;
 
@@ -23,7 +22,7 @@ public class GuidoService {
 
 	private static final int NATURALS_PER_OCTAVE = 7;
 	private static final int NOTES_PER_OCTAVE = 12;
-	
+
 	private static String REPEAT_PATTERN = new String("\\repeatBegin \\repeatEnd");
 
 	//^([a-g_])(#|##|&|&&)?(-?[0-9]+)?(\*[0-9]+)?(\/[0-9]+)?(\.{1,3})?$
@@ -34,7 +33,7 @@ public class GuidoService {
 
 	// ^\\([a-zA-Z]+)(\<(.*)\>)?(\(.*\))?$
 	private static String TAG_PATTERN = new String("^\\\\([a-zA-Z]+)(\\<(.*)\\>)?(\\(.*\\))?$");
-	
+
 	private interface AbstractCommand {
 		public String foundChord(String[] gmnStrings);
 		public String foundTag(String gmnString);
@@ -512,5 +511,23 @@ public class GuidoService {
 
 	public String oneOctaveUp(String gmnString) {
 		return transposeGmn("c0", "c1", gmnString);
+	}
+
+	public String gmnConvertRepeats(String gmn) {
+		//		gmn.replace(":||:", "\\repeatEnd \\repeatBegin");
+		//		gmn.replace("|:", "\\repeatBegin");
+		//		gmn.replace(":|", "\\repeatEnd");
+
+		String regex = "\\\\repeatBegin([a-g0-9\\*\\/,\\{\\}#&\\s]*)\\\\repeatEnd";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(gmn);
+
+		String result = gmn;
+		while (matcher.find()) {
+			String snippet = matcher.group(0);
+			snippet = snippet.substring(12, snippet.length()-10).trim();
+			result = result.replaceFirst(regex, snippet + " " + snippet);
+		}
+		return result;
 	}
 }

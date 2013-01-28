@@ -50,10 +50,49 @@ public class BrahmsSongFactory extends SongFactory {
 					"b0 g b d1 f d b0 g b d1 f d b0 g b d1 e d b0 g b d1 e d" +
 					"a0 g a d1 e d a0 g a d1 e d a0 g a c1 e c a0 g a c1 e c" +
 					"\\repeatEnd {f0/2,a,d1} _";
+			id = 20500L;
+			key = Key.C;
 			break;
 		}
 
 		case 1: {
+			name = "8a";
+			id = 20801L;
+			key = Key.C;
+			String rightPattern = "\\meter<\"4/4\">c2/1 \\repeatBegin d/24 f d a1 f a d2 f d a1 f a d2 f d b&1 g b& d2 e d b&1 g b& d2 e d b1 g# b d2 e " +
+					"d b1 g# b c#2 e c# b&1 a b& c#2 e c# b&1 a b& \\repeatEnd " +
+					"\\repeatBegin d2 f d a1 f a d2 f d a1 f a d2 f d a#1 f a# d2 f d a#1 f a#" +
+					"d2 f d b1 g b d2 f d b1 g b d2 e d b1 g b d2 e d b1 g b " +
+					"d2 e d a1 g a d2 e d a1 g a {c2,e} {e,a} {c,e} a1 g a {c2,e} {e,a} {c,e} a1 g a \\repeatEnd {f/2,a,d2} _ ";
+			String leftPattern = "\\clef<\"bass\"> \\meter<\"4/4\">c1/1 \\repeatBegin  a0/24 f a d1 f d a0 f a d1 f d b&0 g b& d1 f d b&0 g b& d1 e d b0 g# b d1 e d b0 g#" +
+					"b d1 e d b&0 a b& c#1 e c# b&0 g# b& c#1 e c# \repeatEnd" +
+					"\\repeatBegin a0 f a d1 f d a0 f a d1 f d a#0 f a# d1 f d a#0 f a# d1 f d" +
+					"b0 g b d1 f d b0 g b d1 f d b0 g b d1 e d b0 g b d1 e d" +
+					"a0 g a d1 e d a0 g a d1 e d a0 g a c1 e c a0 g a c1 e c" +
+					"\\repeatEnd {f0/2,a,d1} _";
+			break;
+		}
+
+		case 2: {
+			name = "8b";
+			id = 20801L;
+			key = Key.C;
+			String rightPattern = "\\meter<\"3/4\">\\repeatBegin d0/16  c e g b c1 e g b c2 e g b c3 a2 f d c a1 f d c a0 f \\repeatEnd " +
+					"\\repeatBegin d&0 c e g b c1 e g b c2 e g b c3 a2 f d c a1 f d c a0 f \\repeatEnd " +
+					"\\repeatBegin e&0 d f# a c#1 d f# a c#2 d f# a c#3 d b&2 g e& d b&1 g \\repeatEnd " +
+					"\\repeatBegin f0 e g# b d#1 e g# b d#2 e g# b d#3 e c a2 f e c a1 \\repeatEnd " +
+					"\\repeatBegin g0 f a c1 e f a c2 e f a c3 e f d b&2 g f d b&1 g f d b&0 \\repeatEnd " +
+					"\\repeatBegin g&0 f a c1 e f a c2 e f a c3 e f d& b&2 g& f d& b&1 g& f d& b&0 \\repeatEnd " +
+					"\\repeatBegin a&0 g b d1 f# g b d2 f# g b d3 f# g e& c a&2 g e& c a&1 g e& c \\repeatEnd " +
+					"\\repeatBegin b&0 a c#1 e g# a c#2 e g# a c#3 e g# a f d b&2 a f d b&1 a f d \\repeatEnd " +
+					"\\repeatBegin c1 b0 d#1 f# a# b d#2 f# a# b d#3 f# a# b g e c b2 g e c b1 g e \repeatEnd";
+
+			String rightPattern2 = "d1 c e g b c2 e g b c3 e g c4/4 {e1,c2} _";
+			String leftPattern2  = "d0 c e g b c1 e g b c2 e g c3/4 {c0,g,c1}";
+			break;
+		}
+
+		case 3: {
 			name = "8a";
 			id = 20801L;
 			meter = new Fraction(2,4);
@@ -75,7 +114,7 @@ public class BrahmsSongFactory extends SongFactory {
 			break;
 		}
 
-		case 2: {
+		case 4: {
 			name = "8b";
 			id = 20802L;
 			meter = new Fraction(2,4);
@@ -84,9 +123,9 @@ public class BrahmsSongFactory extends SongFactory {
 			pattern1 += "|: d&0 c e g b c1 e g b c2 e g b c3 a&2 f d& c a&1 f d& c a&0 f :|";
 			pattern1 += "|: e&0 d f# a c#1 d f# a c#2 d f# a c#3 d b2 g e d b1 g e d b0 g :|";
 			pattern1 += "|: f0 e g# b d :|";
-			
+
 			String pattern2 = "d1 c e g b c2 e g b c3 e g c4/4 {e1,c2} _";
-			
+
 			int leftFingers1[] = { 4, 5, 4, 3, 2, 1, 2, 3 };
 			int leftFingers2[] = { 4, 5, 4, 3, 2, 1, 2, 3, 4, 1, 2, 3 };
 			int rightFingers1[]  = { 2, 1, 2, 3, 4, 5, 4, 3 };
@@ -99,9 +138,6 @@ public class BrahmsSongFactory extends SongFactory {
 			rightHand.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(pattern2), rightFingers2));
 
 			break;
-		}
-		case 19: {
-			
 		}
 
 		}
