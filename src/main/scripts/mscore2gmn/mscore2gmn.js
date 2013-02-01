@@ -203,16 +203,14 @@ function process_one(file, origDir) {
     var outputFile = new QFile(outputFileName, 3);
     if (outputFile.open(QIODevice.WriteOnly)) {
         print("Datei geöffnet");
-        var ts = new QTextStream(outputFile);
-
-        ts.writeString("name = \"" + curScore.title + "\";\n");
-
         var score = new Score();
         if (score.load(file)) {
+            var ts = new QTextStream(outputFile);
 
-            var cursor = new Cursor(curScore);
+            ts.writeString("name = \"" + score.title + "\";\n");
+            var cursor = new Cursor(score);
 
-            for (var iStaff = 0; iStaff < curScore.staves; iStaff++) {
+            for (var iStaff = 0; iStaff < score.staves; iStaff++) {
 
                 ts.writeString("[");
                 cursor.staff = iStaff;
@@ -277,6 +275,7 @@ function process_one(file, origDir) {
     } else {
         print("Dateifehler!");
     }
+    return file;
 }
 
 //---------------------------------------------------------
