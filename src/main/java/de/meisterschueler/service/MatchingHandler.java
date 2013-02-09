@@ -170,6 +170,9 @@ public class MatchingHandler {
 		Double bestQuality = qualities.get(qualities.size()-1);
 		List<MatchingItem> bestItems = (List<MatchingItem>)qualityMap.get(bestQuality);
 		bestMatchingItem = bestItems.get(0);
+		
+		// Debugging
+		System.out.println(bestMatchingItem.getSong().getName() + " " + bestMatchingItem.getPitchAlignment());
 
 		// Scores und MidiEvents matchen
 		matchingService.updateMerge(bestMatchingItem);

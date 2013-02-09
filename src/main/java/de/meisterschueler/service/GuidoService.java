@@ -142,6 +142,8 @@ public class GuidoService {
 	}
 
 	public List<Score> gmnToScores(String gmnString) {
+		gmnString = gmnConvertRepeats(gmnString);
+		
 		List<Score> result = new ArrayList<Score>();
 
 		Pattern notePattern = Pattern.compile(NOTE_PATTERN);
@@ -513,12 +515,8 @@ public class GuidoService {
 		return transposeGmn("c0", "c1", gmnString);
 	}
 
-	public String gmnConvertRepeats(String gmn) {
-		//		gmn.replace(":||:", "\\repeatEnd \\repeatBegin");
-		//		gmn.replace("|:", "\\repeatBegin");
-		//		gmn.replace(":|", "\\repeatEnd");
-
-		String regex = "\\\\repeatBegin([a-g0-9\\*\\/,\\{\\}#&\\s]*)\\\\repeatEnd";
+	private String gmnConvertRepeats(String gmn) {
+		String regex = "\\\\repeatBegin([a-g0-9\\-\\*\\/,\\{\\}#&\\s]*)\\\\repeatEnd";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(gmn);
 

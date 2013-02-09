@@ -16,7 +16,10 @@ public class BachSongFactory extends SongFactory {
 
 	public BachSongFactory() {
 		for (int i = 0; i <= 13; i++) {
-			songs.add(getNo(i));
+			Song song = getNo(i);
+			if (song != null) {
+				songs.add(getNo(i));
+			}
 		}
 
 		songBook.setName("Inventions");
@@ -132,15 +135,15 @@ public class BachSongFactory extends SongFactory {
 			break;
 		}
 
-		case 10: {
-			name = "Inventio 11";
-			id = 11100L;
-			key = Key.C;
-			rightHand = "";
-			leftHand = "";
-
-			break;
-		}
+//		case 10: {
+//			name = "Inventio 11";
+//			id = 11100L;
+//			key = Key.C;
+//			rightHand = "";
+//			leftHand = "";
+//
+//			break;
+//		}
 
 		case 11: {
 			name = "Inventio 12";
@@ -171,6 +174,9 @@ public class BachSongFactory extends SongFactory {
 
 			break;
 		}
+		
+		default:
+			return null;
 
 		}
 

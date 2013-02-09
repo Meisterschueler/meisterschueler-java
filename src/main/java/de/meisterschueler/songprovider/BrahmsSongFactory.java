@@ -15,11 +15,14 @@ public class BrahmsSongFactory extends SongFactory {
 	private List<Song> songs = new ArrayList<Song>();
 
 	public BrahmsSongFactory() {
-		for (int i = 0; i <= 7; i++) {
-			songs.add(getNo(i));
+		for (int i = 0; i <= 13; i++) {
+			Song song = getNo(i);
+			if (song != null) {
+				songs.add(getNo(i));
+			}
 		}
 
-		songBook.setName("51 Ãœbungen fÃ¼r Klavier");
+		songBook.setName("51 Übungen für Klavier");
 		songBook.setComposer("Johannes Brahms");
 		songBook.setSongs(songs);
 	}
@@ -92,13 +95,13 @@ public class BrahmsSongFactory extends SongFactory {
 			break;
 		}
 
-		case 5: {
-			name = "7";
-			id = 20700L;
-			key = Key.C;
-
-			break;
-		}
+//		case 5: {
+//			name = "7";
+//			id = 20700L;
+//			key = Key.C;
+//
+//			break;
+//		}
 
 		case 6: {
 			name = "8a";
@@ -147,10 +150,10 @@ public class BrahmsSongFactory extends SongFactory {
 			String pattern2left = "d c e g b c1 e g b c2 e g c3/4 {c0,g0,c1} _/4"; 
 			String pattern2right = "d c e g b c2 e g b c3 e g c4/4 {e1,c2} _/4";
 
-			int leftFingers1[] = { 4, 5, 4, 3, 2, 1, 2, 3 };
-			int leftFingers2[] = { 4, 5, 4, 3, 2, 1, 2, 3, 4, 1, 2, 3 };
-			int rightFingers1[]  = { 2, 1, 2, 3, 4, 5, 4, 3 };
-			int rightFingers2[]  = { 2, 1, 2, 3, 4, 5, 4, 3, 2, 1, 4, 3 };
+			int leftFingers1[] = { 4, 5, 4, 3, 2, 1, 4, 3, 2, 1, 4, 3, 2, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3 };
+			int leftFingers2[] = { 4, 5, 4, 3, 2, 1, 4, 3, 2, 1, 4, 3, 1,   5, 2, 1 };
+			int rightFingers1[]  = { 2, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 5, 4, 3, 2, 1, 4, 3, 2, 1, 4, 3 };
+			int rightFingers2[]  = { 2, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 5,   1, 5 };
 
 			leftHand = guidoService.gmnToScores(pattern1, leftFingers1);
 			leftHand.addAll(guidoService.gmnToScores(pattern2left, leftFingers2));
@@ -161,6 +164,9 @@ public class BrahmsSongFactory extends SongFactory {
 
 			break;
 		}
+		
+		default:
+			return null;
 
 		}
 

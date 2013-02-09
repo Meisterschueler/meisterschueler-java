@@ -175,9 +175,8 @@ public class GuidoServiceTest {
 	}
 	
 	@Test
-	public void gmnToScoresTagsTest() {
+	public void gmnToScoresRepeatTest() {
 		String gmn = "\\clef<\"bass\"> \\meter<\"4/4\"> c2 \\repeatBegin d e f g \\repeatEnd a b";
-		gmn = guidoService.gmnConvertRepeats(gmn);
 		List<Score> notes = guidoService.gmnToScores(gmn);
 		assertEquals( 11, notes.size() );
 	}
