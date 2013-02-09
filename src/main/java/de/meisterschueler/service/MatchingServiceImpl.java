@@ -168,12 +168,12 @@ public class MatchingServiceImpl implements MatchingService {
 
 	@Override
 	public void updateMerge(MatchingItem item) {
-		List<Score> flatScores = item.getScores();
-		item.setFlatScores(flatScores);
+		List<Score> scores = item.getScores();
+		item.setScores(scores);
 		List<MidiEventPair> notes = item.getNotes();
 		String pitchAlignment = item.getPitchAlignment();
 
-		merge(flatScores, notes, pitchAlignment);
+		merge(scores, notes, pitchAlignment);
 	}
 
 	@Override

@@ -87,14 +87,6 @@ public class MatchingItem {
 		this.noteIntervalSequence = intervalSequence;
 	}
 
-	public List<Score> getFlatScores() {
-		return scores;
-	}
-	
-	public void setFlatScores(List<Score> flatScores) {
-		this.scores = flatScores;
-	}
-
 	public List<Score> getScores() {
 		return scores;
 	}

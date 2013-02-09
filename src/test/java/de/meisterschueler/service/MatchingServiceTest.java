@@ -9,7 +9,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.leff.midi.event.MidiEvent;
@@ -127,7 +126,7 @@ public class MatchingServiceTest {
 		item.setPitchAlignment("me");
 		matchingService.updateMerge(item);
 
-		List<Score> result = item.getFlatScores();
+		List<Score> result = item.getScores();
 		assertEquals( 2, result.size() );
 		assertEquals( Status.PLAYED, result.get(0).getStatus() );
 		assertEquals( Status.EXTRA, result.get(1).getStatus() );
@@ -136,7 +135,7 @@ public class MatchingServiceTest {
 		item.setPitchAlignment("em");
 		matchingService.updateMerge(item);
 		
-		result = item.getFlatScores();
+		result = item.getScores();
 		assertEquals( 2, result.size() );
 		assertEquals( Status.EXTRA, result.get(0).getStatus() );
 		assertEquals( Status.PLAYED, result.get(1).getStatus() );
@@ -155,7 +154,7 @@ public class MatchingServiceTest {
 		
 		matchingService.updateMerge(item);
 
-		List<Score> result = item.getFlatScores();
+		List<Score> result = item.getScores();
 		
 		assertEquals( 7, result.size());
 
@@ -371,12 +370,11 @@ public class MatchingServiceTest {
 		notes.get(3).setNoteOff(null);
 
 		item.setScores(scores);
-		item.setFlatScores(scores);
 		item.setNotes(notes);
 		item.setPitchAlignment("mmme");
 		matchingService.updateMerge(item);
 		
-		List<Score> result = item.getFlatScores();
+		List<Score> result = item.getScores();
 		
 		assertEquals( 4, result.size() );
 
