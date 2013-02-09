@@ -25,18 +25,6 @@ import de.meisterschueler.basic.Score.Status;
 public class MatchingServiceImpl implements MatchingService {
 
 	@Override
-	public List<Score> getFlatScores(List<Score> scores) {
-		List<Score> flatScores = new ArrayList<Score>();
-		for (Score score : scores) {
-			do {
-				flatScores.add(score);
-				score = score.getSibling();
-			} while (score != null);
-		}
-		return flatScores;
-	}
-
-	@Override
 	public List<Score> simpleMatch(List<Score> scores, List<MidiEventPair> notes) {
 		String seq1  = scoresToPitchSequence(scores);
 		String seq2 = midiEventsToPitchSequence(notes);
@@ -180,7 +168,7 @@ public class MatchingServiceImpl implements MatchingService {
 
 	@Override
 	public void updateMerge(MatchingItem item) {
-		List<Score> flatScores = getFlatScores(item.getScores());
+		List<Score> flatScores = item.getScores();
 		item.setFlatScores(flatScores);
 		List<MidiEventPair> notes = item.getNotes();
 		String pitchAlignment = item.getPitchAlignment();

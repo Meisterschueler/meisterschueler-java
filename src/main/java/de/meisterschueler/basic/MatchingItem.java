@@ -5,8 +5,7 @@ import java.util.List;
 public class MatchingItem {
 	private Song song;
 
-	private List<Score> flatScores;
-
+	
 	private List<Score> scores;
 	private String scorePitchSequence;
 	private String scoreIntervalSequence;
@@ -89,11 +88,11 @@ public class MatchingItem {
 	}
 
 	public List<Score> getFlatScores() {
-		return flatScores;
+		return scores;
 	}
 	
 	public void setFlatScores(List<Score> flatScores) {
-		this.flatScores = flatScores;
+		this.scores = flatScores;
 	}
 
 	public List<Score> getScores() {

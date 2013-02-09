@@ -143,7 +143,7 @@ public class GuidoService {
 
 	public List<Score> gmnToScores(String gmnString) {
 		gmnString = gmnConvertRepeats(gmnString);
-		
+
 		List<Score> result = new ArrayList<Score>();
 
 		Pattern notePattern = Pattern.compile(NOTE_PATTERN);
@@ -160,18 +160,13 @@ public class GuidoService {
 			Matcher tagMatcher = tagPattern.matcher(part);
 
 			if ( chordMatcher.find() ) {
-				Score chordRoot = new Score();
-				Score chordScore = chordRoot;
-
+				Score score = null;
 				for (String part2 : chordMatcher.group(1).split(",")) {
-					Score tmpScore = gmnToScore(part2, prevScore);
-					chordScore.setSibling(tmpScore);
-					prevScore = tmpScore;
-					chordScore = tmpScore;
+					score = gmnToScore(part2, prevScore);
+					score.setPosition(chordPosition);
+					result.add(score);
 				}
-				chordRoot = chordRoot.getSibling();
-				result.add(chordRoot);
-				chordPosition.add(chordRoot.getMeasure());
+				chordPosition.add(score.getMeasure());
 			} else if (noteMatcher.find()){
 				Score score = gmnToScore(part, prevScore);
 				result.add(score);
@@ -223,17 +218,10 @@ public class GuidoService {
 			long deltaTick = (long) (score.getMeasure().doubleValue()*4.0*1000.0);
 
 			if (!score.isPause()) {
+				// TODO: chords werden noch nicht berücksichtigt!!!
 				NoteOn noteOn = new NoteOn(tick, 0, score.getPitch(), velocity);
 				NoteOff noteOff = new NoteOff(tick+deltaTick, 0, score.getPitch(), velocity);
 				notes.add(new MidiEventPair(noteOn, noteOff));
-
-				while (score.getSibling() != null) {
-					score = score.getSibling();
-
-					noteOn = new NoteOn(tick, 0, score.getPitch(), velocity);
-					noteOff = new NoteOff(deltaTick, 0, score.getPitch(), velocity);
-					notes.add(new MidiEventPair(noteOn, noteOff));
-				}
 			}
 
 			tick += deltaTick;
@@ -266,10 +254,6 @@ public class GuidoService {
 		String result = "";
 		for (Score score : scores) {
 			result += (char)score.getPitch();
-			while (score.getSibling() != null) {
-				score = score.getSibling();
-				result += (char)score.getPitch();
-			}
 		}
 		return result;
 	}
@@ -313,10 +297,6 @@ public class GuidoService {
 			Fraction position = scores.get(i-1).getPosition().add(scores.get(i-1).getMeasure());
 			Score score = scores.get(i);
 			score.setPosition(position);
-			while (score.getSibling() != null) {
-				score = score.getSibling();
-				score.setPosition(position);
-			}
 		}
 
 		return scores;
@@ -325,35 +305,25 @@ public class GuidoService {
 	private List<Score> transposeScoresByNatural(List<Score> scores, int step) {
 		List<Score> result = new ArrayList<Score>();
 		for (Score score : scores) {
+			int preNatural = score.getNatural();
+			int postNatural = preNatural + step;
+			int postOctave = postNatural/NATURALS_PER_OCTAVE;
 
-			Score root = new Score();
-			Score node = root;
-			do {
-				int preNatural = score.getNatural();
-				int postNatural = preNatural + step;
-				int postOctave = postNatural/NATURALS_PER_OCTAVE;
+			String accidental = score.getAccidental();
+			Fraction measure = score.getMeasure();
+			Finger finger = score.getFinger();
+			Status status = score.getStatus();
 
-				String accidental = score.getAccidental();
-				Fraction measure = score.getMeasure();
-				Finger finger = score.getFinger();
-				Status status = score.getStatus();
+			Score transScore = new Score();
+			transScore.setNatural(postNatural);
+			transScore.setOctave(postOctave);
+			transScore.setAccidental(accidental);
+			transScore.setMeasure(measure);
 
-				Score transScore = new Score();
-				transScore.setNatural(postNatural);
-				transScore.setOctave(postOctave);
-				transScore.setAccidental(accidental);
-				transScore.setMeasure(measure);
+			transScore.setFinger(finger);
+			transScore.setStatus(status);
 
-				transScore.setFinger(finger);
-				transScore.setStatus(status);
-
-				score = score.getSibling();
-				node.setSibling(transScore);
-				node = transScore;
-
-			} while (score != null);
-
-			result.add(root.getSibling());
+			result.add(transScore);
 		}
 		return result;
 	}
@@ -371,9 +341,7 @@ public class GuidoService {
 		do {
 			currentScore.setFinger(Finger.getFinger(fingers[f % fingers.length]));
 			f++;
-			if (currentScore.getSibling() != null) {
-				currentScore = currentScore.getSibling();
-			} else if (i < scores.size()-1) {
+			if (i < scores.size()-1) {
 				i++;
 				currentScore = scores.get(i);
 			} else {

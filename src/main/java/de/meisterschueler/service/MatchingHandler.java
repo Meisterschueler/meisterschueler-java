@@ -67,9 +67,9 @@ public class MatchingHandler {
 		}
 
 		for (MatchingItem item : matchingItems) {
-			List<Score> flatScores = matchingService.getFlatScores(item.getScores());
-			String pitchSequence = matchingService.scoresToPitchSequence(flatScores);
-			String intervalSequence = matchingService.scoresToIntervalSequence(flatScores);
+			List<Score> scores = item.getScores();
+			String pitchSequence = matchingService.scoresToPitchSequence(scores);
+			String intervalSequence = matchingService.scoresToIntervalSequence(scores);
 
 			item.setScorePitchSequence(pitchSequence);
 			item.setScoreIntervalSequence(intervalSequence);

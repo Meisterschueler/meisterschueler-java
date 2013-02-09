@@ -121,8 +121,8 @@ public class StatisticsServiceTest {
 		result = statisticsService.calcOffset(result);
 		
 		assertEquals(  0.0, result.get(0).retrieveAdditional().getOffset(), 0.1);
-		assertEquals(  7.0, result.get(0).getSibling().retrieveAdditional().getOffset(), 0.1);
-		assertEquals( 12.0, result.get(0).getSibling().getSibling().retrieveAdditional().getOffset(), 0.1);
+		assertEquals(  7.0, result.get(0).retrieveAdditional().getOffset(), 0.1);
+		assertEquals( 12.0, result.get(0).retrieveAdditional().getOffset(), 0.1);
 	}
 	
 	@Test

@@ -1,16 +1,10 @@
 package de.meisterschueler.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.math3.fraction.Fraction;
 import org.junit.Test;
 
@@ -55,27 +49,29 @@ public class GuidoServiceTest {
 	@Test
 	public void gmnToScoresTest() {
 		List<Score> scores = guidoService.gmnToScores( "c-1 c0 {d,f#,a}" );
-	    assertEquals( 3, scores.size()); 
+	    assertEquals( 5, scores.size()); 
 	    assertEquals( 36, scores.get(0).getPitch());
 	    assertEquals( 48, scores.get(1).getPitch());
 	    assertEquals( 50, scores.get(2).getPitch());
-	    assertEquals( 54, scores.get(2).getSibling().getPitch());
-	    assertEquals( 57, scores.get(2).getSibling().getSibling().getPitch());
+	    assertEquals( 54, scores.get(3).getPitch());
+	    assertEquals( 57, scores.get(4).getPitch());
 	    
 	    scores = guidoService.gmnToScores( "{c1,e,g,a&&,b,d2,f2,g##2}" );
+	    assertEquals( 8, scores.size() );
 	    assertEquals( 60, scores.get(0).getPitch() );
-	    assertEquals( 64, scores.get(0).getSibling().getPitch() );
-	    assertEquals( 67, scores.get(0).getSibling().getSibling().getPitch() );
-	    assertEquals( 67, scores.get(0).getSibling().getSibling().getSibling().getPitch() );
-	    assertEquals( 71, scores.get(0).getSibling().getSibling().getSibling().getSibling().getPitch() );
-	    assertEquals( 74, scores.get(0).getSibling().getSibling().getSibling().getSibling().getSibling().getPitch() );
-	    assertEquals( 77, scores.get(0).getSibling().getSibling().getSibling().getSibling().getSibling().getSibling().getPitch() );
-	    assertEquals( 81, scores.get(0).getSibling().getSibling().getSibling().getSibling().getSibling().getSibling().getSibling().getPitch() );
+	    assertEquals( 64, scores.get(1).getPitch() );
+	    assertEquals( 67, scores.get(2).getPitch() );
+	    assertEquals( 67, scores.get(3).getPitch() );
+	    assertEquals( 71, scores.get(4).getPitch() );
+	    assertEquals( 74, scores.get(5).getPitch() );
+	    assertEquals( 77, scores.get(6).getPitch() );
+	    assertEquals( 81, scores.get(7).getPitch() );
 	}
 	
 	@Test
 	public void gmnToScoresPositionTest() {
 		List<Score> scores = guidoService.gmnToScores( "c/4 d e f/8 g c/4 {e/8,g} {e,g} c/2" );
+		assertEquals( 11, scores.size() );
 		assertEquals( new Fraction(0,1), scores.get(0).getPosition() );
 		assertEquals( new Fraction(1,4), scores.get(1).getPosition() );
 		assertEquals( new Fraction(2,4), scores.get(2).getPosition() );
@@ -83,10 +79,10 @@ public class GuidoServiceTest {
 		assertEquals( new Fraction(7,8), scores.get(4).getPosition() );
 		assertEquals( new Fraction(4,4), scores.get(5).getPosition() );
 		assertEquals( new Fraction(5,4), scores.get(6).getPosition() );
-		assertEquals( new Fraction(5,4), scores.get(6).getSibling().getPosition() );
-		assertEquals( new Fraction(11,8), scores.get(7).getPosition() );
-		assertEquals( new Fraction(11,8), scores.get(7).getSibling().getPosition() );
-		assertEquals( new Fraction(6,4), scores.get(8).getPosition() );
+		assertEquals( new Fraction(5,4), scores.get(7).getPosition() );
+		assertEquals( new Fraction(11,8), scores.get(8).getPosition() );
+		assertEquals( new Fraction(11,8), scores.get(9).getPosition() );
+		assertEquals( new Fraction(6,4), scores.get(10).getPosition() );
 	}
 	
 	@Test
@@ -126,12 +122,13 @@ public class GuidoServiceTest {
 		String gmnString = "c d e {f,g} a";
 		int fingers[] = {5, 4, 3, 2, 1, 3};
 		List<Score> scores = guidoService.gmnToScores(gmnString, fingers);
+		assertEquals( 6, scores.size() );
 		assertEquals(Finger.LITTLE, scores.get(0).getFinger());
 		assertEquals(Finger.RING, scores.get(1).getFinger());
 		assertEquals(Finger.MIDDLE, scores.get(2).getFinger());
 		assertEquals(Finger.POINTER, scores.get(3).getFinger());
-		assertEquals(Finger.THUMB, scores.get(3).getSibling().getFinger());
-		assertEquals(Finger.MIDDLE, scores.get(4).getFinger());
+		assertEquals(Finger.THUMB, scores.get(4).getFinger());
+		assertEquals(Finger.MIDDLE, scores.get(5).getFinger());
 	}
 	
 	@Test
@@ -150,28 +147,23 @@ public class GuidoServiceTest {
 		
 		gmnString = "{c,d}";
 		scores = guidoService.gmnToScores(gmnString, fingers, steps);
-		assertEquals( 3, scores.size() );
+		assertEquals( 6, scores.size() );
 		assertEquals( 60, scores.get(0).getPitch() );
-		assertNotNull( scores.get(0).getSibling() );
-		assertEquals( 62, scores.get(0).getSibling().getPitch() );
-		assertEquals( 64, scores.get(1).getPitch() );
-		assertNotNull( scores.get(1).getSibling() );
-		assertEquals( 65, scores.get(1).getSibling().getPitch() );
-		assertEquals( 67, scores.get(2).getPitch() );
-		assertNotNull( scores.get(2).getSibling() );
-		assertEquals( 69, scores.get(2).getSibling().getPitch() );
+		assertEquals( 62, scores.get(1).getPitch() );
+		assertEquals( 64, scores.get(2).getPitch() );
+		assertEquals( 65, scores.get(3).getPitch() );
+		assertEquals( 67, scores.get(4).getPitch() );
+		assertEquals( 69, scores.get(5).getPitch() );
 	}
 	
+	// TODO: Sollten Pausen wirklich eigene Scores bekommen oder einfach entfallen?
 	@Test
 	public void gmnToScoresPauseTest() {
-		List<Score> notes = guidoService.gmnToScores("c {e,g} _ d _ {f,g}");
-		assertEquals( 6, notes.size() );
-		assertNull( notes.get(0).getSibling() );
-		assertNotNull( notes.get(1).getSibling() );
-		assertNull( notes.get(2).getSibling() );
-		assertNull( notes.get(3).getSibling() );
-		assertNull( notes.get(4).getSibling() );
-		assertNotNull( notes.get(5).getSibling() );
+		List<Score> notes = guidoService.gmnToScores("c/4 {e,g} _ d _ {f,g}");
+		assertEquals( 8, notes.size() );
+		assertTrue( notes.get(3).isPause() );
+		assertTrue( notes.get(5).isPause() );
+		assertEquals( 5.0, notes.get(7).getPosition().doubleValue(), 1.0 );
 	}
 	
 	@Test

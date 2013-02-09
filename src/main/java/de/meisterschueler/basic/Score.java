@@ -22,9 +22,6 @@ public class Score {
 	// matching values
 	private Status status;
 
-	// ---
-	private Score sibling = null;
-
 	// Other
 	private MidiEventPair note = null;
 	private AdditionalValues additional = null;
@@ -118,14 +115,6 @@ public class Score {
 
 		pitch += octave*12;
 		return pitch;
-	}
-
-	public Score getSibling() {
-		return sibling;
-	}
-
-	public void setSibling(Score sibling) {
-		this.sibling = sibling;
 	}
 
 	public Finger getFinger() {

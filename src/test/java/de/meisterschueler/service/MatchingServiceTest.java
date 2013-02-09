@@ -9,6 +9,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.leff.midi.event.MidiEvent;
@@ -52,7 +53,6 @@ public class MatchingServiceTest {
 		assertEquals( 2, intervalSequence.length() );
 		
 		scores = guidoService.gmnToScores(gmnString);
-		scores = matchingService.getFlatScores(scores);	// TODO: sollte das nicht eher in scoresToPitchSequence rein ???
 		pitchSequence = matchingService.scoresToPitchSequence(scores);
 		intervalSequence = matchingService.scoresToIntervalSequence(scores);
 		assertEquals( 3, pitchSequence.length() );
@@ -83,21 +83,13 @@ public class MatchingServiceTest {
 		List<Score> scores = guidoService.gmnToScores("{c0,e,g}");
 		List<MidiEventPair> notes = guidoService.gmnToMidi("c0 e g");
 
-		Score score = scores.get(0);
-		do {
-			assertNull( score.getNote() );
-			score = score.getSibling();
-		} while (score != null);
-
 		List<Score> result = matchingService.simpleMatch(scores, notes);
 
-		score = result.get(0);
-		do {
+		for (Score score : result)  {
 			assertNotNull( score.getNote() );
 			assertEquals( score.getNote().getNoteOn().getNoteValue(), score.getPitch());
 			assertEquals( score.getNote().getNoteOff().getNoteValue(), score.getPitch());
-			score = score.getSibling();
-		} while (score != null);
+		} 
 	}
 
 	@Test
@@ -379,7 +371,7 @@ public class MatchingServiceTest {
 		notes.get(3).setNoteOff(null);
 
 		item.setScores(scores);
-		item.setFlatScores(matchingService.getFlatScores(scores));
+		item.setFlatScores(scores);
 		item.setNotes(notes);
 		item.setPitchAlignment("mmme");
 		matchingService.updateMerge(item);

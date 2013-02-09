@@ -157,7 +157,7 @@ public class ChordServiceImpl implements ChordService {
 
 		int idx = StringUtils.indexOf(alignment, "m");
 		if (idx != -1) {
-			Score score = findScore(best, idx);
+			Score score = best.getScores().get(idx);
 
 			int transposition = notes.get(idx).getNoteOn().getNoteValue() - score.getPitch();
 
@@ -166,26 +166,6 @@ public class ChordServiceImpl implements ChordService {
 		}
 
 		return best;
-	}
-
-	private Score findScore(NamedChord best, int idx) {
-		// get the transposition
-
-		int idxFound = -1;
-		for (Score score : best.getScores()) {
-			idxFound++;
-			if (idx == idxFound) {
-				return score;
-			}
-			while (score.getSibling() != null) {
-				score = score.getSibling();
-				idxFound++;
-				if (idx == idxFound) {
-					return score;
-				}
-			}
-		}
-		return null;
 	}
 
 	private double weighting(String alignment) {
