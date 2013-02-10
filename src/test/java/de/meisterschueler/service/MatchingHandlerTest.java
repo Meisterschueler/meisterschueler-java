@@ -43,6 +43,19 @@ public class MatchingHandlerTest  {
 	}
 
 	@Test
+	public void hanonNo1LeftCompleteTest() {
+		String gmn = "c0 e f g a g f e d f g a b a g f e g a b c1 b0 a g f a b c1 d c b0 a g b c1 d e d c b0 a c1 d e f e d c b0 d1 e f g f e d c1 e f g a g f e d f g a b a g f e g a b c2 b1 a g f a b c2 d c b1 a g b c2 d e d c b1 a c2 d e f e d c b1 d2 e f g f e d ";
+		gmn += "g2 e d c b1 c2 d e f d c b1 a b c2 d e c b1 a g a b c2 d b1 a g f g a b c2 a1 g f e f g a b g f e d e f g a f e d c d e f g e d c b0 c1 d e f d c b0 a b c1 d e c b0 a g a b c1 d b0 a g f g a b c1 a0 g f e f g a b g f e d e f g a f e d c d e f g e d c b-1 c0 d e g";
+		List<MidiEventPair> midiEvents = guidoService.gmnToMidi(gmn);
+		proceedMidiEvents(midiEvents);
+		assertNotNull(bestMatchingItem);
+		assertEquals( "No. 1", bestMatchingItem.getSong().getName() );
+		assertEquals( 0, bestMatchingItem.getTransposition() );
+		assertEquals( Key.C, bestMatchingItem.getKey() );
+		assertEquals( Hand.LEFT, bestMatchingItem.getHand() );
+	}
+	
+	@Test
 	public void hanonNo1LeftTest() {
 		List<MidiEventPair> midiEvents = guidoService.gmnToMidi("b0 d#1 e f# g# f# e d# c# e f# g# a# g# f# e");
 		proceedMidiEvents(midiEvents);
@@ -62,6 +75,17 @@ public class MatchingHandlerTest  {
 		assertEquals( 0, bestMatchingItem.getTransposition() );
 		assertEquals( Key.C, bestMatchingItem.getKey() );
 		assertEquals( Hand.RIGHT, bestMatchingItem.getHand() );
+	}
+	
+	@Test
+	public void hanonNo1BothTest() {
+		List<MidiEventPair> midiEvents = guidoService.gmnToMidi("{c0,c1} {e1,e0} {f0,f1} {g0,g1} {a0,a1} {g1,g0} {f0,f1} {e0,e1}");
+		proceedMidiEvents(midiEvents);
+		assertNotNull(bestMatchingItem);
+		assertEquals( "No. 1", bestMatchingItem.getSong().getName() );
+		assertEquals( 0, bestMatchingItem.getTransposition() );
+		assertEquals( Key.C, bestMatchingItem.getKey() );
+		assertEquals( Hand.BOTH, bestMatchingItem.getHand() );
 	}
 
 	@Test
@@ -214,6 +238,17 @@ public class MatchingHandlerTest  {
 		assertNotNull(bestMatchingItem);
 		assertEquals( "Inventio 13", bestMatchingItem.getSong().getName() );
 		assertTrue( bestMatchingItem.getPitchAlignment().startsWith("mmmmmmmmmmm") );
+		assertEquals( Hand.RIGHT, bestMatchingItem.getHand() );
+	}
+	
+	@Test
+	public void bachInventio13BothHandsTest() {
+		List<MidiEventPair> midiEvents = guidoService.gmnToMidi("a-0 e1 {a0,a1} c2 b1 e {a&0,b1} d2 {a0,c2} e0 {a0,e2} c1 {b0,g#1} e0 {a0,e2} c1");
+		proceedMidiEvents(midiEvents);
+		assertNotNull(bestMatchingItem);
+		assertEquals( "Inventio 13", bestMatchingItem.getSong().getName() );
+		assertTrue( bestMatchingItem.getPitchAlignment().startsWith("mmmmmmmmmmm") );
+		assertEquals( Hand.BOTH, bestMatchingItem.getHand() );
 	}
 
 	private void proceedMidiEvents(List<MidiEventPair> midiEvents) {
