@@ -106,10 +106,10 @@ public class MatchingServiceTest {
 		List<Score> result = matchingService.simpleMatch(scores, midiService.pairMidiEvents(notes));
 
 		for (int i=0; i<result.size(); i++) {
-			NoteOn noteOn = scores.get(i).getNote().getNoteOn();
+			NoteOn noteOn = result.get(i).getNote().getNoteOn();
 			assertEquals(i*1000, noteOn.getTick());
 			assertEquals(i, noteOn.getChannel());
-			assertEquals(scores.get(i).getPitch(), noteOn.getNoteValue());
+			assertEquals(result.get(i).getPitch(), noteOn.getNoteValue());
 			assertEquals(i*2+1, noteOn.getVelocity());
 		}
 	}

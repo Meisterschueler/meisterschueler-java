@@ -25,74 +25,64 @@ import de.meisterschueler.basic.Score.Status;
 public class StatisticsService {
 
 	public List<Score> calcDuration(List<Score> scores) {
-//		Score currentScore = null;
-//		for (Score score : scores) {
-//			currentScore = score;
-//			boolean chordFinished = false;
-//			do {
-//				if (currentScore.getNote().getNoteOn() != null && currentScore.getNote().getNoteOff() != null) {
-//					AdditionalValues statistics = currentScore.retrieveAdditional();
-//					statistics.setDuration(currentScore.getNote().getNoteOff().getTick() - currentScore.getNote().getNoteOn().getTick());
-//				}
-//
-//				if (currentScore.getSibling() != null) {
-//					currentScore = currentScore.getSibling();
-//				} else {
-//					chordFinished = true;
-//				}
-//
-//			} while (chordFinished == false);
-//		}
+		for (Score score : scores) {
+			if (score.getNote().getNoteOn() != null && score.getNote().getNoteOff() != null) {
+				AdditionalValues statistics = score.retrieveAdditional();
+				statistics.setDuration(score.getNote().getNoteOff().getTick() - score.getNote().getNoteOn().getTick());
+			}
+		}
 
 		return scores;
 	}
 
 	public List<Score> calcSpeed(List<Score> scores) {
 
-//		double speed = 0;
-//		for (int idx=0; idx<scores.size(); idx++) {
-//			// find currentScore
-//			Score currentScore = scores.get(idx);
-//			boolean currentFound = true;
-//			while (currentScore.getStatus() != Status.PLAYED && currentFound) {
-//				if (currentScore.getSibling() != null) {
-//					currentScore = currentScore.getSibling();
-//				} else {
-//					currentFound = false;
-//				}
-//			}
-//
-//			// find nextScore
-//			boolean nextFound = true;
-//			Score nextScore = null;
-//			for (int idxNext=idx+1; idxNext<scores.size(); idxNext++) {
-//				nextScore = scores.get(idxNext);
-//				while (nextScore.getStatus() != Status.PLAYED && nextFound) {
-//					if (nextScore.getSibling() != null) {
-//						nextScore = nextScore.getSibling();
-//					} else {
-//						nextFound = false;
-//					}
-//				}
-//			}
-//			if (nextScore == null) {
-//				nextFound = false;
-//			}
-//
-//			if (currentFound == true && nextFound == true) {
-//				// calc speed 
-//				Fraction deltaPosition = nextScore.getPosition().subtract(currentScore.getPosition()); 
-//				double deltaTime = nextScore.getNote().getNoteOn().getTick()-currentScore.getNote().getNoteOn().getTick();
-//
-//				speed = deltaPosition.doubleValue()/deltaTime*1000.0*4.0*60.0;
-//				AdditionalValues statistics = currentScore.retrieveAdditional();
-//				statistics.setSpeed(speed);
-//			} else if (currentFound == true){
-//				// get last valid speed
-//				AdditionalValues statistics = currentScore.retrieveAdditional();
-//				statistics.setSpeed(speed);
-//			}
-//		} 
+		if (scores.size() < 2) {
+			return scores;
+		}
+		
+		double speed = 0;
+		Iterator<Score> scoreIt = scores.iterator();
+		Iterator<Score> postScoreIt = scores.iterator();
+		
+		Score currentScore = null;
+		Score postScore = null;
+		while (scoreIt.hasNext()) {
+			// find currentScore
+			boolean currentFound = false;
+			while (currentFound == false && scoreIt.hasNext()) {
+				currentScore = scoreIt.next();
+				if (currentScore.getStatus() == Status.PLAYED) {
+					currentFound = true;
+				}
+			}
+		
+			// find nextScore
+			boolean postFound = false;
+			if (currentScore != null && postScore != null && postScore.getPosition().doubleValue() > currentScore.getPosition().doubleValue()) {
+				postFound = true;
+			}
+			while (postFound == false && postScoreIt.hasNext()) {
+				postScore = postScoreIt.next();
+				if (postScore.getStatus() == Status.PLAYED && postScore.getPosition().doubleValue() > currentScore.getPosition().doubleValue()) {
+					postFound = true;
+				}
+			}
+
+			if (currentFound == true && postFound == true) {
+				// calc speed 
+				Fraction deltaPosition = postScore.getPosition().subtract(currentScore.getPosition()); 
+				double deltaTime = postScore.getNote().getNoteOn().getTick()-currentScore.getNote().getNoteOn().getTick();
+
+				speed = deltaPosition.doubleValue()/deltaTime*1000.0*4.0*60.0;
+				AdditionalValues statistics = currentScore.retrieveAdditional();
+				statistics.setSpeed(speed);
+			} else if (currentFound == true){
+				// get last valid speed
+				AdditionalValues statistics = currentScore.retrieveAdditional();
+				statistics.setSpeed(speed);
+			}
+		} 
 
 		return scores;
 	}
@@ -127,23 +117,25 @@ public class StatisticsService {
 	}
 
 	public List<Score> calcOffset(List<Score> scores) {
-//		for (Score score : scores) {
-//			if (score.getSibling() != null) {
-//				while (score.getNote().getNoteOn() == null && score.getSibling() != null) {
-//					score = score.getSibling();
-//				}
-//				if (score.getSibling() != null) {
-//					long base = score.getNote().getNoteOn().getTick();
-//					score.retrieveAdditional().setOffset(0);
-//					do {
-//						score = score.getSibling();
-//						if (score.getNote() != null && score.getNote().getNoteOn() != null) {
-//							score.retrieveAdditional().setOffset((int) (score.getNote().getNoteOn().getTick()-base));
-//						}
-//					} while (score.getSibling() != null);
-//				}
-//			}
-//		}
+		if (scores.size() < 2) {
+			return scores;
+		}
+
+		Score baseScore = null;
+		Score score = null;
+
+		Iterator<Score> scoreIt = scores.iterator();
+		baseScore = scoreIt.next();
+
+		while (scoreIt.hasNext()) {
+			score = scoreIt.next();
+			if (score.getPosition().doubleValue() == baseScore.getPosition().doubleValue()) {
+				long offset = score.getNote().getNoteOn().getTick() - baseScore.getNote().getNoteOn().getTick();
+				score.retrieveAdditional().setOffset((int)offset);
+			} else {
+				baseScore = score;
+			}
+		}
 		return scores;
 	}
 
@@ -182,7 +174,7 @@ public class StatisticsService {
 				} else if (status == Status.WRONG) {
 					wrongCounter++;
 				}
-						
+
 				if (status == Status.PLAYED) {
 
 					velocities.add((double)score.getNote().getNoteOn().getVelocity());
@@ -201,7 +193,7 @@ public class StatisticsService {
 		result.setWrongCount(wrongCounter);
 		result.setExtraCount(extraCounter);
 		result.setFailCount(missedCounter);
-		
+
 		if (velocities.size() > 0) {
 			StatisticValue velocityValue = getStatisticValue(velocities);
 			StatisticValue durationValue = getStatisticValue(durations);
