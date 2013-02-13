@@ -215,22 +215,24 @@ public class GuidoService {
 		long tick = 0;
 		int velocity = 50;
 
-		Score oldScore = new Score();
+		Score oldScore = null;
+		long deltaTick = 0;
 		Iterator<Score> scoreIt = scores.iterator();
 		while (scoreIt.hasNext()) {
 			Score score = scoreIt.next();
 			
-			long deltaTick = (long) (score.getMeasure().doubleValue()*4.0*1000.0);
-
-			if (oldScore.getPosition() != score.getPosition()) {
+			if (oldScore != null && oldScore.getPosition() != score.getPosition())
 				tick += deltaTick;
-			}
+			
+			deltaTick = (long) (score.getMeasure().doubleValue()*4.0*1000.0);
 
 			if (!score.isPause()) {
 				NoteOn noteOn = new NoteOn(tick, 0, score.getPitch(), velocity);
 				NoteOff noteOff = new NoteOff(tick+deltaTick, 0, score.getPitch(), velocity);
 				notes.add(new MidiEventPair(noteOn, noteOff));
 			}
+			
+			oldScore = score;
 
 		}
 		return notes;
