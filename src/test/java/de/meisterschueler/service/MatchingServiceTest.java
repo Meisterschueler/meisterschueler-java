@@ -14,6 +14,7 @@ import org.junit.Test;
 import com.leff.midi.event.MidiEvent;
 import com.leff.midi.event.NoteOff;
 import com.leff.midi.event.NoteOn;
+import com.leff.midi.event.PitchBend;
 
 import de.meisterschueler.basic.Key;
 import de.meisterschueler.basic.MatchingItem;
@@ -118,24 +119,16 @@ public class MatchingServiceTest {
 		List<Score> scores = guidoService.gmnToScores("c0");
 		List<MidiEventPair> notes = guidoService.gmnToMidi("c0 g");
 		
-		MatchingItem item = new MatchingItem();
-		item.setScores(scores);
-		item.setNotes(notes);
-		
 		// Extra is last
-		item.setPitchAlignment("me");
-		matchingService.updateMerge(item);
-
-		List<Score> result = item.getScores();
+		List<Score> result = matchingService.merge(scores, notes, "me");
+		
 		assertEquals( 2, result.size() );
 		assertEquals( Status.PLAYED, result.get(0).getStatus() );
 		assertEquals( Status.EXTRA, result.get(1).getStatus() );
 		
 		// Extra is first
-		item.setPitchAlignment("em");
-		matchingService.updateMerge(item);
+		result = matchingService.merge(scores, notes, "em");
 		
-		result = item.getScores();
 		assertEquals( 2, result.size() );
 		assertEquals( Status.EXTRA, result.get(0).getStatus() );
 		assertEquals( Status.PLAYED, result.get(1).getStatus() );
@@ -143,19 +136,12 @@ public class MatchingServiceTest {
 
 	@Test
 	public void mergeTest() {
-		MatchingItem item = new MatchingItem();
 		String pitchAlignment = "mwmxmem";
 		List<Score> scores = guidoService.gmnToScores("c0 d e f g c1");
 		List<MidiEventPair> notes = guidoService.gmnToMidi("c0 d# e g a c1");
-
-		item.setPitchAlignment(pitchAlignment);
-		item.setScores(scores);
-		item.setNotes(notes);
 		
-		matchingService.updateMerge(item);
+		List<Score> result = matchingService.merge(scores, notes, pitchAlignment);
 
-		List<Score> result = item.getScores();
-		
 		assertEquals( 7, result.size());
 
 		assertEquals( Status.PLAYED, result.get(0).getStatus() );
@@ -369,12 +355,7 @@ public class MatchingServiceTest {
 		NoteOff noteOffA = notes.get(3).getNoteOff();
 		notes.get(3).setNoteOff(null);
 
-		item.setScores(scores);
-		item.setNotes(notes);
-		item.setPitchAlignment("mmme");
-		matchingService.updateMerge(item);
-		
-		List<Score> result = item.getScores();
+		List<Score> result = matchingService.merge(scores, notes, "mmme");
 		
 		assertEquals( 4, result.size() );
 

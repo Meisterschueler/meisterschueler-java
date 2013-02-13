@@ -8,13 +8,13 @@ import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
-
 import com.leff.midi.event.MidiEvent;
 import com.leff.midi.event.NoteOff;
 import com.leff.midi.event.NoteOn;
 
 import de.meisterschueler.alignment.MatchingState;
 import de.meisterschueler.alignment.NeedlemanWunsch;
+import de.meisterschueler.basic.Hand;
 import de.meisterschueler.basic.Key;
 import de.meisterschueler.basic.MatchingItem;
 import de.meisterschueler.basic.MidiEventPair;
@@ -110,7 +110,10 @@ public class MatchingServiceImpl implements MatchingService {
 		return sb.toString();
 	}
 
-	private List<Score> merge(List<Score> scores, List<MidiEventPair> notes, String alignment) {
+	@Override
+	public List<Score> merge(List<Score> scores, List<MidiEventPair> notes, String alignment) {
+		List<Score> result = new ArrayList<Score>();
+		
 		// Merge NoteOn
 		ListIterator<Score> scoreIterator = scores.listIterator();
 		int noteIdx = 0;
@@ -118,7 +121,7 @@ public class MatchingServiceImpl implements MatchingService {
 
 			Score score = null;
 			if (alignment.charAt(idxAlignment) != MatchingState.EXTRA) { 
-				score = scoreIterator.next();
+				score = new Score(scoreIterator.next());
 			}
 
 			switch (alignment.charAt(idxAlignment)) {
@@ -133,19 +136,19 @@ public class MatchingServiceImpl implements MatchingService {
 				noteIdx++;
 				break;
 			case MatchingState.EXTRA:
-				Score extraScore = new Score();
-				extraScore.setStatus(Status.EXTRA);
-				extraScore.setNote(notes.get(noteIdx)); 
-				scoreIterator.add(extraScore);
+				score = new Score();
+				score.setStatus(Status.EXTRA);
+				score.setNote(notes.get(noteIdx)); 
 				noteIdx++;
 				break;
 			case MatchingState.MISSED:
 				score.setStatus(Status.MISSED);
 				break;
 			}
+			result.add(score);
 		}
 
-		return scores;
+		return result;
 	}
 
 	@Override
@@ -168,12 +171,13 @@ public class MatchingServiceImpl implements MatchingService {
 
 	@Override
 	public void updateMerge(MatchingItem item) {
-		List<Score> scores = item.getScores();
-		item.setScores(scores);
+		Hand hand = item.getHand();
+		List<Score> scores = item.getSong().getVoice(hand);
 		List<MidiEventPair> notes = item.getNotes();
 		String pitchAlignment = item.getPitchAlignment();
 
-		merge(scores, notes, pitchAlignment);
+		List<Score> merged = merge(scores, notes, pitchAlignment);
+		item.setScores(merged);
 	}
 
 	@Override

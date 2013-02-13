@@ -70,6 +70,17 @@ public class GuidoServiceTest {
 	
 	@Test
 	public void gmnToScoresPositionTest() {
+		List<Score> scores = guidoService.gmnToScores( "{c/8,e,g} {d/4,f}" );
+		assertEquals( 5, scores.size() );
+		assertEquals( new Fraction(0,1), scores.get(0).getPosition() );
+		assertEquals( new Fraction(0,1), scores.get(1).getPosition() );
+		assertEquals( new Fraction(0,1), scores.get(2).getPosition() );
+		assertEquals( new Fraction(1,8), scores.get(3).getPosition() );
+		assertEquals( new Fraction(1,8), scores.get(4).getPosition() );
+	}
+	
+	@Test
+	public void gmnToScoresPositionTest2() {
 		List<Score> scores = guidoService.gmnToScores( "c/4 d e f/8 g c/4 {e/8,g} {e,g} c/2" );
 		assertEquals( 11, scores.size() );
 		assertEquals( new Fraction(0,1), scores.get(0).getPosition() );
@@ -163,7 +174,7 @@ public class GuidoServiceTest {
 		assertEquals( 8, notes.size() );
 		assertTrue( notes.get(3).isPause() );
 		assertTrue( notes.get(5).isPause() );
-		assertEquals( 5.0, notes.get(7).getPosition().doubleValue(), 1.0 );
+		assertEquals( 1.25, notes.get(7).getPosition().doubleValue(), 1.0 );
 	}
 	
 	@Test

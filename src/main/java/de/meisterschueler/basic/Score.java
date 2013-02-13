@@ -41,6 +41,20 @@ public class Score {
 		this.pause = false;
 	}
 
+	public Score(Score score) {
+		this.natural = score.natural;
+		this.octave = score.octave;
+		this.accidental = score.accidental;
+		this.measure = score.measure;
+
+		this.position = score.position;
+
+		this.finger = score.finger;
+
+		this.status = score.status;
+		this.pause = score.pause;		
+	}
+
 	public static char naturalToChar(int natural) {
 		String notes = "cdefgab";
 		return notes.charAt(natural % 7);

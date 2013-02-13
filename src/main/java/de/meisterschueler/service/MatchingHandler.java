@@ -51,31 +51,22 @@ public class MatchingHandler {
 		oldPitchSequence = "";
 		matchingItems.clear();
 		for (Song song : songs) {
-			MatchingItem item = new MatchingItem();
-			item.setSong(song);
-			item.setHand(Hand.LEFT);
-			List<Score> scores = song.getVoice(Hand.LEFT);
-			item.setScores(scores);
-			matchingItems.add(item);
+			for (Hand hand : song.getHands()) {
+				MatchingItem item = new MatchingItem();
+				item.setSong(song);
+				item.setHand(hand);
+				List<Score> scores = song.getVoice(hand);
 
-			item = new MatchingItem();
-			item.setSong(song);
-			item.setHand(Hand.RIGHT);
-			scores = song.getVoice(Hand.RIGHT);
-			item.setScores(scores);
-			matchingItems.add(item);
-		}
+				String pitchSequence = matchingService.scoresToPitchSequence(scores);
+				String intervalSequence = matchingService.scoresToIntervalSequence(scores);
 
-		for (MatchingItem item : matchingItems) {
-			List<Score> scores = item.getScores();
-			String pitchSequence = matchingService.scoresToPitchSequence(scores);
-			String intervalSequence = matchingService.scoresToIntervalSequence(scores);
+				item.setScorePitchSequence(pitchSequence);
+				item.setScoreIntervalSequence(intervalSequence);
 
-			item.setScorePitchSequence(pitchSequence);
-			item.setScoreIntervalSequence(intervalSequence);
-
-			item.setTransposition(0);
-			item.setPrunning(false);
+				item.setTransposition(0);
+				item.setPrunning(false);	
+				matchingItems.add(item);
+			}
 		}
 	}
 
@@ -114,10 +105,10 @@ public class MatchingHandler {
 
 			midiEvents = part1;
 			match();
-			
+
 			midiEvents = part2;
 			match();
-			
+
 			midiEvents = all;
 			match();
 		} else {
@@ -170,7 +161,7 @@ public class MatchingHandler {
 		Double bestQuality = qualities.get(qualities.size()-1);
 		List<MatchingItem> bestItems = (List<MatchingItem>)qualityMap.get(bestQuality);
 		bestMatchingItem = bestItems.get(0);
-		
+
 		// Debugging
 		System.out.println(bestMatchingItem.getSong().getName() + " " + bestMatchingItem.getPitchAlignment());
 
