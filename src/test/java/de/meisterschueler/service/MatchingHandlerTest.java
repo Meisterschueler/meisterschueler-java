@@ -179,6 +179,7 @@ public class MatchingHandlerTest  {
 		assertNotNull( resultServiceDummy.getLastResult() );
 		assertEquals( "No. 0", resultServiceDummy.getLastResult().getSong().getName() );
 		assertEquals( Key.C, resultServiceDummy.getLastResult().getKey() );
+		assertEquals( 28, resultServiceDummy.getLastResult().getScores().size() );
 
 		// Play G scale
 		eventSize = midiGEvents.size();
@@ -192,6 +193,7 @@ public class MatchingHandlerTest  {
 		matchingHandler.match(midiGEvents.get(eventSize-1).getNoteOn());
 		matchingHandler.match(midiGEvents.get(eventSize-1).getNoteOff());
 		assertEquals( Key.G, resultServiceDummy.getLastResult().getKey() );
+		assertEquals( 28, resultServiceDummy.getLastResult().getScores().size() );
 	}
 
 	@Test

@@ -2,6 +2,7 @@ package de.meisterschueler.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -165,12 +166,14 @@ public class GuidoService {
 					score = gmnToScore(part2, prevScore);
 					score.setPosition(chordPosition);
 					result.add(score);
+					prevScore = score;
 				}
-				chordPosition.add(score.getMeasure());
+				chordPosition = chordPosition.add(score.getMeasure());
 			} else if (noteMatcher.find()){
 				Score score = gmnToScore(part, prevScore);
+				score.setPosition(chordPosition);
 				result.add(score);
-				chordPosition.add(score.getMeasure());
+				chordPosition = chordPosition.add(score.getMeasure());
 				prevScore = score;
 			} else if ( tagMatcher.find() ) {
 				if ( tagMatcher.group(1).equals("clef") ) {
@@ -182,8 +185,6 @@ public class GuidoService {
 				System.err.println("getGmnCode failed for " + part);
 			}
 		}
-
-		result = updatePositions(result);
 
 		return result;
 	}
@@ -214,17 +215,25 @@ public class GuidoService {
 		long tick = 0;
 		int velocity = 50;
 
-		for (Score score : scores) {
-			long deltaTick = (long) (score.getMeasure().doubleValue()*4.0*1000.0);
+		Score oldScore = null;
+		long deltaTick = 0;
+		Iterator<Score> scoreIt = scores.iterator();
+		while (scoreIt.hasNext()) {
+			Score score = scoreIt.next();
+			
+			if (oldScore != null && oldScore.getPosition() != score.getPosition())
+				tick += deltaTick;
+			
+			deltaTick = (long) (score.getMeasure().doubleValue()*4.0*1000.0);
 
 			if (!score.isPause()) {
-				// TODO: chords werden noch nicht berücksichtigt!!!
 				NoteOn noteOn = new NoteOn(tick, 0, score.getPitch(), velocity);
 				NoteOff noteOff = new NoteOff(tick+deltaTick, 0, score.getPitch(), velocity);
 				notes.add(new MidiEventPair(noteOn, noteOff));
 			}
+			
+			oldScore = score;
 
-			tick += deltaTick;
 		}
 		return notes;
 	}
@@ -287,19 +296,6 @@ public class GuidoService {
 		}
 
 		return result;
-	}
-
-	private List<Score> updatePositions(List<Score> scores) {
-		if (scores.size() >= 1) {
-			scores.get(0).setPosition(new Fraction(0,1));
-		}
-		for (int i=1; i<scores.size(); i++) {
-			Fraction position = scores.get(i-1).getPosition().add(scores.get(i-1).getMeasure());
-			Score score = scores.get(i);
-			score.setPosition(position);
-		}
-
-		return scores;
 	}
 
 	private List<Score> transposeScoresByNatural(List<Score> scores, int step) {

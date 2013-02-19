@@ -70,6 +70,17 @@ public class GuidoServiceTest {
 	
 	@Test
 	public void gmnToScoresPositionTest() {
+		List<Score> scores = guidoService.gmnToScores( "{c/8,e,g} {d/4,f}" );
+		assertEquals( 5, scores.size() );
+		assertEquals( new Fraction(0,1), scores.get(0).getPosition() );
+		assertEquals( new Fraction(0,1), scores.get(1).getPosition() );
+		assertEquals( new Fraction(0,1), scores.get(2).getPosition() );
+		assertEquals( new Fraction(1,8), scores.get(3).getPosition() );
+		assertEquals( new Fraction(1,8), scores.get(4).getPosition() );
+	}
+	
+	@Test
+	public void gmnToScoresPositionTest2() {
 		List<Score> scores = guidoService.gmnToScores( "c/4 d e f/8 g c/4 {e/8,g} {e,g} c/2" );
 		assertEquals( 11, scores.size() );
 		assertEquals( new Fraction(0,1), scores.get(0).getPosition() );
@@ -83,38 +94,6 @@ public class GuidoServiceTest {
 		assertEquals( new Fraction(11,8), scores.get(8).getPosition() );
 		assertEquals( new Fraction(11,8), scores.get(9).getPosition() );
 		assertEquals( new Fraction(6,4), scores.get(10).getPosition() );
-	}
-	
-	@Test
-	public void gmnSequenceToMidiTest() {
-		List<MidiEventPair> notes = guidoService.gmnToMidi( "c e g#" );
-		assertEquals( 3, notes.size() );
-		for (int i=0; i<notes.size(); i++) {
-			NoteOn noteOn = notes.get(i).getNoteOn();
-			assertEquals( 60+i*4, noteOn.getNoteValue() );
-			assertEquals( i*1000, noteOn.getTick());
-
-			NoteOff noteOff = notes.get(i).getNoteOff();
-			assertEquals( 60+i*4, noteOff.getNoteValue() );
-			assertEquals( i*1000+1000, noteOff.getTick());
-		}
-	}
-	
-	@Test
-	public void gmnChordToMidiTest() {
-		List<MidiEventPair> notes = guidoService.gmnToMidi("{c,e,g#}");
-		assertEquals( 3, notes.size() );
-		for (int i=0; i<3; i++) {
-			NoteOn noteOn = notes.get(i).getNoteOn();
-			assertEquals( 60+i*4, noteOn.getNoteValue() );
-			assertEquals( 0, noteOn.getTick());
-		}
-
-		for (int i=3; i<3; i++) {
-			NoteOff noteOff = notes.get(i).getNoteOff();
-			assertEquals( 60+i*4, noteOff.getNoteValue() );
-			assertEquals( 1000, noteOff.getTick());
-		}
 	}
 	
 	@Test
@@ -163,7 +142,7 @@ public class GuidoServiceTest {
 		assertEquals( 8, notes.size() );
 		assertTrue( notes.get(3).isPause() );
 		assertTrue( notes.get(5).isPause() );
-		assertEquals( 5.0, notes.get(7).getPosition().doubleValue(), 1.0 );
+		assertEquals( 1.25, notes.get(7).getPosition().doubleValue(), 1.0 );
 	}
 	
 	@Test
@@ -173,6 +152,36 @@ public class GuidoServiceTest {
 		assertEquals( 11, notes.size() );
 	}
 	
+	@Test
+	public void gmnToMidiTest() {
+		List<MidiEventPair> notes = guidoService.gmnToMidi( "c/8 e/4 {d/16,f,g}" );
+		assertEquals( 5, notes.size() );
+		assertEquals( 60, notes.get(0).getNoteOn().getNoteValue() );
+		assertEquals( 0, notes.get(0).getNoteOn().getTick() );
+		assertEquals( 60, notes.get(0).getNoteOff().getNoteValue() );
+		assertEquals( 500, notes.get(0).getNoteOff().getTick() );
+		
+		assertEquals( 64, notes.get(1).getNoteOn().getNoteValue() );
+		assertEquals( 500, notes.get(1).getNoteOn().getTick() );
+		assertEquals( 64, notes.get(1).getNoteOff().getNoteValue() );
+		assertEquals( 1500, notes.get(1).getNoteOff().getTick() );
+		
+		assertEquals( 62, notes.get(2).getNoteOn().getNoteValue() );
+		assertEquals( 1500, notes.get(2).getNoteOn().getTick() );
+		assertEquals( 62, notes.get(2).getNoteOff().getNoteValue() );
+		assertEquals( 1750, notes.get(2).getNoteOff().getTick() );
+		
+		assertEquals( 65, notes.get(3).getNoteOn().getNoteValue() );
+		assertEquals( 1500, notes.get(3).getNoteOn().getTick() );
+		assertEquals( 65, notes.get(3).getNoteOff().getNoteValue() );
+		assertEquals( 1750, notes.get(3).getNoteOff().getTick() );
+		
+		assertEquals( 67, notes.get(4).getNoteOn().getNoteValue() );
+		assertEquals( 1500, notes.get(4).getNoteOn().getTick() );
+		assertEquals( 67, notes.get(4).getNoteOff().getNoteValue() );
+		assertEquals( 1750, notes.get(4).getNoteOff().getTick() );
+	}
+
 	@Test
 	public void gmnToMidiPauseTest() {
 		List<MidiEventPair> events = guidoService.gmnToMidi("c {e,g} _ d _ {f,g}");

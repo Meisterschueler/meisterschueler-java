@@ -1,8 +1,10 @@
 package de.meisterschueler.basic;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Song {
 	private String name;
@@ -45,6 +47,10 @@ public class Song {
 
 	public void setVoice(Hand hand, List<Score> voice) {
 		this.voices.put(hand, voice);
+	}
+	
+	public Set<Hand> getHands() {
+		return voices.keySet();
 	}
 
 	public Key getKey() {

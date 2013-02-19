@@ -44,4 +44,6 @@ public interface MatchingService {
 	public abstract void updateFinished(MatchingItem item);
 
 	public abstract List<MidiEventPair> cutMatchingMidiEvents(MatchingItem item);
+
+	public abstract List<Score> merge(List<Score> scores, List<MidiEventPair> notes, String alignment);
 }
