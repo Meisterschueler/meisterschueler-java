@@ -1,6 +1,5 @@
 package de.meisterschueler.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -31,11 +30,10 @@ public class MatchingHandlerConcurrencyTest {
 		matchingHandler.setSignalService(new SignalServiceDummy());
 		matchingHandler.setResultListener(resultServiceDummy);
 	}
-	
+
 	@Test
 	public void threadSaveTest() {
-		List<Thread> threads = new ArrayList<Thread>();
-		threads.add(new Thread() {
+		Thread matcherThread = new Thread() {
 			@Override
 			public void run() {
 				List<MidiEventPair> midiEventPairs = guidoService.gmnToMidi("c0 e f g a g f e");
@@ -44,31 +42,25 @@ public class MatchingHandlerConcurrencyTest {
 					matchingHandler.match(pair.getNoteOff());
 				}
 			}
-		});
-		threads.add(new Thread() {
+		};
+
+		Thread initThread = new Thread() {
 			@Override
 			public void run() {
-				try {
-					this.wait(100);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 				matchingHandler.initMatchingItems();
 			}
-		});
-		
-		for (Thread thread : threads) {
-			thread.run();
-		}
-		
-		for (Thread thread : threads) {
-			try {
-				thread.join();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		};
+
+		matcherThread.start();
+		System.out.println("running");
+		initThread.start();
+
+		try {
+			matcherThread.join();
+			initThread.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
