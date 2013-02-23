@@ -3,6 +3,7 @@ package de.meisterschueler.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.collections.MultiMap;
@@ -24,6 +25,8 @@ public class MatchingHandler {
 	private SignalService signalService;
 	private ResultListener resultListener;
 	private MidiService midiService = new MidiService();
+	
+	private ReentrantLock lock = new ReentrantLock();
 
 	public void setSignalService(SignalService signalService) {
 		this.signalService = signalService;
@@ -48,6 +51,8 @@ public class MatchingHandler {
 	private String oldPitchSequence;
 
 	public void initMatchingItems() {
+		lock.lock();
+		
 		oldPitchSequence = "";
 		matchingItems.clear();
 		for (Song song : songs) {
@@ -68,10 +73,12 @@ public class MatchingHandler {
 				matchingItems.add(item);
 			}
 		}
+		
+		lock.unlock();
 	}
 
 	public void match(MidiEvent midiEvent) {
-		//keyboardHandler.update(null, midiEvent); TODO: des gehört woanerscht hi !
+		//keyboardHandler.update(null, midiEvent); TODO: des gehï¿½rt woanerscht hi !
 
 		MidiEvent correctedMidiEvent = midiService.correctMidi(midiEvent);
 		midiService.addMidi(midiEvents, correctedMidiEvent);
@@ -117,7 +124,9 @@ public class MatchingHandler {
 	}
 
 	synchronized private void match() {
-
+		
+		lock.lock();
+		
 		String pitchSequence = matchingService.midiEventsToPitchSequence(midiEvents);
 		String intervalSequence = matchingService.midiEventsToIntervalSequence(midiEvents);
 		String pressedSequence = matchingService.midiEventsToPressedSequence(midiEvents);
@@ -165,16 +174,21 @@ public class MatchingHandler {
 		// Debugging
 		System.out.println(bestMatchingItem.getSong().getName() + " " + bestMatchingItem.getPitchAlignment());
 
-		// Scores und MidiEvents matchen
-		matchingService.updateMerge(bestMatchingItem);
-
 		// Checken, ob beendet
 		matchingService.updateFinished(bestMatchingItem);
 
 		if (bestMatchingItem.isFinished()) {
-			// Events teilen
+			// Events von dem Folgelied abtrennen
 			midiEvents = matchingService.cutMatchingMidiEvents(bestMatchingItem);
 
+			List<MidiEventPair> matchingMidiEvents = bestMatchingItem.getNotes();
+			bestMatchingItem.setNotePitchSequence(matchingService.midiEventsToPitchSequence(matchingMidiEvents));
+			bestMatchingItem.setNoteIntervalSequence(matchingService.midiEventsToIntervalSequence(matchingMidiEvents));
+			bestMatchingItem.setPressedSequence(matchingService.midiEventsToPressedSequence(matchingMidiEvents));
+			
+			// Scores und MidiEvents matchen
+			matchingService.updateMerge(bestMatchingItem);
+			
 			resultListener.gotResult(bestMatchingItem);
 			signalService.sendSignal(Signal.DONG);
 
@@ -209,6 +223,8 @@ public class MatchingHandler {
 				status = Status.WAITING;
 			}
 		}
+		
+		lock.unlock();
 	}
 
 	private void updateQualityMap() {
