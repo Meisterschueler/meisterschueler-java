@@ -5,7 +5,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.meisterschueler.basic.MatchingItem;
 import de.meisterschueler.basic.MidiEventPair;
 import de.meisterschueler.basic.Song;
 import de.meisterschueler.songprovider.BachSongFactory;
@@ -17,7 +16,6 @@ public class MatchingHandlerConcurrencyTest {
 	private HanonSongFactory hanonSongFactory = new HanonSongFactory();
 	private BachSongFactory bachSongFactory = new BachSongFactory();
 	private GuidoService guidoService = new GuidoService();
-	private MatchingItem bestMatchingItem = null;
 
 	private ResultListenerDummy resultServiceDummy = new ResultListenerDummy();
 
@@ -50,10 +48,17 @@ public class MatchingHandlerConcurrencyTest {
 				matchingHandler.initMatchingItems();
 			}
 		};
+		
+		Thread resetThread = new Thread() {
+			@Override
+			public void run() {
+				matchingHandler.resetMidiEvents();
+			}
+		};
 
 		matcherThread.start();
-		System.out.println("running");
 		initThread.start();
+		resetThread.start();
 
 		try {
 			matcherThread.join();

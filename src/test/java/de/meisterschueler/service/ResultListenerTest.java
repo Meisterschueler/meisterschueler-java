@@ -8,21 +8,15 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
-
-
 import com.leff.midi.MidiFile;
 import com.leff.midi.event.NoteOff;
 import com.leff.midi.event.NoteOn;
 
 import de.meisterschueler.basic.MidiEventPair;
-import de.meisterschueler.service.GuidoService;
-import de.meisterschueler.service.ResultListener;
-import de.meisterschueler.service.ResultListenerUpload;
 
 
 public class ResultListenerTest {
 
-	private ResultListener resultListener = new ResultListenerUpload();
 	private GuidoService guidoService = new GuidoService();
 	
 	@Test

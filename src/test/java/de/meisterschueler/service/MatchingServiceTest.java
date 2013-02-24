@@ -14,7 +14,6 @@ import org.junit.Test;
 import com.leff.midi.event.MidiEvent;
 import com.leff.midi.event.NoteOff;
 import com.leff.midi.event.NoteOn;
-import com.leff.midi.event.PitchBend;
 
 import de.meisterschueler.basic.Key;
 import de.meisterschueler.basic.MatchingItem;
@@ -345,14 +344,10 @@ public class MatchingServiceTest {
 
 	@Test
 	public void mergeUnfinishedNotesTest() {
-		MatchingItem item = new MatchingItem();
 		List<Score> scores = guidoService.gmnToScores("c0 e g");
 		List<MidiEventPair> notes = guidoService.gmnToMidi("c0 e g a");
 
-		NoteOff noteOffG = notes.get(2).getNoteOff();
 		notes.get(2).setNoteOff(null);
-		
-		NoteOff noteOffA = notes.get(3).getNoteOff();
 		notes.get(3).setNoteOff(null);
 
 		List<Score> result = matchingService.merge(scores, notes, "mmme");
