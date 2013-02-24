@@ -2,7 +2,7 @@ package de.meisterschueler.basic;
 
 import org.apache.commons.math3.fraction.Fraction;
 
-public class Score {
+public class Score implements Comparable<Score> {
 	// the physical "c0" is in guido notation "c-4"
 	public static final int GUIDO_OCTAVE_OFFSET = -4;
 
@@ -177,8 +177,25 @@ public class Score {
 	public boolean isPause() {
 		return pause;
 	}
-	
+
 	public void setPause(boolean pause) {
 		this.pause = pause;
+	}
+
+	@Override
+	public int compareTo(Score other) {
+		if (other.getPosition().doubleValue() > position.doubleValue()) {
+			return -1;
+		} else if (other.getPosition().doubleValue() < position.doubleValue()) {
+			return 1;
+		} else {
+			if (other.getPitch() > getPitch()) {
+				return -1;
+			} else if (other.getPitch() < getPitch()) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}
 	}
 }
