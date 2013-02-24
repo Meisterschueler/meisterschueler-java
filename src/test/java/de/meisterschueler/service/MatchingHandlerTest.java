@@ -18,25 +18,19 @@ import de.meisterschueler.basic.Hand;
 import de.meisterschueler.basic.Key;
 import de.meisterschueler.basic.MatchingItem;
 import de.meisterschueler.basic.MidiEventPair;
-import de.meisterschueler.basic.Song;
-import de.meisterschueler.songprovider.BachSongFactory;
-import de.meisterschueler.songprovider.HanonSongFactory;
 
 public class MatchingHandlerTest  {
 
 	private MatchingHandler matchingHandler = new MatchingHandler();
-	private HanonSongFactory hanonSongFactory = new HanonSongFactory();
-	private BachSongFactory bachSongFactory = new BachSongFactory();
 	private GuidoService guidoService = new GuidoService();
+	private SongHandler songHandler = new SongHandler();
 	private MatchingItem bestMatchingItem = null;
 
 	private ResultListenerDummy resultServiceDummy = new ResultListenerDummy();
 
 	@Before
 	public void init() {
-		List<Song> songs = hanonSongFactory.getSongBook().getSongs();
-		songs.addAll( bachSongFactory.getSongBook().getSongs() );
-		matchingHandler.setSongs(songs);
+		matchingHandler.setSongs(songHandler.getSongs());
 		matchingHandler.initMatchingItems();
 		matchingHandler.setSignalService(new SignalServiceDummy());
 		matchingHandler.setResultListener(resultServiceDummy);
