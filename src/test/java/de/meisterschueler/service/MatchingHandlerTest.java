@@ -239,7 +239,7 @@ public class MatchingHandlerTest  {
 	
 	@Test
 	public void bachInventio13BothHandsTest() {
-		List<MidiEventPair> midiEvents = guidoService.gmnToMidi("a-0 e1 {a0,a1} c2 b1 e {a&0,b1} d2 {a0,c2} e0 {a0,e2} c1 {b0,g#1} e0 {a0,e2} c1");
+		List<MidiEventPair> midiEvents = guidoService.gmnToMidi("a-1 e1 {a0,a1} c2 b1 e {a&0,b1} d2 {a0,c2} e0 {a0,e2} c1 {b0,g#1} e0 {a0,e2} c1");
 		proceedMidiEvents(midiEvents);
 		assertNotNull(bestMatchingItem);
 		assertEquals( "Inventio 13", bestMatchingItem.getSong().getName() );

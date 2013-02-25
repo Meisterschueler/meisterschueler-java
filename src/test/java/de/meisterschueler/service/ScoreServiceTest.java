@@ -20,7 +20,20 @@ public class ScoreServiceTest {
 		List<Score> leftScores = guidoService.gmnToScores(leftGmn);
 		List<Score> merged = scoreService.mergeScores(rightScores, leftScores);
 		
+		merged = scoreService.removePause(merged);
+		
 		assertEquals( 10, merged.size() );
+		
+		assertEquals( 48, merged.get(0).getPitch() );
+		assertEquals( 36, merged.get(1).getPitch() );
+		assertEquals( 35, merged.get(2).getPitch() );
+		assertEquals( 38, merged.get(3).getPitch() );
+		assertEquals( 55, merged.get(4).getPitch() );
+		assertEquals( 53, merged.get(5).getPitch() );
+		assertEquals( 67, merged.get(6).getPitch() );
+		assertEquals( 36, merged.get(7).getPitch() );
+		assertEquals( 48, merged.get(8).getPitch() );
+		assertEquals( 52, merged.get(9).getPitch() );
 	}
 	
 	@Test

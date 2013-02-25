@@ -14,14 +14,12 @@ public class ScoreService {
 		result.addAll(rightScores);
 		result.addAll(leftScores);
 		
-		result = removePause(result);
-		
 		Score[] resultArray = new Score[result.size()];
 		result.toArray(resultArray);
 		
 		Arrays.sort(resultArray);
 		
-		return Arrays.asList(resultArray);
+		return new ArrayList<Score>(Arrays.asList(resultArray));
 	}
 
 	public List<Score> removePause(List<Score> scores) {

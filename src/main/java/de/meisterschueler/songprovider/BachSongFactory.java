@@ -5,12 +5,15 @@ import java.util.List;
 
 import de.meisterschueler.basic.Hand;
 import de.meisterschueler.basic.Key;
+import de.meisterschueler.basic.Score;
 import de.meisterschueler.basic.Song;
 import de.meisterschueler.service.GuidoService;
+import de.meisterschueler.service.ScoreService;
 
 public class BachSongFactory extends SongFactory {
 
 	private GuidoService guidoService = new GuidoService();
+	private ScoreService scoreService = new ScoreService();
 
 	private List<Song> songs = new ArrayList<Song>();
 
@@ -182,8 +185,11 @@ public class BachSongFactory extends SongFactory {
 
 		Song song = new Song();
 		song.setId(id);
-		song.setVoice(Hand.LEFT, guidoService.gmnToScores(leftHand));
-		song.setVoice(Hand.RIGHT, guidoService.gmnToScores(rightHand));
+		List<Score> leftScores = guidoService.gmnToScores(leftHand);
+		List<Score> rightScores = guidoService.gmnToScores(rightHand);
+		song.setVoice(Hand.LEFT, leftScores);
+		song.setVoice(Hand.RIGHT, rightScores);
+		song.setVoice(Hand.BOTH, scoreService.mergeScores(leftScores, rightScores));
 		song.setKey(key);
 		song.setName(name);
 		if (!description.isEmpty()) {
