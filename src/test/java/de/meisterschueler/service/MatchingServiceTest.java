@@ -93,7 +93,7 @@ public class MatchingServiceTest {
 
 	@Test
 	public void simpleMatchTest2() {
-		List<Score> scores = guidoService.gmnToScores("c0 d e f g/2 g");
+		List<Score> scores = guidoService.gmnToScores("c0 d e f g g");
 		List<MidiEvent> notes = new ArrayList<MidiEvent>();
 		notes.add(new NoteOn(   0, 0, 48, 1));
 		notes.add(new NoteOn(1000, 1, 50, 3));
@@ -110,6 +110,7 @@ public class MatchingServiceTest {
 			assertEquals(i, noteOn.getChannel());
 			assertEquals(result.get(i).getPitch(), noteOn.getNoteValue());
 			assertEquals(i*2+1, noteOn.getVelocity());
+			assertEquals( i*0.25, result.get(i).getPosition().doubleValue(), 0.01 );
 		}
 	}
 	

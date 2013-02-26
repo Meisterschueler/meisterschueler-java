@@ -18,6 +18,7 @@ import de.meisterschueler.basic.Hand;
 import de.meisterschueler.basic.Key;
 import de.meisterschueler.basic.MatchingItem;
 import de.meisterschueler.basic.MidiEventPair;
+import de.meisterschueler.basic.Score;
 
 public class MatchingHandlerTest  {
 
@@ -47,6 +48,14 @@ public class MatchingHandlerTest  {
 		assertEquals( 0, bestMatchingItem.getTransposition() );
 		assertEquals( Key.C, bestMatchingItem.getKey() );
 		assertEquals( Hand.LEFT, bestMatchingItem.getHand() );
+		
+		MatchingItem finishedMatchingItem = resultServiceDummy.getLastResult();
+		assertTrue( finishedMatchingItem.isFinished() );
+		List<Score> scores = finishedMatchingItem.getScores();
+		for (int i = 0; i < scores.size(); i++) {
+			Score score = scores.get(i);
+			assertEquals( 0.0625*i, score.getPosition().doubleValue(), 0.01 );
+		}
 	}
 	
 	@Test

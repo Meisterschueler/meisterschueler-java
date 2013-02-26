@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.math3.fraction.Fraction;
+
 import de.meisterschueler.basic.Score;
 
 public class ScoreService {
@@ -31,6 +33,13 @@ public class ScoreService {
 			}
 		}
 		
+		return scores;
+	}
+
+	public List<Score> shiftScores(List<Score> scores, Fraction position) {
+		for (Score score : scores) {
+			score.setPosition(new Fraction(score.getPosition().getNumerator(), score.getPosition().getDenominator()).add(position));
+		}
 		return scores;
 	}
 

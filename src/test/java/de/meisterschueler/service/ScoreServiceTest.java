@@ -13,6 +13,27 @@ public class ScoreServiceTest {
 	private ScoreService scoreService = new ScoreService();
 	
 	@Test
+	public void shiftTest() {
+		String gmn = "c0/4 d e/8 f g/2";
+		List<Score> scores = guidoService.gmnToScores(gmn);
+		
+		assertEquals( 0.0, scores.get(0).getPosition().doubleValue(), 0.01 );
+		assertEquals( 0.25, scores.get(1).getPosition().doubleValue(), 0.01 );
+		assertEquals( 0.5, scores.get(2).getPosition().doubleValue(), 0.01 );
+		assertEquals( 0.625, scores.get(3).getPosition().doubleValue(), 0.01 );
+		assertEquals( 0.75, scores.get(4).getPosition().doubleValue(), 0.01 );
+		
+		Score lastScore = scores.get(scores.size()-1);
+		List<Score> shiftedScores = scoreService.shiftScores( scores, lastScore.getPosition().add(lastScore.getMeasure()) );
+		
+		assertEquals( 1.25, shiftedScores.get(0).getPosition().doubleValue(), 0.01 );
+		assertEquals( 1.5, shiftedScores.get(1).getPosition().doubleValue(), 0.01 );
+		assertEquals( 1.75, shiftedScores.get(2).getPosition().doubleValue(), 0.01 );
+		assertEquals( 1.875, shiftedScores.get(3).getPosition().doubleValue(), 0.01 );
+		assertEquals( 2.0, shiftedScores.get(4).getPosition().doubleValue(), 0.01 );
+	}
+	
+	@Test
 	public void mergeTest() {
 		String rightGmn = "c0/4 g/8 f {c/4,e}";
 		String leftGmn = "_/8 c-1 {b-2,d-1} g1 c-1";

@@ -34,6 +34,8 @@ public class GuidoService {
 
 	// ^\\([a-zA-Z]+)(\<(.*)\>)?(\(.*\))?$
 	private static String TAG_PATTERN = new String("^\\\\([a-zA-Z]+)(\\<(.*)\\>)?(\\(.*\\))?$");
+	
+	private ScoreService scoreService = new ScoreService();
 
 	private interface AbstractCommand {
 		public String foundChord(String[] gmnStrings);
@@ -199,8 +201,14 @@ public class GuidoService {
 		List<Score> scores = gmnToScores(gmnString);
 		scores = addFingersToScores(fingers, scores);
 		List<Score> result = new ArrayList<Score>();
+		Fraction lastPosition = new Fraction( 0, 1 );
 		for (int step : steps) {
-			result.addAll( transposeScoresByNatural(scores, step) );
+			List<Score> transposedScores = transposeScoresByNatural(scores, step);
+			List<Score> shiftedScores = scoreService.shiftScores( transposedScores, lastPosition );
+			result.addAll( shiftedScores );
+			
+			Score lastScore = shiftedScores.get(shiftedScores.size()-1);
+			lastPosition = lastScore.getPosition().add(lastScore.getMeasure());
 		}
 		return result;
 	}
@@ -307,6 +315,7 @@ public class GuidoService {
 
 			String accidental = score.getAccidental();
 			Fraction measure = score.getMeasure();
+			Fraction position = score.getPosition();
 			Finger finger = score.getFinger();
 			Status status = score.getStatus();
 
@@ -314,7 +323,8 @@ public class GuidoService {
 			transScore.setNatural(postNatural);
 			transScore.setOctave(postOctave);
 			transScore.setAccidental(accidental);
-			transScore.setMeasure(measure);
+			transScore.setMeasure(new Fraction(measure.getNumerator(), measure.getDenominator()));
+			transScore.setPosition(new Fraction(position.getNumerator(), position.getDenominator()));
 
 			transScore.setFinger(finger);
 			transScore.setStatus(status);
