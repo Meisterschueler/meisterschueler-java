@@ -40,7 +40,7 @@ public class MatchingHandlerTest  {
 	@Test
 	public void hanonNo1LeftCompleteTest() {
 		String gmn = "c0 e f g a g f e d f g a b a g f e g a b c1 b0 a g f a b c1 d c b0 a g b c1 d e d c b0 a c1 d e f e d c b0 d1 e f g f e d c1 e f g a g f e d f g a b a g f e g a b c2 b1 a g f a b c2 d c b1 a g b c2 d e d c b1 a c2 d e f e d c b1 d2 e f g f e d ";
-		gmn += "g2 e d c b1 c2 d e f d c b1 a b c2 d e c b1 a g a b c2 d b1 a g f g a b c2 a1 g f e f g a b g f e d e f g a f e d c d e f g e d c b0 c1 d e f d c b0 a b c1 d e c b0 a g a b c1 d b0 a g f g a b c1 a0 g f e f g a b g f e d e f g a f e d c d e f g e d c b-1 c0 d e g";
+		gmn += "g2 e d c b1 c2 d e f d c b1 a b c2 d e c b1 a g a b c2 d b1 a g f g a b c2 a1 g f e f g a b g f e d e f g a f e d c d e f g e d c b0 c1 d e f d c b0 a b c1 d e c b0 a g a b c1 d b0 a g f g a b c1 a0 g f e f g a b g f e d e f g a f e d c d e f g e d c b-1 c0 d e";
 		List<MidiEventPair> midiEvents = guidoService.gmnToMidi(gmn);
 		proceedMidiEvents(midiEvents);
 		assertNotNull(bestMatchingItem);

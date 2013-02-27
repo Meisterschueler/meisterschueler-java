@@ -27,7 +27,7 @@ public class HanonSongFactory extends SongFactory {
 	}
 
 	private Song getNo(int no) {
-		List<Score> leftScores = null;
+		List<Score> leftScores = new ArrayList<Score>();
 		List<Score> rightScores = null;
 		String name = "";
 		String description = "";
@@ -49,8 +49,12 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 4, 3, 2, 1, 2, 3, 4 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
+			List<Score> leftScoresUp = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
+			List<Score> leftScoresDown = guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown);
+			Score lastUpScore = leftScoresUp.get(leftScoresUp.size()-1);
+			scoreService.shiftScores(leftScoresDown, lastUpScore.getPosition().add(lastUpScore.getMeasure()));
+			leftScores.addAll(leftScoresUp);
+			leftScores.addAll(leftScoresDown);
 
 			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
 			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
