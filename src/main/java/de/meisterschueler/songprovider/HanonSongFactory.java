@@ -1,6 +1,7 @@
 package de.meisterschueler.songprovider;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import de.meisterschueler.basic.Hand;
@@ -27,7 +28,7 @@ public class HanonSongFactory extends SongFactory {
 	}
 
 	private Song getNo(int no) {
-		List<Score> leftScores = new ArrayList<Score>();
+		List<Score> leftScores = null;
 		List<Score> rightScores = null;
 		String name = "";
 		String description = "";
@@ -49,15 +50,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 4, 3, 2, 1, 2, 3, 4 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14};
 
-			List<Score> leftScoresUp = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			List<Score> leftScoresDown = guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown);
-			Score lastUpScore = leftScoresUp.get(leftScoresUp.size()-1);
-			scoreService.shiftScores(leftScoresDown, lastUpScore.getPosition().add(lastUpScore.getMeasure()));
-			leftScores.addAll(leftScoresUp);
-			leftScores.addAll(leftScoresDown);
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -77,12 +71,9 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 2, 1, 2, 3, 2, 3, 4 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
-
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
+			
 			break;
 		}
 
@@ -101,12 +92,9 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 2, 1, 2, 3, 4, 3, 2 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
-
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
+			
 			break;
 		}
 
@@ -125,11 +113,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 4, 5, 2, 1, 2, 3, 4 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -149,11 +134,9 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 1, 2, 1, 3, 2, 4, 3, 5 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 			break;
 		}
 
@@ -180,16 +163,9 @@ public class HanonSongFactory extends SongFactory {
 			int stepsDown1[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12};
 			int stepsDown2[] = {-13};
 
-			leftScores = guidoService.gmnToScores(patternUp1, leftFingersUp1, stepsUp1);
-			leftScores.addAll(guidoService.gmnToScores(patternUp2, leftFingersUp2, stepsUp2));
-			leftScores.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
-			leftScores.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp1), rightFingersUp1, stepsUp1);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp2), rightFingersUp2, stepsUp2));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
-
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp1, patternUp2, patternDown1, patternDown2), Arrays.asList(leftFingersUp1, leftFingersUp2, leftFingersDown1, leftFingersDown2), Arrays.asList(stepsUp1, stepsUp2, stepsDown1, stepsDown2));
+			rightScores = asdf(Hand.LEFT, Arrays.asList(patternUp1, patternUp2, patternDown1, patternDown2), Arrays.asList(rightFingersUp1, rightFingersUp2, rightFingersDown1, rightFingersDown2), Arrays.asList(stepsUp1, stepsUp2, stepsDown1, stepsDown2));
+			
 			break;
 		}
 
@@ -208,11 +184,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 3, 4, 2, 3, 1, 3, 4 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -232,11 +205,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 4, 2, 1, 3, 2, 4, 3};
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -260,14 +230,8 @@ public class HanonSongFactory extends SongFactory {
 			int stepsDown1[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12};
 			int stepsDown2[] = {-13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
-			leftScores.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
-
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown1, patternDown2), Arrays.asList(leftFingersUp, leftFingersDown1, leftFingersDown2), Arrays.asList(stepsUp, stepsDown1, stepsDown2));
+			rightScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown1, patternDown2), Arrays.asList(rightFingersUp, rightFingersDown1, rightFingersDown2), Arrays.asList(stepsUp, stepsDown1, stepsDown2));
 			break;
 		}
 
@@ -286,11 +250,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 1, 2, 3, 4, 3, 4, 3 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -310,11 +271,9 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 2, 1, 2, 1, 2, 3, 2 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
 			break;
 		}
 
@@ -336,23 +295,13 @@ public class HanonSongFactory extends SongFactory {
 
 			String patternDown1    = "c2/16 a f g a g f a";
 			String patternDown2    = "c0/16 g e f g f e f";
-			int leftFingersDown[]  = { 1, 5, 3, 4, 5, 4, 3, 5 };
-			int rightFingersDown[] = { 5, 1, 3, 2, 1, 2, 3, 4 };
+			int leftFingersDown12[]  = { 1, 5, 3, 4, 5, 4, 3, 5 };
+			int rightFingersDown12[] = { 5, 1, 3, 2, 1, 2, 3, 4 };
 			int stepsDown1[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 			int stepsDown2[] = {0};
 
-			leftScores = guidoService.gmnToScores(patternUp1, leftFingersUp12, stepsUp1);
-			leftScores.addAll(guidoService.gmnToScores(patternUp2, leftFingersUp12, stepsUp2));
-			leftScores.addAll(guidoService.gmnToScores(patternUp3, leftFingersUp3, stepsUp3));
-			leftScores.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown, stepsDown1));
-			leftScores.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown, stepsDown2));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp1), rightFingersUp12, stepsUp1);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp2), rightFingersUp12, stepsUp2));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp3), rightFingersUp3, stepsUp3));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown, stepsDown1));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown, stepsDown2));
-
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp1, patternUp2, patternUp3, patternDown1, patternDown2), Arrays.asList(leftFingersUp12, leftFingersUp12, leftFingersUp3, leftFingersDown12, leftFingersDown12), Arrays.asList(stepsUp1, stepsUp2, stepsUp3, stepsDown1, stepsDown2));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp1, patternUp2, patternUp3, patternDown1, patternDown2), Arrays.asList(rightFingersUp12, rightFingersUp12, rightFingersUp3, rightFingersDown12, rightFingersDown12), Arrays.asList(stepsUp1, stepsUp2, stepsUp3, stepsDown1, stepsDown2));
 			break;
 		}
 
@@ -371,11 +320,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 3, 5, 2, 4, 3, 1, 3, 4 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -395,11 +341,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 4, 2, 3, 2, 3, 1, 3 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -427,15 +370,8 @@ public class HanonSongFactory extends SongFactory {
 			int stepsDown1[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10,- 11, -12};
 			int stepsDown2[] = {-13};
 
-			leftScores = guidoService.gmnToScores(patternUp1, leftFingersUp1, stepsUp1);
-			leftScores.addAll(guidoService.gmnToScores(patternUp2, leftFingersUp2, stepsUp2));
-			leftScores.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
-			leftScores.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp1), rightFingersUp1, stepsUp1);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp2), rightFingersUp2, stepsUp2));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp1, patternUp2, patternDown1, patternDown2), Arrays.asList(leftFingersUp1, leftFingersUp2, leftFingersDown1, leftFingersDown2), Arrays.asList(stepsUp1, stepsUp2, stepsDown1, stepsDown2));
+			rightScores = asdf(Hand.LEFT, Arrays.asList(patternUp1, patternUp2, patternDown1, patternDown2), Arrays.asList(rightFingersUp1, rightFingersUp2, rightFingersDown1, rightFingersDown2), Arrays.asList(stepsUp1, stepsUp2, stepsDown1, stepsDown2));
 
 			break;
 		}
@@ -455,11 +391,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 1, 3, 2, 3, 5, 4, 3, 4 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -487,15 +420,9 @@ public class HanonSongFactory extends SongFactory {
 			int stepsDown1[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11};
 			int stepsDown2[] = {-12};
 
-			leftScores = guidoService.gmnToScores(patternUp1, leftFingersUp1, stepsUp1);
-			leftScores.addAll(guidoService.gmnToScores(patternUp2, leftFingersUp2, stepsUp2));
-			leftScores.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
-			leftScores.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp1), rightFingersUp1, stepsUp1);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp2), rightFingersUp2, stepsUp2));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp1, patternUp2, patternDown1, patternDown2), Arrays.asList(leftFingersUp1, leftFingersUp2, leftFingersDown1, leftFingersDown2), Arrays.asList(stepsUp1, stepsUp2, stepsDown1, stepsDown2));
+			rightScores = asdf(Hand.LEFT, Arrays.asList(patternUp1, patternUp2, patternDown1, patternDown2), Arrays.asList(rightFingersUp1, rightFingersUp2, rightFingersDown1, rightFingersDown2), Arrays.asList(stepsUp1, stepsUp2, stepsDown1, stepsDown2));
+			
 			break;
 		}
 
@@ -514,11 +441,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 4, 2, 3, 1, 2, 4, 3 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -538,11 +462,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 1, 3, 2, 1, 3, 4, 2 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -554,8 +475,8 @@ public class HanonSongFactory extends SongFactory {
 
 			String patternUp1 = "e0/16 g c1 e c b0 c1 a0";
 			String patternUp2 = "e0/16 g c1 e c b0 c1 g0";
-			int leftFingersUp[] = { 5, 4, 2, 1, 2, 3, 2, 4 };
-			int rightFingersUp[] = { 1, 2, 4, 5, 4, 3, 4, 2 };
+			int leftFingersUp12[] = { 5, 4, 2, 1, 2, 3, 2, 4 };
+			int rightFingersUp12[] = { 1, 2, 4, 5, 4, 3, 4, 2 };
 			int stepsUp1[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 			int stepsUp2[] = {14};
 
@@ -568,16 +489,8 @@ public class HanonSongFactory extends SongFactory {
 			int stepsDown1[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 			int stepsDown2[] = {-14};
 
-			leftScores = guidoService.gmnToScores(patternUp1, leftFingersUp, stepsUp1);
-			leftScores.addAll(guidoService.gmnToScores(patternUp2, leftFingersUp, stepsUp2));
-			leftScores.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
-			leftScores.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp1), rightFingersUp, stepsUp1);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp2), rightFingersUp, stepsUp2));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
-
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp1, patternUp2, patternDown1, patternDown2), Arrays.asList(leftFingersUp12, leftFingersUp12, leftFingersDown1, leftFingersDown2), Arrays.asList(stepsUp1, stepsUp2, stepsDown1, stepsDown2));
+			rightScores = asdf(Hand.LEFT, Arrays.asList(patternUp1, patternUp2, patternDown1, patternDown2), Arrays.asList(rightFingersUp12, rightFingersUp12, rightFingersDown1, rightFingersDown2), Arrays.asList(stepsUp1, stepsUp2, stepsDown1, stepsDown2));
 			break;
 		}
 		case 20: {
@@ -599,13 +512,9 @@ public class HanonSongFactory extends SongFactory {
 			int stepsDown1[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12};
 			int stepsDown2[] = {0};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
-			leftScores.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown1, patternDown2), Arrays.asList(leftFingersUp, leftFingersDown1, leftFingersDown2), Arrays.asList(stepsUp, stepsDown1, stepsDown2));
+			rightScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown1, patternDown2), Arrays.asList(rightFingersUp, rightFingersDown1, rightFingersDown2), Arrays.asList(stepsUp, stepsDown1, stepsDown2));
+			
 			break;
 		}
 		case 21: {
@@ -627,13 +536,9 @@ public class HanonSongFactory extends SongFactory {
 			int stepsDown1[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12};
 			int stepsDown2[] = {0};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
-			leftScores.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown1, patternDown2), Arrays.asList(leftFingersUp, leftFingersDown1, leftFingersDown2), Arrays.asList(stepsUp, stepsDown1, stepsDown2));
+			rightScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown1, patternDown2), Arrays.asList(rightFingersUp, rightFingersDown1, rightFingersDown2), Arrays.asList(stepsUp, stepsDown1, stepsDown2));
+	
 			break;
 		}
 		case 22: {
@@ -651,11 +556,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 4, 3, 4, 5, 4, 3, 4, 5, 1, 2, 3, 4, 3, 2, 3 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -674,11 +576,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 3, 5, 4, 5, 3, 5, 4, 5, 3, 5, 4, 5, 1, 3, 2, 4 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -687,7 +586,7 @@ public class HanonSongFactory extends SongFactory {
 			id = 2500L;
 			meter = "C";
 
-			String patternUp = "c0/16 d e c d e f d e f g f e g f e";
+			String patternUp12 = "c0/16 d e c d e f d e f g f e g f e";
 			int leftFingersUp1[] = { 5, 4, 3, 5, 4, 3, 2, 4, 3, 2, 1, 2, 3, 1, 3, 4 };
 			int leftFingersUp2[] = { 5, 4, 3, 5, 4, 3, 2, 4, 3, 2, 1, 2, 3, 1, 3, 4 };
 			int rightFingersUp1[] = { 1, 2, 3, 1, 2, 3, 4, 2, 3, 4, 5, 4, 3, 5, 4, 3 };
@@ -695,23 +594,16 @@ public class HanonSongFactory extends SongFactory {
 			int stepsUp1[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 			int stepsUp2[] = {13};
 
-			String patternDown = "g2/16 f e g f e d f e d c e d c d e";
+			String patternDown12 = "g2/16 f e g f e d f e d c e d c d e";
 			int leftFingersDown1[] = { 1, 2, 3, 1, 2, 3, 4, 2, 3, 4, 5, 3, 4, 5, 4, 3 };
 			int leftFingersDown2[] = { 1, 2, 3, 1, 2, 3, 4, 2, 3, 4, 5, 3, 4, 5, 3, 2 };
-			int rightFingersDown[] = { 5, 4, 3, 5, 4, 3, 2, 4, 3, 2, 1, 3, 2, 1, 3, 4 };
+			int rightFingersDown12[] = { 5, 4, 3, 5, 4, 3, 2, 4, 3, 2, 1, 3, 2, 1, 3, 4 };
 			int stepsDown1[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12};
 			int stepsDown2[] = {-13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp1, stepsUp1);
-			leftScores.addAll(guidoService.gmnToScores(patternUp, leftFingersUp2, stepsUp2));
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown1, stepsDown1));
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown2, stepsDown2));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp1, stepsUp1);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp2, stepsUp2));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown1));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown2));
-
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp12, patternUp12, patternDown12, patternDown12), Arrays.asList(leftFingersUp1, leftFingersUp2, leftFingersDown1, leftFingersDown2), Arrays.asList(stepsUp1, stepsUp2, stepsDown1, stepsDown2));
+			rightScores = asdf(Hand.LEFT, Arrays.asList(patternUp12, patternUp12, patternDown12, patternDown12), Arrays.asList(rightFingersUp1, rightFingersUp2, rightFingersDown12, rightFingersDown12), Arrays.asList(stepsUp1, stepsUp2, stepsDown1, stepsDown2));
+			
 			break;
 		}
 		case 25: {
@@ -729,11 +621,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 3, 4, 5, 4, 2, 3, 4, 3, 1, 2, 3, 2, 1, 2, 1 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -752,11 +641,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 4, 5, 3, 5, 4, 3, 2, 1, 2, 1, 2, 1, 2, 3, 4 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -775,11 +661,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 3, 4, 3, 5, 3, 4, 3, 5, 1, 2, 1, 3, 2, 4, 3 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -788,7 +671,7 @@ public class HanonSongFactory extends SongFactory {
 			id = 2900L;
 			meter = "C";
 
-			String patternUp = "c0/16 d c e d e d f e f e g f g f g";
+			String patternUp12 = "c0/16 d c e d e d f e f e g f g f g";
 			int leftFingersUp1[] = { 5, 4, 5, 3, 4, 3, 4, 2, 3, 2, 3, 1, 2, 1, 2, 1 };
 			int leftFingersUp2[] = { 5, 4, 5, 3, 4, 3, 4, 2, 3, 2, 3, 1, 3, 2, 3, 2 };
 			int rightFingersUp1[] = { 1, 2, 1, 3, 2, 3, 2, 4, 3, 4, 3, 5, 4, 5, 4, 5 };
@@ -805,15 +688,9 @@ public class HanonSongFactory extends SongFactory {
 			int stepsDown1[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12};
 			int stepsDown2[] = {0};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp1, stepsUp1);
-			leftScores.addAll(guidoService.gmnToScores(patternUp, leftFingersUp2, stepsUp2));
-			leftScores.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
-			leftScores.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp1, stepsUp1);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp2, stepsUp2));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp12, patternUp12, patternDown1, patternDown2), Arrays.asList(leftFingersUp1, leftFingersUp2, leftFingersDown1, leftFingersDown2), Arrays.asList(stepsUp1, stepsUp2, stepsDown1, stepsDown2));
+			rightScores = asdf(Hand.LEFT, Arrays.asList(patternUp12, patternUp12, patternDown1, patternDown2), Arrays.asList(rightFingersUp1, rightFingersUp2, rightFingersDown1, rightFingersDown2), Arrays.asList(stepsUp1, stepsUp2, stepsDown1, stepsDown2));
+			
 			break;
 		}
 		case 29: {
@@ -835,14 +712,8 @@ public class HanonSongFactory extends SongFactory {
 			int stepsDown1[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12};
 			int stepsDown2[] = {-13};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
-			leftScores.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
-
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown1, patternDown2), Arrays.asList(leftFingersUp, leftFingersDown1, leftFingersDown2), Arrays.asList(stepsUp, stepsDown1, stepsDown2));
+			rightScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown1, patternDown2), Arrays.asList(rightFingersUp, rightFingersDown1, rightFingersDown2), Arrays.asList(stepsUp, stepsDown1, stepsDown2));
 			break;
 		}
 		case 30: {
@@ -862,11 +733,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 1, 2, 1, 3, 1, 4, 1, 5, 1, 5, 1 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12};
 
-			leftScores = guidoService.gmnToScores(leftPatternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(leftPatternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(rightPatternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(rightPatternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(leftPatternUp, leftPatternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(rightPatternUp, rightPatternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -885,11 +753,8 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 5, 4, 3, 2, 1, 3, 2, 1 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
 		}
@@ -898,9 +763,9 @@ public class HanonSongFactory extends SongFactory {
 			id = 5000L;
 			meter = "C";
 
-			String patternUp = "{c0,e0} {d0,f0} {e0,g0} {d0,f0}";
-			int leftFingersUp[] = { 5, 3, 4, 2, 3, 1, 4, 2 };
-			int rightFingersUp[] = { 1, 3, 2, 4, 3, 5, 2, 4 };
+			String patternUp12 = "{c0,e0} {d0,f0} {e0,g0} {d0,f0}";
+			int leftFingersUp12[] = { 5, 3, 4, 2, 3, 1, 4, 2 };
+			int rightFingersUp12[] = { 1, 3, 2, 4, 3, 5, 2, 4 };
 			int stepsUp1[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 			int stepsUp2[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 
@@ -909,17 +774,11 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 3, 5, 2, 4, 1, 3, 2, 4 };
 			int stepsDown[] = {0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp1);
-			leftScores.addAll(guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp2));
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp1);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp2));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
-
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp12, patternUp12, patternDown), Arrays.asList(leftFingersUp12, leftFingersUp12, leftFingersDown), Arrays.asList(stepsUp1, stepsUp2, stepsDown));
+			rightScores = asdf(Hand.LEFT, Arrays.asList(patternUp12, patternUp12, patternDown), Arrays.asList(rightFingersUp12, rightFingersUp12, rightFingersDown), Arrays.asList(stepsUp1, stepsUp2, stepsDown));
 			break;
 		}
-		
+
 		case 33: {
 			name = "50a";
 			id = 5001L;
@@ -939,17 +798,12 @@ public class HanonSongFactory extends SongFactory {
 			int stepsDown1[] = {0, -3, -6, -9, -12, -15, -18};
 			int stepsDown2[] = {0};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown1, leftFingersDown1, stepsDown1));
-			leftScores.addAll(guidoService.gmnToScores(patternDown2, leftFingersDown2, stepsDown2));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown1), rightFingersDown1, stepsDown1));
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown2), rightFingersDown2, stepsDown2));
-
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown1, patternDown2), Arrays.asList(leftFingersUp, leftFingersDown1, leftFingersDown2), Arrays.asList(stepsUp, stepsDown1, stepsDown2));
+			rightScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown1, patternDown2), Arrays.asList(rightFingersUp, rightFingersDown1, rightFingersDown2), Arrays.asList(stepsUp, stepsDown1, stepsDown2));
+			
 			break;
 		}
-		
+
 		case 34: {
 			name = "54";
 			id = 5400L;
@@ -965,16 +819,13 @@ public class HanonSongFactory extends SongFactory {
 			int rightFingersDown[] = { 3, 5, 2, 4, 3, 5, 2, 4, 3, 5, 2, 4, 3, 5, 2, 4, 1, 3, 2, 4, 1, 3, 2, 4, 1, 3, 2, 4, 1, 3, 2, 4};   
 			int stepsDown[] = { 0, -1, -2, -3, -4, -5, -6};
 
-			leftScores = guidoService.gmnToScores(patternUp, leftFingersUp, stepsUp);
-			leftScores.addAll(guidoService.gmnToScores(patternDown, leftFingersDown, stepsDown));
-
-			rightScores = guidoService.gmnToScores(guidoService.oneOctaveUp(patternUp), rightFingersUp, stepsUp);
-			rightScores.addAll(guidoService.gmnToScores(guidoService.oneOctaveUp(patternDown), rightFingersDown, stepsDown));
+			leftScores = asdf(Hand.LEFT, Arrays.asList(patternUp, patternDown), Arrays.asList(leftFingersUp, leftFingersDown), Arrays.asList(stepsUp, stepsDown));
+			rightScores = asdf(Hand.RIGHT, Arrays.asList(patternUp, patternDown), Arrays.asList(rightFingersUp, rightFingersDown), Arrays.asList(stepsUp, stepsDown));
 
 			break;
-			
+
 		}
-		
+
 		case 35: {
 			name = "0";
 			description = "Scale";
@@ -1005,5 +856,23 @@ public class HanonSongFactory extends SongFactory {
 		//		song.meter = meter;
 
 		return song;
+	}
+
+	private List<Score> asdf(Hand hand, List<String> patterns, List<int[]> fingers, List<int[]> steps) {
+		List<List<Score>> scores = new ArrayList<List<Score>>();
+
+		for (int i = 0; i < patterns.size(); i++) {
+			if (hand == Hand.LEFT) {
+				scores.add(guidoService.gmnToScores(patterns.get(i), fingers.get(i), steps.get(i)));
+			} else {
+				scores.add(guidoService.gmnToScores(guidoService.oneOctaveUp(patterns.get(i)), fingers.get(i), steps.get(i)));
+			}
+		}
+
+		List<Score> result = scores.get(0); 
+		for (int i = 1; i < scores.size(); i++) {
+			result = scoreService.concat(result, scores.get(i));
+		}
+		return result;
 	}
 }
