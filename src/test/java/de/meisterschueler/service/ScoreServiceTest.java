@@ -13,6 +13,19 @@ public class ScoreServiceTest {
 	private ScoreService scoreService = new ScoreService();
 	
 	@Test
+	public void concatTest() {
+		String gmn = "c0/4 d e";
+		List<Score> scores1 = guidoService.gmnToScores(gmn);
+		List<Score> scores2 = guidoService.gmnToScores(gmn);
+		
+		List<Score> scores3 = scoreService.concat(scores1, scores2);
+		
+		for (int i=0; i<scores3.size(); i++) {
+			assertEquals( i*0.25, scores3.get(i).getPosition().doubleValue(), 0.01 );
+		}
+	}
+	
+	@Test
 	public void shiftTest() {
 		String gmn = "c0/4 d e/8 f g/2";
 		List<Score> scores = guidoService.gmnToScores(gmn);

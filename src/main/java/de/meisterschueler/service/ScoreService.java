@@ -43,4 +43,11 @@ public class ScoreService {
 		return scores;
 	}
 
+	public List<Score> concat(List<Score> scores1, List<Score> scores2) {
+		Score lastScore1 = scores1.get(scores1.size()-1);
+		List<Score> result = scores1;
+		result.addAll(shiftScores(scores2, lastScore1.getPosition().add(lastScore1.getMeasure())));
+		return result;
+	}
+
 }
