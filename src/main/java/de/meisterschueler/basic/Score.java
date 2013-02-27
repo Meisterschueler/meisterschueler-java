@@ -47,7 +47,7 @@ public class Score implements Comparable<Score> {
 		this.accidental = score.accidental;
 		this.measure = new Fraction(score.measure.getNumerator(), score.measure.getDenominator());
 
-		this.position = new Fraction(score.position.getNumerator(), score.measure.getDenominator());
+		this.position = new Fraction(score.position.getNumerator(), score.position.getDenominator());
 
 		this.finger = score.finger;
 
