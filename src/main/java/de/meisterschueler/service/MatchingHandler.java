@@ -171,9 +171,6 @@ public class MatchingHandler {
 		List<MatchingItem> bestItems = (List<MatchingItem>)qualityMap.get(bestQuality);
 		bestMatchingItem = bestItems.get(0);
 
-		// Debugging
-		System.out.println(bestMatchingItem.getSong().getName() + " " + bestMatchingItem.getPitchAlignment());
-
 		// Checken, ob beendet
 		matchingService.updateFinished(bestMatchingItem);
 

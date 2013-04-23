@@ -58,12 +58,12 @@ public class NeedlemanWunsch {
 	    // For DTW only
 	    if (i > j) {
 	        while ((i > 0) && (dist[ i*(n2+1) + j ] == big )) {
-	            align = MatchingState.MISSED + align;
+	            align = MatchingState.DELETED + align;
 	            i--;
 	        }
 	    } else {
 	        while ((j > 0) && (dist[ i*(n2+1) + j ]  == big )) {
-	            align = MatchingState.EXTRA + align;
+	            align = MatchingState.INSERT + align;
 	            j--;
 	        }
 	    }
@@ -98,10 +98,10 @@ public class NeedlemanWunsch {
 	                j--;
 	            }
 	        } else if (up>=left) {
-	            align = MatchingState.MISSED + align;
+	            align = MatchingState.DELETED + align;
 	            i--;
 	        } else {
-	            align = MatchingState.EXTRA + align;
+	            align = MatchingState.INSERT + align;
 	            j--;
 	        }
 	    }

@@ -12,10 +12,10 @@ public class NeedlemanWunschTest {
 	@Test
 	public void emptySequencesTest() {
 		String alignment = NeedlemanWunsch.getAlignments("", "AAA");
-		assertEquals("eee", alignment);
+		assertEquals("iii", alignment);
 		
 		alignment = NeedlemanWunsch.getAlignments("AAA", "");
-		assertEquals("xxx", alignment);
+		assertEquals("ddd", alignment);
 		
 		alignment = NeedlemanWunsch.getAlignments("", "");
 		assertEquals("", alignment);
@@ -34,42 +34,42 @@ public class NeedlemanWunschTest {
 	}
 	
 	@Test
-	public void AAA_AZA_mexm_Test() {
+	public void AAA_AZA_midm_Test() {
 		String alignment = NeedlemanWunsch.getAlignments("AAA", "AZA");
-		//assertEquals( "mexm", alignment);	// 1. Wahl
-		assertEquals( "memx", alignment);	// 2. Wahl (auch nicht falsch, aber unschön)
+		//assertEquals( "midm", alignment);	// 1. Wahl
+		assertEquals( "mimd", alignment);	// 2. Wahl (auch nicht falsch, aber unschÃ¶n)
 	}
 	
 	@Test
-	public void ABC_AZC_mexm_Test() {
+	public void ABC_AZC_mwm_Test() {
 		String alignment = NeedlemanWunsch.getAlignments("ABC", "AZC");
 		assertEquals( "mwm", alignment);
 	}
 	
 	@Test
-	public void AAA_AABA_mmem_Test() {
+	public void AAA_AABA_mmim_Test() {
 		String alignment = NeedlemanWunsch.getAlignments("AAA", "AABA");
-		assertEquals( "mmem", alignment);
+		assertEquals( "mmim", alignment);
 	}
 	
 	@Test
-	public void AABA_AAA_mmxm_Test() {
+	public void AABA_AAA_mmdm_Test() {
 		String alignment = NeedlemanWunsch.getAlignments("AABA", "AAA");
-		assertEquals( "mmxm", alignment);
+		assertEquals( "mmdm", alignment);
 	}
 
 	@Test
 	public void complexTest() {
 		String alignment = NeedlemanWunsch.getAlignments("BCEFGH", "ABCDFG");
-		assertEquals( "emmwmmx", alignment );
+		assertEquals( "immwmmd", alignment );
 	}
 	
 	@Test
 	public void matchFirstTest() {
 		String alignment = NeedlemanWunsch.getAlignments("AAA", "AAAA");
-		assertEquals( "mmme", alignment);
+		assertEquals( "mmmi", alignment);
 		
 		alignment = NeedlemanWunsch.getAlignments("AAAA", "AAA");
-		assertEquals( "mmmx", alignment);
+		assertEquals( "mmmd", alignment);
 	}
 }

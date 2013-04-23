@@ -95,7 +95,7 @@ public class MatchingServiceImpl implements MatchingService {
 			if (event.getNoteOff() != null) {
 				sequence += ".";
 			} else {
-				sequence += "X";
+				sequence += "D";
 			}
 		}
 		return sequence;
@@ -120,7 +120,7 @@ public class MatchingServiceImpl implements MatchingService {
 		for (int idxAlignment = 0; idxAlignment < alignment.length(); idxAlignment++) {
 
 			Score score = null;
-			if (alignment.charAt(idxAlignment) != MatchingState.EXTRA) { 
+			if (alignment.charAt(idxAlignment) != MatchingState.INSERT) { 
 				score = new Score(scoreIterator.next());
 			}
 
@@ -135,13 +135,13 @@ public class MatchingServiceImpl implements MatchingService {
 				score.setNote(notes.get(noteIdx));
 				noteIdx++;
 				break;
-			case MatchingState.EXTRA:
+			case MatchingState.INSERT:
 				score = new Score();
 				score.setStatus(Status.EXTRA);
 				score.setNote(notes.get(noteIdx)); 
 				noteIdx++;
 				break;
-			case MatchingState.MISSED:
+			case MatchingState.DELETED:
 				score.setStatus(Status.MISSED);
 				break;
 			}
@@ -184,13 +184,13 @@ public class MatchingServiceImpl implements MatchingService {
 	public void updateQuality(MatchingItem item) {
 		String pitchAlignment = item.getPitchAlignment();
 
-		int firstHitChord = pitchAlignment.replaceAll("[mwe]", ".").indexOf(".");
-		int lastHitChord = pitchAlignment.replaceAll("[mwe]", ".").lastIndexOf(".");
+		int firstHitChord = pitchAlignment.replaceAll("[mwi]", ".").indexOf(".");
+		int lastHitChord = pitchAlignment.replaceAll("[mwi]", ".").lastIndexOf(".");
 
 		int open = StringUtils.countMatches(pitchAlignment, String.valueOf(MatchingState.OPEN));
 		int played = StringUtils.countMatches(pitchAlignment, String.valueOf(MatchingState.MATCH));
-		int missed = StringUtils.countMatches(pitchAlignment, String.valueOf(MatchingState.MISSED));
-		int extra = StringUtils.countMatches(pitchAlignment, String.valueOf(MatchingState.EXTRA));
+		int missed = StringUtils.countMatches(pitchAlignment, String.valueOf(MatchingState.DELETED));
+		int extra = StringUtils.countMatches(pitchAlignment, String.valueOf(MatchingState.INSERT));
 		int wrong = StringUtils.countMatches(pitchAlignment, String.valueOf(MatchingState.WRONG));
 
 		double rangeFactor = (double)(played+wrong+extra)/(double)(lastHitChord - firstHitChord + 1);
@@ -222,8 +222,8 @@ public class MatchingServiceImpl implements MatchingService {
 
 		String goodString = item.getIntervalAlignment().substring(0, posAlignment);
 
-		int scorePosition = goodString.replaceAll("e", "").length();
-		int notePosition = goodString.replaceAll("x", "").length();
+		int scorePosition = goodString.replaceAll("i", "").length();
+		int notePosition = goodString.replaceAll("d", "").length();
 
 		char scorePitch = item.getScorePitchSequence().charAt(scorePosition);
 		char notePitch = item.getNotePitchSequence().charAt(notePosition);
@@ -242,8 +242,8 @@ public class MatchingServiceImpl implements MatchingService {
 		int saveRegion = item.getSaveRegion();
 		String saveAlignment = item.getPitchAlignment().substring(0, saveRegion);
 
-		String prunnedScorePitchSequence = item.getScorePitchSequence().substring(saveAlignment.replaceAll("[e]", "").length());
-		String prunnedNotePitchSequence = item.getNotePitchSequence().substring(saveAlignment.replaceAll("[x]", "").length());
+		String prunnedScorePitchSequence = item.getScorePitchSequence().substring(saveAlignment.replaceAll("[i]", "").length());
+		String prunnedNotePitchSequence = item.getNotePitchSequence().substring(saveAlignment.replaceAll("[d]", "").length());
 
 		String prunnedAlignment = NeedlemanWunsch.getAlignments(prunnedScorePitchSequence, prunnedNotePitchSequence);
 
@@ -264,12 +264,12 @@ public class MatchingServiceImpl implements MatchingService {
 	@Override
 	public void updateFinished(MatchingItem item) {
 		String alignment = item.getPitchAlignment();
-		while (alignment.endsWith("e")) {
+		while (alignment.endsWith("i")) {
 			alignment = alignment.substring(0, alignment.length()-1);
 		}
 		if (alignment.endsWith("m")) {
-			alignment.replace("x", "");
-			int idxPressed = item.getPressedSequence().indexOf("X");
+			alignment.replace("d", "");
+			int idxPressed = item.getPressedSequence().indexOf("D");
 			if (idxPressed != -1 && idxPressed < alignment.length()) {
 				item.setFinished(false);
 			} else {
@@ -279,10 +279,10 @@ public class MatchingServiceImpl implements MatchingService {
 			item.setFinished(false);
 		}
 		
-//		Pattern finishedPattern = Pattern.compile("^([mwex]*[m]+)([e]*)$");
+//		Pattern finishedPattern = Pattern.compile("^([mwid]*[m]+)([i]*)$");
 //		Matcher matcher = finishedPattern.matcher(item.getPitchAlignment());
 //		if (matcher.find()) {
-//			int idxPressed = item.getPressedSequence().indexOf("X");
+//			int idxPressed = item.getPressedSequence().indexOf("D");
 //			if (idxPressed != -1 && idxPressed < matcher.group(0).length()) {
 //				item.setFinished(false);
 //			} else {
@@ -296,10 +296,10 @@ public class MatchingServiceImpl implements MatchingService {
 	@Override
 	public List<MidiEventPair> cutMatchingMidiEvents(MatchingItem item) {
 		String pitchAlignment = item.getPitchAlignment();
-		while (pitchAlignment.endsWith("e")) {
+		while (pitchAlignment.endsWith("i")) {
 			pitchAlignment = pitchAlignment.substring(0, pitchAlignment.length()-1);
 		}
-		String noteAlignment = StringUtils.remove(pitchAlignment, "x");
+		String noteAlignment = StringUtils.remove(pitchAlignment, "d");
 
 		List<MidiEventPair> goodEvents;
 		List<MidiEventPair> evilEvents;

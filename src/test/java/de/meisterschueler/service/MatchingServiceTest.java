@@ -120,14 +120,14 @@ public class MatchingServiceTest {
 		List<MidiEventPair> notes = guidoService.gmnToMidi("c0 g");
 		
 		// Extra is last
-		List<Score> result = matchingService.merge(scores, notes, "me");
+		List<Score> result = matchingService.merge(scores, notes, "mi");
 		
 		assertEquals( 2, result.size() );
 		assertEquals( Status.PLAYED, result.get(0).getStatus() );
 		assertEquals( Status.EXTRA, result.get(1).getStatus() );
 		
 		// Extra is first
-		result = matchingService.merge(scores, notes, "em");
+		result = matchingService.merge(scores, notes, "im");
 		
 		assertEquals( 2, result.size() );
 		assertEquals( Status.EXTRA, result.get(0).getStatus() );
@@ -136,7 +136,7 @@ public class MatchingServiceTest {
 
 	@Test
 	public void mergeTest() {
-		String pitchAlignment = "mwmxmem";
+		String pitchAlignment = "mwmdmim";
 		List<Score> scores = guidoService.gmnToScores("c0 d e f g c1");
 		List<MidiEventPair> notes = guidoService.gmnToMidi("c0 d# e g a c1");
 		
@@ -223,7 +223,7 @@ public class MatchingServiceTest {
 		item.setNotePitchSequence("AB.DEx");
 
 		matchingService.matchPitch(item);
-		assertEquals( "mmwmme", item.getPitchAlignment() );
+		assertEquals( "mmwmmi", item.getPitchAlignment() );
 
 		matchingService.updateQuality(item);
 		assertTrue( 0.9 > item.getQuality() );
@@ -308,7 +308,7 @@ public class MatchingServiceTest {
 	@Test
 	public void updateFinishedTest() {
 		MatchingItem item = new MatchingItem();
-		item.setPitchAlignment("mmmx");
+		item.setPitchAlignment("mmmd");
 		item.setPressedSequence("....");
 		matchingService.updateFinished(item);
 		assertFalse( item.isFinished() );
@@ -317,26 +317,26 @@ public class MatchingServiceTest {
 		item.setPressedSequence("......");
 		matchingService.updateFinished(item);
 		assertTrue( item.isFinished() );
-		item.setPressedSequence("...X..");
+		item.setPressedSequence("...D..");
 		matchingService.updateFinished(item);
 		assertFalse( item.isFinished() );
 
-		item.setPitchAlignment("mmmme");
+		item.setPitchAlignment("mmmmi");
 		item.setPressedSequence(".....");
 		matchingService.updateFinished(item);
 		assertTrue( item.isFinished() );
-		item.setPressedSequence("....X");
+		item.setPressedSequence("....D");
 		matchingService.updateFinished(item);
 		assertTrue( item.isFinished() );
-		item.setPressedSequence("...X.");
+		item.setPressedSequence("...D.");
 		matchingService.updateFinished(item);
 		assertFalse( item.isFinished() );
 		
-		item.setPitchAlignment("meme");
+		item.setPitchAlignment("mimi");
 		item.setPressedSequence("....");
 		matchingService.updateFinished(item);
 		assertTrue( item.isFinished() );
-		item.setPressedSequence(".X..");
+		item.setPressedSequence(".D..");
 		matchingService.updateFinished(item);
 		assertFalse( item.isFinished() );
 	}
@@ -351,7 +351,7 @@ public class MatchingServiceTest {
 		notes.get(2).setNoteOff(null);
 		notes.get(3).setNoteOff(null);
 
-		List<Score> result = matchingService.merge(scores, notes, "mmme");
+		List<Score> result = matchingService.merge(scores, notes, "mmmi");
 		
 		assertEquals( 4, result.size() );
 
@@ -385,7 +385,7 @@ public class MatchingServiceTest {
 		MatchingItem item = new MatchingItem();
 		item.setNotes(events);
 		item.setScores(scores);
-		item.setPitchAlignment("mme");
+		item.setPitchAlignment("mmi");
 		
 		List<MidiEventPair> rest = matchingService.cutMatchingMidiEvents(item);
 		assertEquals( 1, rest.size() );
