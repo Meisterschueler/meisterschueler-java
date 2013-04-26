@@ -189,7 +189,7 @@ public class BachSongFactory extends SongFactory {
 		List<Score> rightScores = guidoService.gmnToScores(rightHand);
 		song.setVoice(Hand.LEFT, leftScores);
 		song.setVoice(Hand.RIGHT, rightScores);
-		song.setVoice(Hand.BOTH, scoreService.mergeScores(leftScores, rightScores));
+		song.setVoice(Hand.BOTH, scoreService.merge(leftScores, rightScores));
 		song.setKey(key);
 		song.setName(name);
 		if (!description.isEmpty()) {

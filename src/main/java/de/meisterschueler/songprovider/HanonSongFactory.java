@@ -847,7 +847,7 @@ public class HanonSongFactory extends SongFactory {
 		Song song = new Song();
 		song.setVoice(Hand.LEFT, leftScores);
 		song.setVoice(Hand.RIGHT, rightScores);
-		song.setVoice(Hand.BOTH, scoreService.mergeScores(leftScores, rightScores));
+		song.setVoice(Hand.BOTH, scoreService.merge(leftScores, rightScores));
 		song.setName("No. " + name);
 		if (!description.isEmpty()) {
 			song.setDescription(description);

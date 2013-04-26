@@ -15,11 +15,6 @@ public class NeedlemanWunsch {
 	    int width = 30;
 
 	    int big = 10000;
-	    
-	    if (seq1 == null || seq2 == null) {
-	    	System.out.println("WTF!!!");
-	    	return "";
-	    }
 
 	    int n1 = seq1.length();
 	    int n2 = seq2.length();

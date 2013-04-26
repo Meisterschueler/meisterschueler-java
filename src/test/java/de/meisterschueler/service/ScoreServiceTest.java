@@ -19,6 +19,7 @@ public class ScoreServiceTest {
 		List<Score> scores2 = guidoService.gmnToScores(gmn);
 		
 		List<Score> scores3 = scoreService.concat(scores1, scores2);
+		assertEquals( 6,  scores3.size() );
 		
 		for (int i=0; i<scores3.size(); i++) {
 			assertEquals( i*0.25, scores3.get(i).getPosition().doubleValue(), 0.01 );
@@ -52,7 +53,7 @@ public class ScoreServiceTest {
 		String leftGmn = "_/8 c-1 {b-2,d-1} g1 c-1";
 		List<Score> rightScores = guidoService.gmnToScores(rightGmn);
 		List<Score> leftScores = guidoService.gmnToScores(leftGmn);
-		List<Score> merged = scoreService.mergeScores(rightScores, leftScores);
+		List<Score> merged = scoreService.merge(rightScores, leftScores);
 		
 		merged = scoreService.removePause(merged);
 		

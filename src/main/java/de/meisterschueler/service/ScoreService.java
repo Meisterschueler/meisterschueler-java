@@ -11,7 +11,7 @@ import de.meisterschueler.basic.Score;
 
 public class ScoreService {
 
-	public List<Score> mergeScores(List<Score> rightScores, List<Score> leftScores) {
+	public List<Score> merge(List<Score> rightScores, List<Score> leftScores) {
 		List<Score> result = new ArrayList<Score>();
 		result.addAll(rightScores);
 		result.addAll(leftScores);
