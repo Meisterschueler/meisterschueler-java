@@ -24,8 +24,18 @@ This software enables you to analyze your piano performance and help you with yo
 * It forces you to repeat a song until you managed it to pressed all keys in the right moment
 * You play a stupid c major scale and the software accompany you with a huge orchestra and make standing ovations if you manage it to play the scale 
 
-## Q&A
+## Repertoire
+### C. L. Hanon
+The Virtuoso Pianist: Exercises 1-31, 38, 50, 50a, 54 
 
+### J. S. Bach
+Inventions and Sinfonias: Inventionen 1-10, 12, 13, 14 
+
+### J. Brahms
+51 Exercises: 1a, 1b, 1c, 2a, 2b, 8a, 8b 
+
+## Q&A
 Q: Why do I need a MIDI Keyboard?
 
 A: Well, I know that a real piano is much more fun to play. But the reason is simple: the accuracy of the MIDI-Signal is much more accurate than a FFT can be. 
+
